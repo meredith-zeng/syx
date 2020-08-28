@@ -1,0 +1,6 @@
+# Default ignored file
+/*
+!/src
+!/src/main/resources/rebel.xml
+!/.gitignore
+!/pom.xml
