@@ -20,7 +20,7 @@ public class LogServiceImplTest {
     public void insertLog() {
         LogVO logVO = new LogVO();
         logVO.setTeamName("保住头发");
-        logVO.setTeamId(6);
+        logVO.setTeamId(4);
         logVO.setLogSpecific("昨天也是这样的呢");
 
         System.out.println(logServices.insertLog(logVO));
@@ -42,11 +42,11 @@ public class LogServiceImplTest {
 
     @Test
     public void queryTeamLog() {
-        System.out.println(logServices.queryTeamLog(6));
+        System.out.println(logServices.queryTeamLog(4));
     }
 
     @Test
     public void queryAll() {
-        System.out.println(logServices.queryAll());
+        System.out.println(logServices.queryAll().size());
     }
 }

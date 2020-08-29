@@ -1,7 +1,9 @@
 package com.protecthair.services.impl;
 
 import com.protecthair.dao.LogMapper;
+import com.protecthair.dao.TeamMapper;
 import com.protecthair.domain.Log;
+import com.protecthair.domain.Team;
 import com.protecthair.services.LogServices;
 import com.protecthair.vo.LogVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class LogServiceImpl implements LogServices {
 
     @Autowired
     LogMapper logMapper;
+    @Autowired
+    TeamMapper teamMapper;
 
     @Override
     public int insertLog(LogVO logVO) {
@@ -42,55 +46,52 @@ public class LogServiceImpl implements LogServices {
     @Override
     public LogVO selectLog(int LogCode) {
         Log selectResult = logMapper.selectByPrimaryKey(LogCode);
-        String TeamNmae = "测试名，等待团队方法写好调用团队mapper获得teamName";
-
         LogVO logVO = new LogVO();
-        logVO.setLogCode(LogCode);
-        logVO.setLogSpecific(selectResult.getLogSpecific());
-        logVO.setLogTime(selectResult.getLogOperateTime());
-        logVO.setTeamId(selectResult.getLogTeamId());
-        logVO.setTeamName(TeamNmae);
-
+        Team team = teamMapper.selectByPrimaryKey(selectResult.getLogTeamId());
+        if (team!=null) {
+            logVO.setTeamName(team.getTeamName());
+            logVO.setLogCode(LogCode);
+            logVO.setLogSpecific(selectResult.getLogSpecific());
+            logVO.setLogTime(selectResult.getLogOperateTime());
+            logVO.setTeamId(selectResult.getLogTeamId());
+        }
         return logVO;
-
     }
 
     @Override
     public ArrayList<LogVO> queryTeamLog(int TeamId) {
-        String TeamName = "测试名，等待团队方法写好调用团队mapper获得teamName";
-
         List<Log> queryTeamResult = logMapper.queryTeamLog(TeamId);
         ArrayList<LogVO> finalQueryResult = new ArrayList<>();
         for (Log x:queryTeamResult){
-            LogVO logVO = new LogVO();
-            logVO.setLogTime(x.getLogOperateTime());
-            logVO.setLogCode(x.getLogCode());
-            logVO.setLogSpecific(x.getLogSpecific());
-
-            logVO.setTeamName(TeamName);
-
-            logVO.setTeamId(TeamId);
-            finalQueryResult.add(logVO);
+            Team team = teamMapper.selectByPrimaryKey(TeamId);
+            if (team!=null){
+                LogVO logVO = new LogVO();
+                logVO.setLogTime(x.getLogOperateTime());
+                logVO.setLogCode(x.getLogCode());
+                logVO.setLogSpecific(x.getLogSpecific());
+                logVO.setTeamId(TeamId);
+                logVO.setTeamName(team.getTeamName());
+                finalQueryResult.add(logVO);
+            }
         }
         return finalQueryResult;
     }
 
     @Override
     public ArrayList<LogVO> queryAll() {
-        String TeamName = "测试名，等待团队方法写好调用团队mapper获得teamName";
-
         List<Log> queryResult = logMapper.queryAll();
         ArrayList<LogVO> queryAllResult = new ArrayList<>();
         for (Log x : queryResult){
-            LogVO logVO = new LogVO();
-            logVO.setLogTime(x.getLogOperateTime());
-            logVO.setLogCode(x.getLogCode());
-            logVO.setLogSpecific(x.getLogSpecific());
-            logVO.setTeamId(x.getLogTeamId());
-
-            logVO.setTeamName(TeamName);
-
-            queryAllResult.add(logVO);
+            Team team = teamMapper.selectByPrimaryKey(x.getLogTeamId());
+            if (team!=null){
+                LogVO logVO = new LogVO();
+                logVO.setLogTime(x.getLogOperateTime());
+                logVO.setLogCode(x.getLogCode());
+                logVO.setLogSpecific(x.getLogSpecific());
+                logVO.setTeamId(x.getLogTeamId());
+                logVO.setTeamName(team.getTeamName());
+                queryAllResult.add(logVO);
+            }
         }
         return queryAllResult;
     }
