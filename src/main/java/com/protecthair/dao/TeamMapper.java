@@ -2,6 +2,8 @@ package com.protecthair.dao;
 
 import com.protecthair.domain.Team;
 
+import java.util.ArrayList;
+
 public interface TeamMapper {
     int deleteByPrimaryKey(Integer teamId);
 
@@ -9,9 +11,12 @@ public interface TeamMapper {
 
     int insertSelective(Team record);
 
-    Team selectByPrimaryKey(Integer teamId);
+    ArrayList<Team> selectByPrimaryKey(Integer teamId);
 
     int updateByPrimaryKeySelective(Team record);
 
     int updateByPrimaryKey(Team record);
+
+    ArrayList<Team> search(String teamName);
+
 }
