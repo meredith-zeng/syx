@@ -13,7 +13,8 @@ public interface LogMapper {
     int updateByPrimaryKeySelective(Log record);
     //查询指定团队所有日志
     List<Log> queryTeamLog(int TeamId);
-
+    //查询团队的所有日志
+    List<Log> queryAll();
 
     int deleteByPrimaryKey(Integer logCode);
     int insert(Log record);

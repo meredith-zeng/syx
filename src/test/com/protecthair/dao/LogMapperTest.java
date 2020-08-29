@@ -42,7 +42,6 @@ public class LogMapperTest {
 
     @Test
     public void queryAll() {
-        List<Log> queryResult = logMapper.queryAll();
-        System.out.println(queryResult.size());
+        System.out.println(logMapper.queryAll().size());
     }
 }

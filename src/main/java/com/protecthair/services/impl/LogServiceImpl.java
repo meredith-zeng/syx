@@ -2,14 +2,10 @@ package com.protecthair.services.impl;
 
 import com.protecthair.dao.LogMapper;
 import com.protecthair.domain.Log;
-import com.protecthair.result.CodeMsg;
 import com.protecthair.services.LogServices;
 import com.protecthair.vo.LogVO;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +27,7 @@ public class LogServiceImpl implements LogServices {
         Log log = new Log();
         log.setLogSpecific(logVO.getLogSpecific());
         log.setLogTeamId(logVO.getTeamId());
-        int insertResult = logMapper.insertSelective(log);
-        return insertResult;
+        return logMapper.insertSelective(log);
 
     }
 
@@ -40,8 +35,8 @@ public class LogServiceImpl implements LogServices {
     public int updateLog(LogVO logVO) {
         Log log = new Log();
         log.setLogSpecific(logVO.getLogSpecific());
-        int updateResult = logMapper.updateByPrimaryKeySelective(log);
-        return updateResult;
+        log.setLogCode(logVO.getLogCode());
+        return logMapper.updateByPrimaryKeySelective(log);
     }
 
     @Override
@@ -82,6 +77,21 @@ public class LogServiceImpl implements LogServices {
 
     @Override
     public ArrayList<LogVO> queryAll() {
-        return null;
+        String TeamName = "测试名，等待团队方法写好调用团队mapper获得teamName";
+
+        List<Log> queryResult = logMapper.queryAll();
+        ArrayList<LogVO> queryAllResult = new ArrayList<>();
+        for (Log x : queryResult){
+            LogVO logVO = new LogVO();
+            logVO.setLogTime(x.getLogOperateTime());
+            logVO.setLogCode(x.getLogCode());
+            logVO.setLogSpecific(x.getLogSpecific());
+            logVO.setTeamId(x.getLogTeamId());
+
+            logVO.setTeamName(TeamName);
+
+            queryAllResult.add(logVO);
+        }
+        return queryAllResult;
     }
 }
