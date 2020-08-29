@@ -70,44 +70,6 @@
   </insert>
   <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
     <constructor>
-      <arg column="right_level" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="created_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-    </constructor>
-  </resultMap>
-  <insert id="insert" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right (right_level, user_id, created_time
-      )
-    values (#{rightLevel,jdbcType=CHAR}, #{userId,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="rightLevel != null">
-        right_level,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="rightLevel != null">
-        #{rightLevel,jdbcType=CHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
-    <constructor>
       <idArg column="right_code" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="right_user_name" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="right_level" javaType="java.lang.String" jdbcType="CHAR" />

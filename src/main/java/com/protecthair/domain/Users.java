@@ -1,56 +1,43 @@
 package com.protecthair.domain;
 
-import java.util.Date;
-
 public class Users {
-    private Integer id;
+    private String user;
 
-    private String name;
+    private Long currentConnections;
 
-    private String avatar;
+    private Long totalConnections;
 
-    private Date regtime;
-
-    public Users(Integer id, String name, String avatar, Date regtime) {
-        this.id = id;
-        this.name = name;
-        this.avatar = avatar;
-        this.regtime = regtime;
+    public Users(String user, Long currentConnections, Long totalConnections) {
+        this.user = user;
+        this.currentConnections = currentConnections;
+        this.totalConnections = totalConnections;
     }
 
     public Users() {
         super();
     }
 
-    public Integer getId() {
-        return id;
+    public String getUser() {
+        return user;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUser(String user) {
+        this.user = user == null ? null : user.trim();
     }
 
-    public String getName() {
-        return name;
+    public Long getCurrentConnections() {
+        return currentConnections;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setCurrentConnections(Long currentConnections) {
+        this.currentConnections = currentConnections;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public Long getTotalConnections() {
+        return totalConnections;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
-    }
-
-    public Date getRegtime() {
-        return regtime;
-    }
-
-    public void setRegtime(Date regtime) {
-        this.regtime = regtime;
+    public void setTotalConnections(Long totalConnections) {
+        this.totalConnections = totalConnections;
     }
 }
