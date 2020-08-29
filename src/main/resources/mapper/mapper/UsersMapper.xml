@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.protecthair.dao.UsersMapper">
-  <resultMap id="BaseResultMap" type="com.protecthair.domain.Users">
+  <resultMap id="BaseResultMap" type="com.protecthair.domain.User">
     <constructor>
       <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="name" javaType="java.lang.String" jdbcType="CHAR" />
@@ -9,13 +9,13 @@
       <arg column="regtime" javaType="java.util.Date" jdbcType="DATE" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="com.protecthair.domain.Users">
+  <insert id="insert" parameterType="com.protecthair.domain.User">
     insert into users (id, name, avatar, 
       regtime)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR}, 
       #{regtime,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.protecthair.domain.Users">
+  <insert id="insertSelective" parameterType="com.protecthair.domain.User">
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -46,20 +46,20 @@
       </if>
     </trim>
   </insert>
-  <resultMap id="BaseResultMap" type="com.protecthair.domain.Users">
+  <resultMap id="BaseResultMap" type="com.protecthair.domain.User">
     <constructor>
       <arg column="USER" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="CURRENT_CONNECTIONS" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="TOTAL_CONNECTIONS" javaType="java.lang.Long" jdbcType="BIGINT" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="com.protecthair.domain.Users">
+  <insert id="insert" parameterType="com.protecthair.domain.User">
     insert into users (USER, CURRENT_CONNECTIONS, TOTAL_CONNECTIONS
       )
     values (#{user,jdbcType=CHAR}, #{currentConnections,jdbcType=BIGINT}, #{totalConnections,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.protecthair.domain.Users">
+  <insert id="insertSelective" parameterType="com.protecthair.domain.User">
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="user != null">
@@ -84,7 +84,7 @@
       </if>
     </trim>
   </insert>
-  <resultMap id="BaseResultMap" type="com.protecthair.domain.Users">
+  <resultMap id="BaseResultMap" type="com.protecthair.domain.User">
     <constructor>
       <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -109,7 +109,7 @@
     delete from users
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.protecthair.domain.Users">
+  <insert id="insert" parameterType="com.protecthair.domain.User">
     insert into users (user_id, user_name, university_code, 
       user_password, user_phoneNumber, user_salt, 
       created_time)
@@ -117,7 +117,7 @@
       #{userPassword,jdbcType=VARCHAR}, #{userPhonenumber,jdbcType=VARCHAR}, #{userSalt,jdbcType=VARCHAR}, 
       #{createdTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.protecthair.domain.Users">
+  <insert id="insertSelective" parameterType="com.protecthair.domain.User">
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.protecthair.domain.Users">
+  <update id="updateByPrimaryKeySelective" parameterType="com.protecthair.domain.User">
     update users
     <set>
       <if test="userName != null">
@@ -190,7 +190,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.protecthair.domain.Users">
+  <update id="updateByPrimaryKey" parameterType="com.protecthair.domain.User">
     update users
     set user_name = #{userName,jdbcType=VARCHAR},
       university_code = #{universityCode,jdbcType=VARCHAR},

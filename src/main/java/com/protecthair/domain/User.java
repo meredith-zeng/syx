@@ -2,7 +2,7 @@ package com.protecthair.domain;
 
 import java.util.Date;
 
-public class Users {
+public class User {
     private Integer id;
 
     private String name;
@@ -11,14 +11,14 @@ public class Users {
 
     private Date regtime;
 
-    public Users(Integer id, String name, String avatar, Date regtime) {
+    public User(Integer id, String name, String avatar, Date regtime) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.regtime = regtime;
     }
 
-    public Users() {
+    public User() {
         super();
     }
 

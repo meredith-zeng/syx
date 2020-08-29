@@ -55,6 +55,17 @@ public class CodeMsg {
     public static final CodeMsg FIND_TEAM_FAILED=new CodeMsg(305,"Find Team Failed");
     public static final CodeMsg REMOVE_TEAM_SUCCESS=new CodeMsg(306,"Remove Team Success");
     public static final CodeMsg REMOVE_TEAM_FAILED=new CodeMsg(307,"Remove Team Failed");
+
+    //财务管理
+    public static final CodeMsg SUBMIT_APPROVAL_SUCCESS = new CodeMsg(400, "报销申请成功");
+    public static final CodeMsg SUBMIT_APPROVAL_ERROR = new CodeMsg(401, "报销申请失败");
+    public static final CodeMsg SUBMIT_NULL_ERROR = new CodeMsg(402, "上传单据为空");
+    public static final CodeMsg QUERY_EXPENSE_SUCCESS = new CodeMsg(403, "查询报销成功");
+    public static final CodeMsg EXPENSE_REVIEW_SUCCESS = new CodeMsg(404, "报销审核成功");
+    public static final CodeMsg EXPENSE_REVIEW_ERROR = new CodeMsg(405, "报销审核未通过");
+    public static final CodeMsg COMPUTER_SALARY_SUCCESS = new CodeMsg(406, "工资计算成功");
+    public static final CodeMsg COMPUTER_SALARY_ERROR = new CodeMsg(407, "工资计算出错");
+    public static final CodeMsg NULL_MEMBERID = new CodeMsg(101, "工号不存在");
     //返回一个带参数的错误码
     public CodeMsg fillArgs(Object... args) {//变参
         int code = this.code;
