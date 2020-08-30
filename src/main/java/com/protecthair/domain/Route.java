@@ -9,16 +9,13 @@ public class Route {
 
     private String routeUrl;
 
-    private String parentRouteName;
-
     private Integer parentRouteCode;
 
-    public Route(Integer routeCode, String routeName, String routeLevel, String routeUrl, String parentRouteName, Integer parentRouteCode) {
+    public Route(Integer routeCode, String routeName, String routeLevel, String routeUrl, Integer parentRouteCode) {
         this.routeCode = routeCode;
         this.routeName = routeName;
         this.routeLevel = routeLevel;
         this.routeUrl = routeUrl;
-        this.parentRouteName = parentRouteName;
         this.parentRouteCode = parentRouteCode;
     }
 
@@ -56,14 +53,6 @@ public class Route {
 
     public void setRouteUrl(String routeUrl) {
         this.routeUrl = routeUrl == null ? null : routeUrl.trim();
-    }
-
-    public String getParentRouteName() {
-        return parentRouteName;
-    }
-
-    public void setParentRouteName(String parentRouteName) {
-        this.parentRouteName = parentRouteName == null ? null : parentRouteName.trim();
     }
 
     public Integer getParentRouteCode() {

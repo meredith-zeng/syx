@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.protecthair.dao.TeamMapper">
-
   <resultMap id="BaseResultMap" type="com.protecthair.domain.Team">
     <constructor>
       <idArg column="team_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -13,31 +12,20 @@
       <arg column="created_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
-
   <sql id="Base_Column_List">
     team_id, team_name, team_college, team_leader_student_name, team_leader_student_id, 
     team_level, created_time
   </sql>
-
-  <select id="search" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from team
-    where team_id like concat('%',#{teamName,jdbcType=VARCHAR},'%')
+    where team_id = #{teamId,jdbcType=INTEGER}
   </select>
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from team
-    where team_name = #{teamId,jdbcType=INTEGER}
-  </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from team
     where team_id = #{teamId,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="com.protecthair.domain.Team">
     insert into team (team_id, team_name, team_college, 
       team_leader_student_name, team_leader_student_id, 
@@ -46,7 +34,6 @@
       #{teamLeaderStudentName,jdbcType=VARCHAR}, #{teamLeaderStudentId,jdbcType=INTEGER}, 
       #{teamLevel,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP})
   </insert>
-
   <insert id="insertSelective" parameterType="com.protecthair.domain.Team">
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -96,7 +83,6 @@
       </if>
     </trim>
   </insert>
-
   <update id="updateByPrimaryKeySelective" parameterType="com.protecthair.domain.Team">
     update team
     <set>
@@ -121,7 +107,6 @@
     </set>
     where team_id = #{teamId,jdbcType=INTEGER}
   </update>
-
   <update id="updateByPrimaryKey" parameterType="com.protecthair.domain.Team">
     update team
     set team_name = #{teamName,jdbcType=VARCHAR},
@@ -132,6 +117,4 @@
       created_time = #{createdTime,jdbcType=TIMESTAMP}
     where team_id = #{teamId,jdbcType=INTEGER}
   </update>
-
-
 </mapper>

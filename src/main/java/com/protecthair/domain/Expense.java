@@ -1,55 +1,111 @@
 package com.protecthair.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/**
- * @author by liuquan
- * @Classname Expense
- * @Description 审批报销实体类
- * @Date 2020/8/10 15:34
- */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Expense {
-
-    //审批单据业务编号
-    @NotBlank
     private Integer expenseCode;
-    //组织的名称
-    @NotBlank
-    private String expenseOrganization;
-    //报销人工号
-    @NotBlank
-    private Integer memberId;
 
-    //报销金额
-    @NotNull
-    private Double expenseMoney;
-    //报销原由
-    @NotBlank
-    private String expenseEvent;
-    //经办人
-    @NotBlank
-    private String expenseAgent;
-    //报销单据
-    @NotBlank
-    private String expensePic;
+    private Integer organizationCode;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date expenseTime;
 
-    //报销审核的信息
-    @NotBlank
-    private String expenseCertifictedCondition;
+    private String expenseOrganization;
 
+    private Float expenseMoney;
 
+    private String expenseEvent;
+
+    private String expenseAgent;
+
+    private String expensePic;
+
+    private String expenseCertifictedcondition;
+
+    public Expense(Integer expenseCode, Integer organizationCode, Date expenseTime, String expenseOrganization, Float expenseMoney, String expenseEvent, String expenseAgent, String expensePic, String expenseCertifictedcondition) {
+        this.expenseCode = expenseCode;
+        this.organizationCode = organizationCode;
+        this.expenseTime = expenseTime;
+        this.expenseOrganization = expenseOrganization;
+        this.expenseMoney = expenseMoney;
+        this.expenseEvent = expenseEvent;
+        this.expenseAgent = expenseAgent;
+        this.expensePic = expensePic;
+        this.expenseCertifictedcondition = expenseCertifictedcondition;
+    }
+
+    public Expense() {
+        super();
+    }
+
+    public Integer getExpenseCode() {
+        return expenseCode;
+    }
+
+    public void setExpenseCode(Integer expenseCode) {
+        this.expenseCode = expenseCode;
+    }
+
+    public Integer getOrganizationCode() {
+        return organizationCode;
+    }
+
+    public void setOrganizationCode(Integer organizationCode) {
+        this.organizationCode = organizationCode;
+    }
+
+    public Date getExpenseTime() {
+        return expenseTime;
+    }
+
+    public void setExpenseTime(Date expenseTime) {
+        this.expenseTime = expenseTime;
+    }
+
+    public String getExpenseOrganization() {
+        return expenseOrganization;
+    }
+
+    public void setExpenseOrganization(String expenseOrganization) {
+        this.expenseOrganization = expenseOrganization == null ? null : expenseOrganization.trim();
+    }
+
+    public Float getExpenseMoney() {
+        return expenseMoney;
+    }
+
+    public void setExpenseMoney(Float expenseMoney) {
+        this.expenseMoney = expenseMoney;
+    }
+
+    public String getExpenseEvent() {
+        return expenseEvent;
+    }
+
+    public void setExpenseEvent(String expenseEvent) {
+        this.expenseEvent = expenseEvent == null ? null : expenseEvent.trim();
+    }
+
+    public String getExpenseAgent() {
+        return expenseAgent;
+    }
+
+    public void setExpenseAgent(String expenseAgent) {
+        this.expenseAgent = expenseAgent == null ? null : expenseAgent.trim();
+    }
+
+    public String getExpensePic() {
+        return expensePic;
+    }
+
+    public void setExpensePic(String expensePic) {
+        this.expensePic = expensePic == null ? null : expensePic.trim();
+    }
+
+    public String getExpenseCertifictedcondition() {
+        return expenseCertifictedcondition;
+    }
+
+    public void setExpenseCertifictedcondition(String expenseCertifictedcondition) {
+        this.expenseCertifictedcondition = expenseCertifictedcondition == null ? null : expenseCertifictedcondition.trim();
+    }
 }
