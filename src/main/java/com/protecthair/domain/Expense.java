@@ -5,7 +5,7 @@ import java.util.Date;
 public class Expense {
     private Integer expenseCode;
 
-    private Integer organizationCode;
+    private Integer TeamId;
 
     private Date expenseTime;
 
@@ -23,7 +23,7 @@ public class Expense {
 
     public Expense(Integer expenseCode, Integer organizationCode, Date expenseTime, String expenseOrganization, Float expenseMoney, String expenseEvent, String expenseAgent, String expensePic, String expenseCertifictedcondition) {
         this.expenseCode = expenseCode;
-        this.organizationCode = organizationCode;
+        this.TeamId = organizationCode;
         this.expenseTime = expenseTime;
         this.expenseOrganization = expenseOrganization;
         this.expenseMoney = expenseMoney;
@@ -45,12 +45,12 @@ public class Expense {
         this.expenseCode = expenseCode;
     }
 
-    public Integer getOrganizationCode() {
-        return organizationCode;
+    public Integer getTeamId() {
+        return TeamId;
     }
 
-    public void setOrganizationCode(Integer organizationCode) {
-        this.organizationCode = organizationCode;
+    public void setTeamId(Integer teamId) {
+        this.TeamId = teamId;
     }
 
     public Date getExpenseTime() {

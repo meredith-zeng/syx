@@ -1,4 +1,4 @@
-package com.protecthair.cotroller;
+package com.protecthair.controller;
 
 import com.protecthair.domain.Team;
 import com.protecthair.result.Result;
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/api")
@@ -50,11 +49,11 @@ public class TeamController {
         Result res=teamService.searchTeam(team);
         return res;
     }
-    //Show Team
-    @ResponseBody
-    @RequestMapping(value = "/showTeam", method = RequestMethod.POST)
-    public Result showTeam() {
-        Result res=teamService.showTeam();
-        return res;
-    }
+//    //Show Team
+//    @ResponseBody
+//    @RequestMapping(value = "/showTeam", method = RequestMethod.POST)
+//    public Result showTeam() {
+//        Result res=teamService.showTeam();
+//        return res;
+//    }
 }

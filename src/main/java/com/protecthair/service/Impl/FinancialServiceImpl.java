@@ -60,7 +60,7 @@ public class FinancialServiceImpl implements FinancialService {
         }
         //图片路径
         expense.setExpensePic(path);
-        expense.setExpenseCertifictedCondition("待审核");
+        expense.setExpenseCertifictedcondition("待审核");
         SessionUser sessionUser = SessionUtil.getSessionUserFromCookie(req);
         //未登录测试用
 //        OrgMember orgMember = sessionUser.getOrgMember();
@@ -69,11 +69,11 @@ public class FinancialServiceImpl implements FinancialService {
 //            return Result.CodeMsg(CodeMsg.NULL_MEMBERID);
 //        }
 //        Integer memberID = orgMember.getId();
-        Integer memberID = -1;
-
-
-        //设置工号
-        expense.setMemberId(memberID);
+//        Integer memberID = -1;
+//
+//
+//        //设置工号
+//        expense.setMemberId(memberID);
         //保存实体
         try {
             financialMapper.saveExpense(expense);
