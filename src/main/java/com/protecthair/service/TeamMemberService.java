@@ -12,5 +12,5 @@ public interface TeamMemberService {
 
     Result queryTeam(TeamMember member);
 
-    Result searchTeam(TeamMember member);
+    Result findMember(TeamMember member);
 }

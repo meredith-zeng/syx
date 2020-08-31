@@ -1,21 +1,22 @@
 package com.protecthair.domain;
 
 public class TeamMember {
+    //团队成员id*
     private Integer teamMemberId;
-
-    private Integer teamName;
-
+    //团队名称
+    private String teamName;
+    //团队成员名称
     private String teamMemberName;
-
+    //学号
     private String studentId;
-
+    //团队成员专业
     private String teamMemberMajor;
-
+    //团队成员学院
     private String teamMemberCollege;
-
+    //是否为队长
     private String isLeader;
 
-    public TeamMember(Integer teamMemberId, Integer teamName, String teamMemberName, String studentId, String teamMemberMajor, String teamMemberCollege, String isLeader) {
+    public TeamMember(Integer teamMemberId, String teamName, String teamMemberName, String studentId, String teamMemberMajor, String teamMemberCollege, String isLeader) {
         this.teamMemberId = teamMemberId;
         this.teamName = teamName;
         this.teamMemberName = teamMemberName;
@@ -37,11 +38,11 @@ public class TeamMember {
         this.teamMemberId = teamMemberId;
     }
 
-    public Integer getTeamName() {
+    public String getTeamName() {
         return teamName;
     }
 
-    public void setTeamName(Integer teamName) {
+    public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
 

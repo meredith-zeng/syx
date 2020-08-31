@@ -53,9 +53,9 @@ public class TeamMemberController {
 
     //Search Team
     @ResponseBody
-    @RequestMapping(value = "/searchTeamMember", method = RequestMethod.POST)
-    public Result search(TeamMember member) {
-        Result res = teamMemberService.searchTeam(member);
+    @RequestMapping(value = "/findTeamMember", method = RequestMethod.POST)
+    public Result find(TeamMember member) {
+        Result res = teamMemberService.findMember(member);
         return res;
     }
 
