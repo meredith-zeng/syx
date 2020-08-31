@@ -6,4 +6,6 @@ public interface UserRightMapper {
     int insert(UserRight record);
 
     int insertSelective(UserRight record);
+
+    UserRight selectUserRight(Integer userId);
 }

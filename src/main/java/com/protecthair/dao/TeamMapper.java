@@ -1,6 +1,9 @@
 package com.protecthair.dao;
 
 import com.protecthair.domain.Team;
+import com.protecthair.domain.TeamApply;
+
+import java.util.List;
 
 public interface TeamMapper {
     int deleteByPrimaryKey(Integer teamId);
@@ -14,4 +17,15 @@ public interface TeamMapper {
     int updateByPrimaryKeySelective(Team record);
 
     int updateByPrimaryKey(Team record);
+
+    //自己写的sql
+    Integer selectTeamIDByStuId(String stuId);
+
+    Integer addTeamApply(TeamApply teamApply);
+
+    List<TeamApply> showApplyByStatus(String status);
+
+    List<TeamApply> showMyApply(String stuId);
+
+    Integer reviewTeam(TeamApply teamApply);
 }
