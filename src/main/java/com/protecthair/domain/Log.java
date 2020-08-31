@@ -9,18 +9,22 @@ public class Log {
 
     private Date logOperateTime;
 
+    private Date logTime;
+
     private String logSpecific;
 
-    public Log(Integer logCode, Integer logTeamId, Date logOperateTime) {
+    public Log(Integer logCode, Integer logTeamId, Date logOperateTime, Date logTime) {
         this.logCode = logCode;
         this.logTeamId = logTeamId;
         this.logOperateTime = logOperateTime;
+        this.logTime = logTime;
     }
 
-    public Log(Integer logCode, Integer logTeamId, Date logOperateTime, String logSpecific) {
+    public Log(Integer logCode, Integer logTeamId, Date logOperateTime, Date logTime, String logSpecific) {
         this.logCode = logCode;
         this.logTeamId = logTeamId;
         this.logOperateTime = logOperateTime;
+        this.logTime = logTime;
         this.logSpecific = logSpecific;
     }
 
@@ -50,6 +54,14 @@ public class Log {
 
     public void setLogOperateTime(Date logOperateTime) {
         this.logOperateTime = logOperateTime;
+    }
+
+    public Date getLogTime() {
+        return logTime;
+    }
+
+    public void setLogTime(Date logTime) {
+        this.logTime = logTime;
     }
 
     public String getLogSpecific() {

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,6 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("/api/log")
 public class LogController {
-    private static final Log logger = LogFactory.getLog(LogController.class);
     private LogServices logServices;
     @Autowired
     public void setSupplierEvaluateController(LogServices logServices){
@@ -36,7 +37,7 @@ public class LogController {
     //添加日志
     @ResponseBody
     @RequestMapping(value = "/insertLog",method = RequestMethod.POST)
-    public Result insertLog(@RequestBody LogVO logVO){
+    public Result insertLog(@RequestBody LogVO logVO) throws ParseException {
         if (logServices.insertLog(logVO)==1){
             return Result.success(true,CodeMsg.LOG_INSERT_SUCCESS);
         }else{
@@ -47,7 +48,7 @@ public class LogController {
 //    修改日志
     @ResponseBody
     @RequestMapping(value = "/updateLog",method = RequestMethod.POST)
-    public Result updateLog(@RequestBody LogVO logVO){
+    public Result updateLog(@RequestBody LogVO logVO) throws ParseException {
             if (logServices.updateLog(logVO)==1){
                 return Result.success(true,CodeMsg.LOG_UPDATE_SUCCESS);
             }else{
@@ -58,7 +59,7 @@ public class LogController {
     //选择某一具体日志
     @ResponseBody
     @RequestMapping(value = "/selectLog",method = RequestMethod.POST)
-    public Result selectLog(@RequestBody LogVO logVO){
+    public Result selectLog(@RequestBody LogVO logVO) throws ParseException {
         LogVO selectResult = logServices.selectLog(logVO.getLogCode());
         if (selectResult!=null){
             return Result.success(selectResult,CodeMsg.LOG_SELECT_SUCCESS);
@@ -69,9 +70,10 @@ public class LogController {
 
     //查询团队所有日志
     @ResponseBody
-    @RequestMapping(value = "/queryTeamLog",method = RequestMethod.POST)
-    public Result queryTeamLog(@RequestBody LogVO logVO){
-        ArrayList<LogVO> logResult = logServices.queryTeamLog(logVO.getTeamId());
+    @RequestMapping(value = "/queryTeamLog",method = RequestMethod.GET)
+    public Result queryTeamLog(HttpServletRequest request){
+        int TeamId = 1;
+        ArrayList<LogVO> logResult = logServices.queryTeamLog(TeamId);
         if (logResult!=null){
             return Result.success(logResult,CodeMsg.LOG_SELECT_ALL_SUCCESS);
         }else{
@@ -79,7 +81,7 @@ public class LogController {
         }
     }
 
-    //查询所有团队的所有日志,等待团队的mapper正式定稿后在services层调用
+
     @ResponseBody
     @RequestMapping(value = "/queryAll",method = RequestMethod.POST)
     public Result queryAll(){
