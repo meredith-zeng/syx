@@ -1,9 +1,9 @@
 package com.protecthair.dao;
 
-import com.protecthair.domain.User;
+import com.protecthair.domain.Users;
 
 public interface UsersMapper {
-    int insert(User record);
+    int insert(Users record);
 
-    int insertSelective(User record);
+    int insertSelective(Users record);
 }

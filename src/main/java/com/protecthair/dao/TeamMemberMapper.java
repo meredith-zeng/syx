@@ -17,5 +17,5 @@ public interface TeamMemberMapper {
 
     int updateByPrimaryKey(TeamMember record);
 
-    ArrayList<TeamMember> selectByName(String teamName);
+    ArrayList<TeamMember> find(String name);
 }

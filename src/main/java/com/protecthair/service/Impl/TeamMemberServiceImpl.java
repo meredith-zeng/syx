@@ -54,8 +54,8 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     }
 
     public Result findMember(TeamMember member) {
-        String teamName= member.getTeamName();
-        ArrayList list =teamMemberMapper.selectByName(teamName);
+        String name=member.getTeamName();
+        ArrayList list =teamMemberMapper.find(name);
         if (list!=null) {
             return Result.success(list,CodeMsg.FIND_TEAM_SUCCESS);
         } else {

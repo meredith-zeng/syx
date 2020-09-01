@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SessionUser {
-    private User user;
+    private Users users;
     private Team team;
     private UserRight userRight;
 }
