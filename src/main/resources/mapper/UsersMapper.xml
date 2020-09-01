@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.protecthair.dao.UsersMapper">
+
+  <!--自己写的sql-->
+  <select id="selectByUniversityCode" resultType="com.protecthair.domain.User" parameterType="String">
+        select user_id,user_name,university_code,user_password,user_phoneNumber,user_salt
+        from users
+        where university_code = #{universityCode}
+    </select>
+
+  <update id="modifyUserMsg" parameterType="com.protecthair.domain.User">
+    update Users
+    set user_phoneNumber = #{userPhoneNumber}
+    where user_id = #{userId}
+  </update>
+
+  <update id="setNewPassword"  parameterType="com.protecthair.domain.User">
+    update Users
+    set user_password = #{userPassword}
+    where university_code = #{universityCode}
+  </update>
+
+</mapper>

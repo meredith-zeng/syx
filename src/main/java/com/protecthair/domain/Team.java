@@ -1,7 +1,12 @@
 package com.protecthair.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@Data
 public class Team {
     private Integer teamId;
 
