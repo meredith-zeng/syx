@@ -17,6 +17,12 @@ public class CodeMsg {
     private int code;
     private String msg;
 
+
+    //注册模块
+    public static final CodeMsg REGISTER_SUCCESS = new CodeMsg(200, "注册成功");
+    public static final CodeMsg REGISTER_EXIST_PHONENUMBER = new CodeMsg(201, "手机号码已经被注册");
+    public static final CodeMsg REGISTER_ERROR_BIRTH = new CodeMsg(202, "错误的出生年月");
+
     //日志模块
     public static final CodeMsg LOG_INSERT_SUCCESS = new CodeMsg(2001, "日志新增成功");
     public static final CodeMsg LOG_INSERT_ERROR = new CodeMsg(2002, "日志新增失败");
