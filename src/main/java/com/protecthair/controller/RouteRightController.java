@@ -1,8 +1,10 @@
 package com.protecthair.controller;
 
+import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.RouteRightService;
+import com.protecthair.util.SessionUtil;
 import com.protecthair.vo.RouteRightVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +30,9 @@ public class RouteRightController {
     @ResponseBody
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     public Result routeRight(HttpServletRequest request)  {
-//        SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
-        Collection<RouteRightVO> finalMapResult = routeRightService.queryRouteRight(
-//                session.getUserRight().getRightLevel()
-                100
-        );
+        SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
+        int UserRight = session.getUserRight().getRightLevel();
+        Collection<RouteRightVO> finalMapResult = routeRightService.queryRouteRight(UserRight);
         if (finalMapResult !=null){
         return Result.success(finalMapResult, CodeMsg.RIGHT_ROUTE_SUCCESS);
         }else {

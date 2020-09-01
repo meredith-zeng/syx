@@ -3,7 +3,7 @@
 <mapper namespace="com.protecthair.dao.UserRightMapper">
   <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
     <constructor>
-      <arg column="right_level" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="right_level" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
@@ -37,11 +37,22 @@
     </select>
 
   <select id="selectUserRight" resultType="com.protecthair.domain.UserRight">
-            SELECT
-    user_right.right_level,
-    user_right.user_id,
-    FROM
-    user_right
-        where user_id = #{userId}
+        SELECT
+          user_right.right_level,
+          user_right.user_id,
+        FROM
+          user_right
+          where user_id = #{userId}
     </select>
+
+  <insert id="insertUserRightWithUsers">
+    INSERT ignore into user_right
+    VALUES (
+      (SELECT LEFT(university_code,1) from users where  user_id = 38),
+      38,
+      now()
+    );
+
+
+  </insert>
 </mapper>

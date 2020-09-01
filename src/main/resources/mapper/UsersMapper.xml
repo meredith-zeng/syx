@@ -27,5 +27,8 @@
         where team_leader_student_id = #{stuId}
     </select>
 
+    <insert id="insertUserRight">
+        insert into userRight
+    </insert>
 
 </mapper>

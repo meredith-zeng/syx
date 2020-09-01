@@ -1,5 +1,6 @@
 package com.protecthair.services.impl;
 
+import com.protecthair.domain.UserRight;
 import com.protecthair.vo.LoginVo;
 import com.protecthair.vo.ModifyPasswordVO;
 import com.protecthair.vo.ModifyVO;
@@ -49,6 +50,9 @@ public class UserServicesImpl implements UserServices {
                 return Result.CodeMsg(CodeMsg.PASSWORD_ERROR);
             } else {
                 //用户权限和团队id
+                if (userRightMapper.selectUserRight(loginUser.getUserId())==null){
+                    userRightMapper.insertUserRightWithUsers(loginUser.getUserId());
+                }
                 UserRight userRight = userRightMapper.selectUserRight(loginUser.getUserId());
                 Integer teamId = usersMapper.selectTeamIdByStuId(loginUser.getUniversityCode());
                 SessionUser sessionUser = new SessionUser(loginUser, userRight, teamId);
