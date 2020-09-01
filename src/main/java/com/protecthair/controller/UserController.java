@@ -1,13 +1,11 @@
 package com.protecthair.controller;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.protecthair.VO.LoginVo;
-import com.protecthair.VO.ModifyPasswordVO;
-import com.protecthair.VO.ModifyVO;
+import com.protecthair.vo.LoginVo;
+import com.protecthair.vo.ModifyPasswordVO;
+import com.protecthair.vo.ModifyVO;
 import com.protecthair.domain.SessionUser;
 import com.protecthair.domain.User;
-import com.protecthair.domain.UserRight;
-import com.protecthair.domain.Users;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.Result;

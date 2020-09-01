@@ -1,30 +1,20 @@
 package com.protecthair.services.impl;
 
-import com.protecthair.VO.LoginVo;
-import com.protecthair.VO.ModifyPasswordVO;
-import com.protecthair.VO.ModifyVO;
+import com.protecthair.vo.LoginVo;
+import com.protecthair.vo.ModifyPasswordVO;
+import com.protecthair.vo.ModifyVO;
 import com.protecthair.dao.UserRightMapper;
 import com.protecthair.dao.UsersMapper;
 import com.protecthair.domain.SessionUser;
 import com.protecthair.domain.User;
-import com.protecthair.domain.UserRight;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.Result;
 import com.protecthair.services.UserServices;
-import com.protecthair.util.AliyunSmsUtils;
 import com.protecthair.util.MD5Util;
-import com.protecthair.util.SessionUtil;
-import com.protecthair.util.UUIDUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
 
 /**
  * @author by liuquan

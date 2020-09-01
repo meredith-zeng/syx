@@ -1,13 +1,12 @@
 package com.protecthair.controller;
 
-import com.protecthair.VO.TeamApplyVO;
-import com.protecthair.VO.TeamReviewVO;
+import com.protecthair.vo.TeamApplyVO;
+import com.protecthair.vo.TeamReviewVO;
 import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.TeamServices;
 import com.protecthair.util.SessionUtil;
-import javafx.scene.chart.ValueAxis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

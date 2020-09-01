@@ -1,4 +1,4 @@
-package com.protecthair.VO;
+package com.protecthair.vo;
 
 import lombok.Data;
 

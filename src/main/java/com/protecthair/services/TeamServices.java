@@ -1,15 +1,9 @@
 package com.protecthair.services;
 
-import com.protecthair.VO.TeamApplyVO;
-import com.protecthair.VO.TeamReviewVO;
-import com.protecthair.domain.SessionUser;
+import com.protecthair.vo.TeamApplyVO;
+import com.protecthair.vo.TeamReviewVO;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * @author by liuquan

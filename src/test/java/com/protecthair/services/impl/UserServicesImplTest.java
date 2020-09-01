@@ -1,8 +1,8 @@
 package com.protecthair.services.impl;
 
-import com.protecthair.VO.LoginVo;
-import com.protecthair.VO.ModifyPasswordVO;
-import com.protecthair.VO.ModifyVO;
+import com.protecthair.vo.LoginVo;
+import com.protecthair.vo.ModifyPasswordVO;
+import com.protecthair.vo.ModifyVO;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.UserServices;
@@ -11,8 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.*;
 
 /**
  * @author by liuquan

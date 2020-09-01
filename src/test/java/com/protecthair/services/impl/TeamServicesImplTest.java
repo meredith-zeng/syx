@@ -1,10 +1,8 @@
 package com.protecthair.services.impl;
 
-import com.protecthair.VO.TeamApplyVO;
-import com.protecthair.VO.TeamReviewVO;
+import com.protecthair.vo.TeamApplyVO;
+import com.protecthair.vo.TeamReviewVO;
 import com.protecthair.dao.TeamMapper;
-import com.protecthair.domain.TeamApply;
-import com.protecthair.services.TeamServices;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author by liuquan

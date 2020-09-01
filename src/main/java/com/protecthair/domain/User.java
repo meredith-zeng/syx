@@ -1,6 +1,6 @@
 package com.protecthair.domain;
 
-import com.protecthair.VO.ModifyVO;
+import com.protecthair.vo.ModifyVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

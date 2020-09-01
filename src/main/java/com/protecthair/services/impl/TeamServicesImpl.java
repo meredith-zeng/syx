@@ -1,27 +1,19 @@
 package com.protecthair.services.impl;
 
-import com.protecthair.VO.TeamApplyVO;
-import com.protecthair.VO.TeamReviewVO;
+import com.protecthair.vo.TeamApplyVO;
+import com.protecthair.vo.TeamReviewVO;
 import com.protecthair.dao.TeamMapper;
-import com.protecthair.domain.SessionUser;
 import com.protecthair.domain.TeamApply;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.Result;
 import com.protecthair.services.TeamServices;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.el.ELClass;
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author by liuquan

@@ -1,7 +1,5 @@
 package com.protecthair.dao;
 
-import com.protecthair.VO.TeamReviewVO;
-import com.protecthair.dao.TeamMapper;
 import com.protecthair.domain.TeamApply;
 import junit.framework.TestCase;
 import org.junit.Test;
