@@ -10,4 +10,7 @@ public interface UsersMapper {
     Integer modifyUserMsg(User user);
 
     Integer setNewPassword(User updatUser);
+
+    Integer selectTeamIdByStuId(String stuId);
+
 }

@@ -16,4 +16,5 @@ import lombok.NoArgsConstructor;
 public class SessionUser {
     private User user;
     private UserRight userRight;
+    private Integer teamId;
 }
