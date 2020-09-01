@@ -15,10 +15,17 @@
     where user_id = #{userId}
   </update>
 
-  <update id="setNewPassword"  parameterType="com.protecthair.domain.User">
+    <update id="setNewPassword" parameterType="com.protecthair.domain.User">
     update Users
     set user_password = #{userPassword}
     where university_code = #{universityCode}
   </update>
+
+    <select id="selectTeamIdByStuId" resultType="Integer" parameterType="String">
+        select team_id
+        from team
+        where team_leader_student_id = #{stuId}
+    </select>
+
 
 </mapper>

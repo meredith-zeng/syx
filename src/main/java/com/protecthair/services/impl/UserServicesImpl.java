@@ -58,13 +58,12 @@ public class UserServicesImpl implements UserServices {
                 //密码错误
                 return Result.CodeMsg(CodeMsg.PASSWORD_ERROR);
             } else {
-                //用户权限
-//                UserRight userRight = userRightMapper.selectUserRight(loginUser.getUserId());
-//                SessionUser sessionUser = new SessionUser(loginUser,userRight);
-
-                SessionUser sessionUser = new SessionUser(loginUser,null);
+                //用户权限和团队id
+                UserRight userRight = userRightMapper.selectUserRight(loginUser.getUserId());
+                Integer teamId = usersMapper.selectTeamIdByStuId(loginUser.getUniversityCode());
+                SessionUser sessionUser = new SessionUser(loginUser, userRight, teamId);
                 //登录成功
-                return Result.success(sessionUser,CodeMsg.LOGIN_SUCCESS);
+                return Result.success(sessionUser, CodeMsg.LOGIN_SUCCESS);
             }
         }
     }
