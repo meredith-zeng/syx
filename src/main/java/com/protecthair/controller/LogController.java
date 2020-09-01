@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class LogController {
     private LogServices logServices;
     @Autowired
-    public void setSupplierEvaluateController(LogServices logServices){
+    public void setLogController(LogServices logServices){
         this.logServices=logServices;
     }
 
@@ -38,6 +38,9 @@ public class LogController {
     @ResponseBody
     @RequestMapping(value = "/insertLog",method = RequestMethod.POST)
     public Result insertLog(@RequestBody LogVO logVO) throws ParseException {
+//        SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
+//        int TeamId = 1;
+//        logVO.setTeamId(TeamId);
         if (logServices.insertLog(logVO)==1){
             return Result.success(true,CodeMsg.LOG_INSERT_SUCCESS);
         }else{
@@ -49,6 +52,9 @@ public class LogController {
     @ResponseBody
     @RequestMapping(value = "/updateLog",method = RequestMethod.POST)
     public Result updateLog(@RequestBody LogVO logVO) throws ParseException {
+//        SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
+//        int TeamId = 1;
+//        logVO.setTeamId(TeamId);
             if (logServices.updateLog(logVO)==1){
                 return Result.success(true,CodeMsg.LOG_UPDATE_SUCCESS);
             }else{
@@ -72,7 +78,9 @@ public class LogController {
     @ResponseBody
     @RequestMapping(value = "/queryTeamLog",method = RequestMethod.GET)
     public Result queryTeamLog(HttpServletRequest request){
+        //        SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
         int TeamId = 1;
+//        logVO.setTeamId(TeamId);
         ArrayList<LogVO> logResult = logServices.queryTeamLog(TeamId);
         if (logResult!=null){
             return Result.success(logResult,CodeMsg.LOG_SELECT_ALL_SUCCESS);
