@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
-public class teamTest {
+public class TeamTest {
     private static final Log logger = LogFactory.getLog(TeamController.class);
     @Autowired TeamMapper teamMapper;
     @Test
