@@ -1,43 +1,21 @@
 package com.protecthair.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ *
+ *  @author YULIN ZENG
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RouteRight {
-    private String routeCode;
-
-    private String routeParentCode;
-
-    private String rightLevel;
-
-    public RouteRight(String routeCode, String routeParentCode, String rightLevel) {
-        this.routeCode = routeCode;
-        this.routeParentCode = routeParentCode;
-        this.rightLevel = rightLevel;
+    private int routeCode;
+    private String routeName;
+    private String routeLevel;
+    private String routeUrl;
+    private String parentRouteName;
+    private int parentRouteCode;
     }
-
-    public RouteRight() {
-        super();
-    }
-
-    public String getRouteCode() {
-        return routeCode;
-    }
-
-    public void setRouteCode(String routeCode) {
-        this.routeCode = routeCode == null ? null : routeCode.trim();
-    }
-
-    public String getRouteParentCode() {
-        return routeParentCode;
-    }
-
-    public void setRouteParentCode(String routeParentCode) {
-        this.routeParentCode = routeParentCode == null ? null : routeParentCode.trim();
-    }
-
-    public String getRightLevel() {
-        return rightLevel;
-    }
-
-    public void setRightLevel(String rightLevel) {
-        this.rightLevel = rightLevel == null ? null : rightLevel.trim();
-    }
-}
