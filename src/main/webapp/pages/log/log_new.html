@@ -40,7 +40,6 @@
                     <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>重邮三下乡</span></a>
                 </div>
                 <div class="clearfix"></div>
-
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_info">
@@ -49,9 +48,7 @@
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
-
                 <br />
-
                 <!-- sidebar menu -->
                 <div  class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
@@ -62,12 +59,8 @@
 
                 </div>
                 <!-- /sidebar menu -->
-
-
-
             </div>
         </div>
-
         <!-- top navigation -->
         <div class="top_nav">
             <div class="nav_menu">
@@ -91,18 +84,14 @@
             </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
-            <div class="">
+            <div>
                 <div class="page-title">
                     <div class="title_left">
                         <h3>欢迎 <small> 欢迎</small></h3>
                     </div>
-
-
                     <div class="clearfix"></div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="x_panel">
@@ -134,17 +123,9 @@
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align">日志时间 <span class="required">*</span>
-                                            </label>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align">日志时间 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
                                                 <input id="logTime" name="logTime" class="date-picker form-control parsley-success" placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-parsley-id="16">
-                                                <script>
-                                                    function timeFunctionLong(input) {
-                                                        setTimeout(function() {
-                                                            input.type = 'text';
-                                                        }, 60000);
-                                                    }
-                                                </script>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
@@ -154,7 +135,6 @@
                                                 <button type="submit" class="btn btn-success" id="btn_01"> 提交</button>
                                             </div>
                                         </div>
-
                                     </form>
                                     <div id="errorMsg" style="text-align: center;color: red;margin-top: 25px"></div>
                                 </div>
@@ -214,41 +194,40 @@
 <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
 
 <script type="text/javascript" src="../../vendors/jquery.serializejson.js"></script>
-<!--<script type="text/template" id="listTemplate">-->
-<!--    {{#each this}}-->
-<!--    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>-->
-<!--        <ul class=" nav side-menu">-->
-<!--            {{#each childPartList}}-->
-<!--            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>-->
-<!--            {{/each}}-->
-<!--        </ul>-->
-<!--    </li>-->
-<!--    {{/each}}-->
-<!--</script>-->
-<!--<script>-->
-<!--    window.onload = function(){flushPage();}-->
-<!--    function flushPage() {-->
-<!--        $.ajax({-->
-<!--            url: "/api/route/query",-->
-<!--            type: "POST",-->
-<!--            dateType: 'JSON',-->
-<!--            cache: false,-->
-<!--            success: function (data) {-->
-<!--                console.log(data.data);-->
-<!--                const ParentTpl = $("#listTemplate").html();-->
-<!--                const ParentTemplate = Handlebars.compile(ParentTpl);-->
-<!--                const html = ParentTemplate(data.data);-->
-<!--                // $("#sidebar_menu_container").html(html);-->
-<!--                $("#sidebar-menu").html(html);-->
-<!--            },-->
-<!--            error: function (error) {-->
-<!--                console.log(error);-->
-<!--                $("#errorMsg").text("没有可以浏览的内容");-->
-<!--            },-->
-<!--        });-->
-<!--    }-->
-<!--</script>-->
+<script type="text/template" id="listTemplate">
+    {{#each this}}
+    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>
+        <ul class="side-menu">
+            {{#each childPartList}}
+            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>
+            {{/each}}
+        </ul>
+    </li>
+    {{/each}}
+</script>
+<script>
 
+    function flushPage() {
+        $.ajax({
+            url: "/api/route/query",
+            type: "POST",
+            dateType: 'JSON',
+            cache: false,
+            success: function (data) {
+                console.log(data.data);
+                const ParentTpl = $("#listTemplate").html();
+                const ParentTemplate = Handlebars.compile(ParentTpl);
+                const html = ParentTemplate(data.data);
+                $("#sidebar-menu").html(html);
+            },
+            error: function (error) {
+                console.log(error);
+                $("#errorMsg").text("没有可以浏览的内容");
+            },
+        });
+    }
+    window.onload = function(){flushPage();}
+</script>
 <script>
     function wordStatic(input) {
         // 获取要显示已经输入字数文本框对象
@@ -263,8 +242,7 @@
         }
     }
 </script>
-    <script type="text/javascript">
-
+<script type="text/javascript">
         $(function () {
             $("#btn_01").click(function (e) {
                 e.preventDefault();
@@ -287,8 +265,13 @@
                     })
             });
         })
-
 </script>
-
+<script>
+    function timeFunctionLong(input) {
+        setTimeout(function() {
+            input.type = 'text';
+        }, 60000);
+    }
+</script>
 </body>
 </html>

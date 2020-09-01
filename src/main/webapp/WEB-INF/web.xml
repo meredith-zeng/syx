@@ -63,6 +63,6 @@
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>pages/log/test.html</welcome-file>
+    <welcome-file>pages/log/log_queryAll.html</welcome-file>
   </welcome-file-list>
 </web-app>

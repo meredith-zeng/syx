@@ -34,7 +34,9 @@ public class CodeMsg {
     public static final CodeMsg LOG_SELECT_ALL_ERROR = new CodeMsg(2008, "指定团队所有日志查询失败");
     public static final CodeMsg LOG_QUERY_SUCCESS = new CodeMsg(2009, "查询所有团队所有日志成功");
     public static final CodeMsg LOG_QUERY_ERROR = new CodeMsg(2010, "查询所有团队所有日志失败");
-
+    //动态侧边栏
+    public static  final CodeMsg RIGHT_ROUTE_SUCCESS = new CodeMsg(914,"刷新动态侧边栏成功");
+    public static  final CodeMsg RIGHT_ROUTE_ERROR = new CodeMsg(915,"刷新动态侧边栏失败");
     //返回一个带参数的错误码
     public CodeMsg fillArgs(Object... args) {//变参
         int code = this.code;

@@ -40,7 +40,6 @@
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
@@ -72,7 +71,6 @@
 
             </div>
         </div>
-
         <!-- top navigation -->
         <div class="top_nav">
             <div class="nav_menu">
@@ -96,7 +94,6 @@
             </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
@@ -205,40 +202,43 @@
 <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
 
 <script type="text/javascript" src="../../vendors/jquery.serializejson.js"></script>
-<!--<script type="text/template" id="listTemplate">-->
-<!--    {{#each this}}-->
-<!--    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>-->
-<!--        <ul class=" nav side-menu">-->
-<!--            {{#each childPartList}}-->
-<!--            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>-->
-<!--            {{/each}}-->
-<!--        </ul>-->
-<!--    </li>-->
-<!--    {{/each}}-->
-<!--</script>-->
-<!--<script>-->
-<!--    window.onload = function(){flushPage();}-->
-<!--    function flushPage() {-->
-<!--        $.ajax({-->
-<!--            url: "/api/route/query",-->
-<!--            type: "POST",-->
-<!--            dateType: 'JSON',-->
-<!--            cache: false,-->
-<!--            success: function (data) {-->
-<!--                console.log(data.data);-->
-<!--                const ParentTpl = $("#listTemplate").html();-->
-<!--                const ParentTemplate = Handlebars.compile(ParentTpl);-->
-<!--                const html = ParentTemplate(data.data);-->
-<!--                // $("#sidebar_menu_container").html(html);-->
-<!--                $("#sidebar-menu").html(html);-->
-<!--            },-->
-<!--            error: function (error) {-->
-<!--                console.log(error);-->
-<!--                $("#errorMsg").text("没有可以浏览的内容");-->
-<!--            },-->
-<!--        });-->
-<!--    }-->
-<!--</script>-->
+<script type="text/template" id="listTemplate">
+    {{#each this}}
+    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>
+        <ul class="side-menu">
+            {{#each childPartList}}
+            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>
+            {{/each}}
+        </ul>
+    </li>
+    {{/each}}
+</script>
+<script>
+    window.onload = function(){
+        flushPage();
+        flushContent();
+    };
+    function flushPage() {
+        $.ajax({
+            url: "/api/route/query",
+            type: "POST",
+            dateType: 'JSON',
+            cache: false,
+            success: function (data) {
+                console.log(data.data);
+                const ParentTpl = $("#listTemplate").html();
+                const ParentTemplate = Handlebars.compile(ParentTpl);
+                const html = ParentTemplate(data.data);
+                $("#sidebar-menu").html(html);
+            },
+            error: function (error) {
+                console.log(error);
+                $("#errorMsg").text("没有可以浏览的内容");
+            },
+        });
+    }
+
+</script>
 
 <script type="text/template" id="template">
     {{#each this}}
@@ -254,10 +254,7 @@
     {{/each}}
 </script>
 <script>
-    window.onload = function () {
-        flushPage();
-    };
-    function flushPage() {
+    function flushContent() {
         $.ajax({
             url: "/api/log/queryTeamLog",
             type: "GET",
