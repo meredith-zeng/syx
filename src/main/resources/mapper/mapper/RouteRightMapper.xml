@@ -39,4 +39,13 @@
       </if>
     </trim>
   </insert>
+  <select id="queryRouteRight" resultType="com.protecthair.domain.RouteRight">
+        select route_code,route_name,route_level,route_url,parent_route_name,parent_route_code
+        from route
+        where route_code = any(
+            select route_code
+            from route_right
+            where right_level = #{rightLevel}
+        )
+    </select>
 </mapper>

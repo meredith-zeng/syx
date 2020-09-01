@@ -40,7 +40,6 @@
                     <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>重邮三下乡</span></a>
                 </div>
                 <div class="clearfix"></div>
-
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_info">
@@ -49,7 +48,6 @@
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
-
                 <br />
 
                 <!-- sidebar menu -->
@@ -194,40 +192,17 @@
 <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
 
 <script type="text/javascript" src="../../vendors/jquery.serializejson.js"></script>
-<!--<script type="text/template" id="listTemplate">-->
-<!--    {{#each this}}-->
-<!--    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>-->
-<!--        <ul class=" nav side-menu">-->
-<!--            {{#each childPartList}}-->
-<!--            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>-->
-<!--            {{/each}}-->
-<!--        </ul>-->
-<!--    </li>-->
-<!--    {{/each}}-->
-<!--</script>-->
-<!--<script>-->
-<!--    window.onload = function(){flushPage();}-->
-<!--    function flushPage() {-->
-<!--        $.ajax({-->
-<!--            url: "/api/route/query",-->
-<!--            type: "POST",-->
-<!--            dateType: 'JSON',-->
-<!--            cache: false,-->
-<!--            success: function (data) {-->
-<!--                console.log(data.data);-->
-<!--                const ParentTpl = $("#listTemplate").html();-->
-<!--                const ParentTemplate = Handlebars.compile(ParentTpl);-->
-<!--                const html = ParentTemplate(data.data);-->
-<!--                // $("#sidebar_menu_container").html(html);-->
-<!--                $("#sidebar-menu").html(html);-->
-<!--            },-->
-<!--            error: function (error) {-->
-<!--                console.log(error);-->
-<!--                $("#errorMsg").text("没有可以浏览的内容");-->
-<!--            },-->
-<!--        });-->
-<!--    }-->
-<!--</script>-->
+<script type="text/template" id="listTemplate">
+    {{#each this}}
+    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>
+        <ul class="side-menu">
+            {{#each childPartList}}
+            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>
+            {{/each}}
+        </ul>
+    </li>
+    {{/each}}
+</script>
 
 <script type="text/template" id="template">
     {{#each this}}
@@ -242,8 +217,30 @@
     {{/each}}
 </script>
 <script>
-    window.onload = function(){flushPage();}
+    window.onload = function(){
+        flushContent();
+        flushPage();
+    };
     function flushPage() {
+        $.ajax({
+            url: "/api/route/query",
+            type: "POST",
+            dateType: 'JSON',
+            cache: false,
+            success: function (data) {
+                console.log(data.data);
+                const ParentTpl = $("#listTemplate").html();
+                const ParentTemplate = Handlebars.compile(ParentTpl);
+                const html = ParentTemplate(data.data);
+                $("#sidebar-menu").html(html);
+            },
+            error: function (error) {
+                console.log(error);
+                $("#errorMsg").text("没有可以浏览的内容");
+            },
+        });
+    }
+    function flushContent() {
         $.ajax({
             url: "/api/log/queryAll",
             type: "POST",
@@ -265,5 +262,7 @@
     }
 
 </script>
+
+
 </body>
 </html>

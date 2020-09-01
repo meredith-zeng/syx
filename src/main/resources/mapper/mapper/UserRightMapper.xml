@@ -3,14 +3,11 @@
 <mapper namespace="com.protecthair.dao.UserRightMapper">
   <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
     <constructor>
-      <arg column="right_level" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="right_level" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right (right_level, user_id)
-    values (#{rightLevel,jdbcType=CHAR}, #{userId,jdbcType=INTEGER})
-  </insert>
+
   <insert id="insertSelective" parameterType="com.protecthair.domain.UserRight">
     insert into user_right
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -30,111 +27,32 @@
       </if>
     </trim>
   </insert>
-  <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
-    <constructor>
-      <arg column="right_level" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="created_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-    </constructor>
-  </resultMap>
-  <insert id="insert" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right (right_level, user_id, created_time
-      )
-    values (#{rightLevel,jdbcType=CHAR}, #{userId,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}
-      )
+
+  <select id="queryUserRight" resultType="com.protecthair.domain.UserRight">
+            SELECT
+    user_right.right_level,
+    user_right.user_id
+    FROM
+    user_right
+    </select>
+
+  <select id="selectUserRight" resultType="com.protecthair.domain.UserRight">
+        SELECT
+          user_right.right_level,
+          user_right.user_id,
+        FROM
+          user_right
+          where user_id = #{userId}
+    </select>
+
+  <insert id="insertUserRightWithUsers">
+    INSERT ignore into user_right
+    VALUES (
+      (SELECT LEFT(university_code,1) from users where  user_id = 38),
+      38,
+      now()
+    );
+
+
   </insert>
-  <insert id="insertSelective" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="rightLevel != null">
-        right_level,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="createdTime != null">
-        created_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="rightLevel != null">
-        #{rightLevel,jdbcType=CHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="createdTime != null">
-        #{createdTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
-    <constructor>
-      <idArg column="right_code" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="right_user_name" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="right_level" javaType="java.lang.String" jdbcType="CHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    right_code, right_user_name, right_level
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user_right
-    where right_code = #{rightCode,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_right
-    where right_code = #{rightCode,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right (right_code, right_user_name, right_level
-      )
-    values (#{rightCode,jdbcType=INTEGER}, #{rightUserName,jdbcType=CHAR}, #{rightLevel,jdbcType=CHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.protecthair.domain.UserRight">
-    insert into user_right
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="rightCode != null">
-        right_code,
-      </if>
-      <if test="rightUserName != null">
-        right_user_name,
-      </if>
-      <if test="rightLevel != null">
-        right_level,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="rightCode != null">
-        #{rightCode,jdbcType=INTEGER},
-      </if>
-      <if test="rightUserName != null">
-        #{rightUserName,jdbcType=CHAR},
-      </if>
-      <if test="rightLevel != null">
-        #{rightLevel,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.protecthair.domain.UserRight">
-    update user_right
-    <set>
-      <if test="rightUserName != null">
-        right_user_name = #{rightUserName,jdbcType=CHAR},
-      </if>
-      <if test="rightLevel != null">
-        right_level = #{rightLevel,jdbcType=CHAR},
-      </if>
-    </set>
-    where right_code = #{rightCode,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.protecthair.domain.UserRight">
-    update user_right
-    set right_user_name = #{rightUserName,jdbcType=CHAR},
-      right_level = #{rightLevel,jdbcType=CHAR}
-    where right_code = #{rightCode,jdbcType=INTEGER}
-  </update>
 </mapper>
