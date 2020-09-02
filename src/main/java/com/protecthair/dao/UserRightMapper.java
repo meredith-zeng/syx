@@ -1,6 +1,7 @@
 package com.protecthair.dao;
 
 import com.protecthair.domain.UserRight;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserRightMapper {
     int insert(UserRight record);
@@ -9,5 +10,5 @@ public interface UserRightMapper {
 
     UserRight selectUserRight(Integer userId);
 
-    int insertUserRightWithUsers (Integer userId);
+    int insertUserRightWithUsers ( Integer userId);
 }

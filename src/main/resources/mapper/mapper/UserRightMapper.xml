@@ -39,7 +39,7 @@
   <select id="selectUserRight" resultType="com.protecthair.domain.UserRight">
         SELECT
           user_right.right_level,
-          user_right.user_id,
+          user_right.user_id
         FROM
           user_right
           where user_id = #{userId}
@@ -48,10 +48,10 @@
   <insert id="insertUserRightWithUsers">
     INSERT ignore into user_right
     VALUES (
-      (SELECT LEFT(university_code,1) from users where  user_id = 38),
-      38,
+      (SELECT LEFT(university_code,1) from users where  user_id = #{userId}),
+      #{userId},
       now()
-    );
+    )
 
 
   </insert>

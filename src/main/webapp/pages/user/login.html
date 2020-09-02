@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>三下乡信息管理系统</title>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/build/css/custom.min.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        function userPasswordNull() {
+            var userPasswordText=$("#userPassword").val();
+            var userPasswordPatt=/^\w{6,12}$/;
+            if(userPasswordText==""){
+                $("#errorMsg").text("密码不能为空")
+                return false;
+            }else {
+                if(!userPasswordPatt.test(userPasswordText)){
+                    $("#errorMsg").text("密码由字母、数字下划线组成！");
+                    return false;
+                }else {
+                    $("#errorMsg").text("")
+                    return true;
+                }
+            }
+        }
+
+        $(function () {
+            $("#btn_login").click(function (e) {
+                e.preventDefault();
+                    $.post("/api/user/login",$("#form_login").serialize(),function (data) {
+                        if(data.code==212){
+                            $("#errorMsg").text(data.msg)
+                            window.location.href="/pages/user/user_center.html";
+                        }else{
+                            $("#errorMsg").text(data.msg)
+                        }
+
+                    },"json");
+            })
+
+
+        })
+    </script>
+</head>
+
+<body class="login">
+<div style="background-color: deepskyblue;margin: 0px" >
+    <div class="row" style="width: 1000px;margin: 0 auto;height: 141px;">
+        <img style="width: 100%;height: 100%" src="/static/img/user_top.png" class="img-responsive">
+    </div>
+</div>
+<div>
+    <div class="login_wrapper">
+        <div class=" animate form login_form">
+            <section class="login_content">
+                <span style="text-align: center;font-size: 30px">三下乡信息管理系统</span>
+                <form id="form_login">
+                    <h1>Login</h1>
+                    <!-- 存放错误信息-->
+                    <div style="height: 15px;margin-bottom: 13px">
+                        <span id="errorMsg" style="color: red;text-align: center"></span>
+                    </div>
+                    <div class="form-group row">
+                        <label for="universityCode" class="col-sm-3 col-form-label" style="font-size: 18px;text-align: right">账号:</label>
+                        <div class="col-sm-8">
+                            <input type="text"  class="form-control" id="universityCode" name="universityCode" placeholder="统一认证码" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userPassword" class="col-sm-3 col-form-label" style="font-size: 18px;text-align: right">密码:</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="密码" oninput="userPasswordNull()"onfocus="userPasswordNull()" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <button id="btn_login" type="button" class="btn btn-primary btn-block">登录</button>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <div>
+                            <h1><i class="fa fa-paw"></i> 保住头发!</h1>
+                            <p>©2020 重庆邮电大学 软件工程学院 华迪实训 保住头发小组</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

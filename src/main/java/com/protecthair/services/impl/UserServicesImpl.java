@@ -51,7 +51,8 @@ public class UserServicesImpl implements UserServices {
             } else {
                 //用户权限和团队id
                 if (userRightMapper.selectUserRight(loginUser.getUserId())==null){
-                    userRightMapper.insertUserRightWithUsers(loginUser.getUserId());
+                    Integer integer = loginUser.getUserId();
+                    userRightMapper.insertUserRightWithUsers(integer);
                 }
                 UserRight userRight = userRightMapper.selectUserRight(loginUser.getUserId());
                 Integer teamId = usersMapper.selectTeamIdByStuId(loginUser.getUniversityCode());

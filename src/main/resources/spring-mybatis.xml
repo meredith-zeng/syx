@@ -14,9 +14,9 @@
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/security_sys?serverTimezone=GMT%2B8"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/asdf?serverTimezone=GMT%2B8"/>
         <property name="username" value="root" />
-        <property name="password" value="199811"/>
+        <property name="password" value="123456"/>
     </bean>
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
