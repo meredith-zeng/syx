@@ -42,7 +42,7 @@
             $("#btn_login").click(function (e) {
                 e.preventDefault();
                     $.post("/api/user/login",$("#form_login").serialize(),function (data) {
-                        if(data.code==212){
+                        if(data.code==3103){
                             $("#errorMsg").text(data.msg)
                             window.location.href="/pages/user/user_center.html";
                         }else{

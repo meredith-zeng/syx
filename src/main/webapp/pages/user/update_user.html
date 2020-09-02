@@ -40,8 +40,9 @@
                     e.preventDefault();
                     if(checkPhoneNumber()){
                         $.post("/api/user/modifyMsg",$("#form_01").serialize(),function (data) {
-                            if(data.code==206){
+                            if(data.code==3105){
                                 $("#errorMsg").text(data.msg)
+                                window.location.href="/pages/user/user_center.html";
                             }else{
                                 //修改失败，返回修改失败信息；
                                 $("#errorMsg").text(data.msg)
@@ -210,7 +211,7 @@
                                         <div class="form-group row">
                                             <label for="userPhoneNumber" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">电话号码:</label>
                                             <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="userPhoneNumber" name="userPhoneNumber" placeholder="电话号码" oninput="checkPhoneNumber()" required>
+                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="userPhoneNumber" name="userPhoneNumber" placeholder="电话号码" oninput="checkPhoneNumber()" required>
                                             </div>
                                             <!--存放错误信息-->
                                             <div class="col-sm-3">
