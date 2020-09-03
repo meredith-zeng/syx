@@ -1,4 +1,4 @@
-package com.protecthair.services.Impl;
+package com.protecthair.services.impl;
 
 
 import com.protecthair.dao.TeamMemberMapper;
@@ -8,9 +8,10 @@ import com.protecthair.result.Result;
 import com.protecthair.services.TeamMemberService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
+@Service
 public class TeamMemberServiceImpl implements TeamMemberService {
     @Autowired
     TeamMemberMapper teamMemberMapper;

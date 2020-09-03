@@ -22,6 +22,12 @@
     from team
     where team_id = #{teamId,jdbcType=INTEGER}
   </select>
+  <select id="check" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where team_name = #{teamName,jdbcType=VARCHAR}
+  </select>
   <select id="search" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

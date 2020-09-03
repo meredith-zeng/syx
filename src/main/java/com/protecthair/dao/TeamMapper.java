@@ -19,4 +19,5 @@ public interface TeamMapper {
 
     ArrayList<Team> search(String teamName);
 
+    Team check(String teamName);
 }

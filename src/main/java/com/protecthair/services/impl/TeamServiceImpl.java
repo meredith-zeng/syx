@@ -1,4 +1,4 @@
-package com.protecthair.services.Impl;
+package com.protecthair.services.impl;
 import com.protecthair.dao.TeamMapper;
 import com.protecthair.domain.Team;
 import com.protecthair.result.CodeMsg;
@@ -6,8 +6,10 @@ import com.protecthair.result.Result;
 import com.protecthair.services.TeamService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+@Service
 public class TeamServiceImpl implements TeamService{
     @Autowired
     TeamMapper teamMapper;
@@ -26,9 +28,14 @@ public class TeamServiceImpl implements TeamService{
     public Result addTeam(Team team) {
         Team team1=new Team();
         BeanUtils.copyProperties(team,team1);
-        if (1 == teamMapper.insert(team1)) {
-            return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
-        } else {
+        String name=team1.getTeamName();
+        if (teamMapper.check(name)==null) {
+            if (1 == teamMapper.insert(team1)) {
+                return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
+            } else {
+                return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
+            }
+        }else {
             return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
         }
     }
