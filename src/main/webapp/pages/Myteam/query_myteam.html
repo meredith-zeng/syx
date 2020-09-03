@@ -38,7 +38,7 @@
             $("#btn_01").click(function (e) {
                 e.preventDefault();
                 $.post("/api/searchTeam",$("#form_01").serialize(),function (data) {
-                    if(data.code==505){
+                    if(data.code==304){
                         //查询成功
                         var $tbody = $("#table_01>tbody").empty();
                         $.each(data.data,function(i, result){
@@ -48,7 +48,7 @@
                                  <td>${result.teamCollege}</td>
                                  <td>${result.teamLeaderStudentName}</td>
                                  <td>${result.teamLeaderStudentId}</td>
-                                 <td><a href="/pages/organization/update_organization.html?id=${result.teamName}">查看</a> </td>
+                                 <td><a href="/pages/Myteam/query_myteamMember.html?id=${result.teamName}">查看</a> </td>
                                  <td><a class="btnDelete" data-code="${result.teamId}">删除</a> </td>
                                  </tr>`).appendTo($tbody);
                         });

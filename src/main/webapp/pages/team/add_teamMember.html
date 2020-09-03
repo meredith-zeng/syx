@@ -46,7 +46,7 @@
                         var $form = $("#form_01").empty();
                         $( `<div class="form-group row">
                         <div>
-                            <input type="text" style="height: 30px;font-size: 15px;display: none" class="form-control" id="teamName" name="memberName" value="${teamnameVal}" >
+                            <input type="text" style="height: 30px;font-size: 15px;display: none" class="form-control" id="teamName" name="teamName" value="${teamnameVal}" >
                         </div>
 
                         <label for="teamMemberName" class="col-sm-1 col-form-label" style="font-size: 18px;text-align: right">成员姓名:</label>
@@ -59,9 +59,9 @@
                             <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="studentId" name="studentId" placeholder="学号"required>
                         </div>
 
-                       <label for="teamCollege" class="col-sm-1 col-form-label" style="font-size: 18px;text-align: right">学院:</label>
+                       <label for="teamMemberCollege" class="col-sm-1 col-form-label" style="font-size: 18px;text-align: right">学院:</label>
                        <div class="col-sm-2">
-                            <select id="teamCollege" name="teamCollege" style="height: 30px;font-size:14px"class="form-control" >
+                            <select id="teamMemberCollege" name="teamMemberCollege" style="height: 30px;font-size:14px"class="form-control" >
 
                             </select>
                        </div>
@@ -80,7 +80,7 @@
                            </div>
                      </div>`).appendTo($form);
                         var department = ["软件工程学院","计算机学院","通信学院","经济管理学院","法学院","理学院","外国语学院","传媒学院","自动化学院"];
-                        var $option01 = $("#teamCollege").empty();
+                        var $option01 = $("#teamMemberCollege").empty();
                         $.each(department, function (i, item) {
                             $("<option/>").val(item).text(item).appendTo($option01);
                         })
@@ -102,7 +102,7 @@
                         var departmentVal=$("#teamName").val();
                         var studentName=$("#teamMemberName").val();
                         var studentId=$("#studentId").val();
-                        var stuDepart=$("#teamCollege").val();
+                        var stuDepart=$("#teamMemberCollege").val();
                         var stuMajor=$("#teamMemberMajor").val();
                         $(`<tr style='border: 3px;text-align: center'>
                                  <td>${departmentVal}</td>
@@ -111,6 +111,7 @@
                                  <td>${stuDepart} </td>
                                  <td>${stuMajor} </td>
                                  </tr>`).appendTo($tbody);
+                        var $form = $("#form_01").empty();
                     }else {
                         $("#errorMsg").text(data.msg)
                     }

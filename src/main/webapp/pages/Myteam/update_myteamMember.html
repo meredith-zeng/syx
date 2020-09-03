@@ -40,7 +40,7 @@
             if(result){
                 $("#teamMemberId").val(result[1]);
                 $.post("/api/queryTeamMember",{teamMemberId:result[1]},function (data) {
-                    if(data.code==222){
+                    if(data.code==304){
                         $("#teamName").val(data.data[0].teamName);
                         $("#teamMemberName").val(data.data[0].teamMemberName);
                         $("#studentId").val(data.data[0].studentId);
