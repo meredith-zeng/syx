@@ -1,11 +1,9 @@
 package com.protecthair.controller;
 
 import com.protecthair.domain.Expense;
-import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.FinancialService;
-import com.protecthair.util.SessionUtil;
 
 //import com.protecthair.vo.QueryExpenseVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +59,7 @@ public class FinancialManagerController {
     @ResponseBody
     @RequestMapping(value = "/expenseApplyListByIdStatus", method = RequestMethod.POST)
     public Result getExpenseApplyByIdAndStatus(@RequestParam("expenseStatus")String status,HttpServletRequest request){
-        SessionUser sessionUser = SessionUtil.getSessionUserFromCookie(request);
+
         //工号
         //Integer memberid = sessionUser.getOrgMember().getId();
         Integer memberid = -1;
@@ -77,7 +75,7 @@ public class FinancialManagerController {
     @ResponseBody
     @RequestMapping(value = "/expenseApplyListById", method = RequestMethod.POST)
     public Result getExpenseApplyById(HttpServletRequest request){
-        SessionUser sessionUser = SessionUtil.getSessionUserFromCookie(request);
+
         //Integer memberid = sessionUser.getOrgMember().getId();
         Integer memberid = -1;
         List<Expense> expenseList= financialService.getExpenseApplyById(memberid);

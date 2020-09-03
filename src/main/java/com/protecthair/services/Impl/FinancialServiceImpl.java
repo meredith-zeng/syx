@@ -5,7 +5,7 @@ import com.protecthair.domain.*;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.Result;
-import com.protecthair.util.SessionUtil;
+
 //import com.protecthair.util.WageUitl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +60,7 @@ public class FinancialServiceImpl implements FinancialService {
         //图片路径
         expense.setExpensePic(path);
         expense.setExpenseCertifictedCondition("待审核");
-        SessionUser sessionUser = SessionUtil.getSessionUserFromCookie(req);
+
         //未登录测试用
 //        OrgMember orgMember = sessionUser.getOrgMember();
 //        if (orgMember == null) {
