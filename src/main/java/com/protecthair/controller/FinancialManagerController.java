@@ -44,10 +44,11 @@ public class FinancialManagerController {
     @ResponseBody
     @RequestMapping(value = "/expenseApply", method = RequestMethod.POST)
     public Result submitApproval(@RequestParam("expensePicter") MultipartFile picture,Expense expense,
-                                 HttpServletRequest req, BindingResult result) throws IOException {
+                                 HttpServletRequest req, BindingResult result) throws Exception {
         if (result.hasErrors()){
             return Result.CodeMsg(CodeMsg.SUBMIT_NULL_ERROR);
         }
+
        return financialService.saveExpense(picture,expense,req);
     }
 

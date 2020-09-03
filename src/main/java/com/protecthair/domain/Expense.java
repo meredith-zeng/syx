@@ -26,7 +26,7 @@ public class Expense {
     private Integer expenseCode;
     //组织的名称
     @NotBlank
-    private String expenseOrganization;
+    private String TeamName;
     //报销人工号
     @NotBlank
     private Integer memberId;

@@ -1,12 +1,17 @@
 package com.protecthair.services.Impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.protecthair.dao.FinancialMapper;
+import com.protecthair.dao.InvoiceMapper;
 import com.protecthair.domain.*;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
+import com.protecthair.result.InvoiceResult;
 import com.protecthair.result.Result;
 
 //import com.protecthair.util.WageUitl;
+import com.protecthair.utils.ClientUploadUtils;
+import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.protecthair.services.FinancialService;
@@ -29,6 +34,7 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Autowired
     FinancialMapper financialMapper;
+    InvoiceMapper invoiceMapper;
 
     /**
      * 保存报销申请
@@ -39,7 +45,7 @@ public class FinancialServiceImpl implements FinancialService {
      * @return
      */
 
-    public Result saveExpense(MultipartFile picture, Expense expense, HttpServletRequest req) throws IOException {
+    public Result saveExpense(MultipartFile picture, Expense expense, HttpServletRequest req) throws Exception {
         // 判断文件是否为空
         if (picture.isEmpty()) {
             Result.error(CodeMsg.SUBMIT_APPROVAL_ERROR);
@@ -56,23 +62,30 @@ public class FinancialServiceImpl implements FinancialService {
             String imageName = contentType.substring(contentType.indexOf("/") + 1);
             path = "/file/" + uuid + "." + imageName;
             picture.transferTo(new File(pathRoot + path));
+            //voice Recognize
+            ResponseBody responseBody= ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr",path,imageName);
+            String json = responseBody.byteString().toString();
+            ObjectMapper objectMapper = new ObjectMapper();
+            InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
+            Invoice invoice=invoiceResult.getData();
+            System.out.println(invoice);
+//            String teamName=expense.getTeamName();
+//            invoice.setTeamName(teamName);
+//            invoiceMapper.save(invoice);
         }
         //图片路径
         expense.setExpensePic(path);
         expense.setExpenseCertifictedCondition("待审核");
 
-        //未登录测试用
-//        OrgMember orgMember = sessionUser.getOrgMember();
-//        if (orgMember == null) {
-//            //工号不存在
-//            return Result.CodeMsg(CodeMsg.NULL_MEMBERID);
-//        }
-//        Integer memberID = orgMember.getId();
+
+
         Integer memberID = -1;
 
 
         //设置工号
         expense.setMemberId(memberID);
+
+
         //保存实体
         try {
             financialMapper.saveExpense(expense);
@@ -80,6 +93,7 @@ public class FinancialServiceImpl implements FinancialService {
         } catch (Exception e) {
             return Result.CodeMsg(CodeMsg.SUBMIT_NULL_ERROR);
         }
+
     }
 
     //查询所有报销

@@ -3,10 +3,7 @@ package com.protecthair.dao;
 import com.protecthair.domain.Expense;
 //import com.protecthair.domain.Performance;
 //import com.protecthair.domain.Salary;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ import java.util.List;
  * @Description TODO
  * @Date 2020/8/10 14:23
  */
+@Mapper
 public interface FinancialMapper {
 
     String TABLE_NAME = " expense ";
@@ -29,22 +27,6 @@ public interface FinancialMapper {
     String INSERT_FIELDS_WAGE ="wage_memberid, wage_basic,wage_performance, wage_whole, " +
             "wage_month,wage_years,apply_performance";
     String SELECT_FIELDS_WAGE = " wage_code , " + INSERT_FIELDS;
-//    //插入
-//    @Insert({"insert into wage (", INSERT_FIELDS_WAGE,
-//            ") values (#{wageMemberid},#{wageBasic},#{wagePerformance}," +
-//                    "#{wageWhole},#{wageMonth},#{wageYears},#{applyPerformance})"})
-//    Salary addWage(Salary salary);
-//
-//
-//    @Select({"select count(*) from ", TABLE_WAGE_NAME ,"where wage_month = #{month} and " +
-//            " wage_years = #{years} and wage_memberid=#{id} "})
-//    Integer isExistCurMonthSalary(@Param("id") Integer id, @Param("month") Integer month,
-//                                  @Param("years") Integer years);
-//
-//
-//    @Select({"select * from ", TABLE_WAGE_NAME ," where wage_memberid=#{id}"})
-//    List<Salary>  selectAllWageById(Integer id);
-
 
 
 

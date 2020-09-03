@@ -23,7 +23,7 @@ public interface FinancialService {
      * @return
      */
     Result saveExpense(MultipartFile picture
-            , Expense expense, HttpServletRequest req) throws IOException;
+            , Expense expense, HttpServletRequest req) throws Exception;
 
     Result expenseReview(String expense_certifictedCondition, String id);
 
