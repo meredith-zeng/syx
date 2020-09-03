@@ -4,7 +4,7 @@ import com.protecthair.domain.Expense;
 import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
-import com.protecthair.service.FinancialService;
+import com.protecthair.services.FinancialService;
 import com.protecthair.util.SessionUtil;
 
 //import com.protecthair.vo.QueryExpenseVO;
@@ -28,7 +28,7 @@ import java.util.List;
  * @Date 2020/8/10 13:13
  */
 @Controller
-@RequestMapping(value = "/financial")
+@RequestMapping(value = "/api")
 public class FinancialManagerController {
 
     @Autowired

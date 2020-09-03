@@ -1,4 +1,4 @@
-package com.protecthair.service;
+package com.protecthair.services;
 
 import com.protecthair.domain.Expense;
 //import com.protecthair.domain.Salary;
