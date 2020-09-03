@@ -1,5 +1,6 @@
 package com.protecthair.dao;
 
+import com.protecthair.domain.Team;
 import com.protecthair.domain.TeamApply;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class TeamMapperTest extends TestCase {
 
     @Test
     public void testSelectTeamIDByStuId() {
-        Integer teamid = teamDao.selectTeamIDByStuId("20190002");
+        Team teamid = teamDao.selectTeamIDByStuId("20190002");
         System.out.println(teamid);
     }
 

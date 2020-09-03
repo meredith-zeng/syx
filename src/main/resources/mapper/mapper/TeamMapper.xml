@@ -119,14 +119,14 @@
   </update>
 
   <!--自己写的sql语句-->
-  <select id="selectTeamIDByStuId" resultType="Integer"  parameterType="String">
-        select team_id
+  <select id="selectTeamIDByStuId" resultType="com.protecthair.domain.Team"  parameterType="String">
+        select team_id,team_name
         from team
         where team_leader_student_id = #{stuId}
     </select>
 
   <select id="showApplyByStatus" resultType="com.protecthair.domain.TeamApply" parameterType="String">
-        select certification_id,team_id,activity_begin_time,
+        select certification_id,team_id,team_name,activity_begin_time,
         activity_end_time,team_level,is_pass,created_time,certification_file_url,certification_time
         from certification
         where is_pass = #{isPass}

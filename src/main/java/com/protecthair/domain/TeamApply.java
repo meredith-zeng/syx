@@ -1,5 +1,6 @@
 package com.protecthair.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,12 +19,17 @@ import java.util.Date;
 public class TeamApply {
     private Integer certificationId;
     private Integer teamId;
+    private String teamName;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date activityBeginTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date activityEndTime;
     private String teamLevel;
     private String isPass;
     private String certificationFileUrl;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date certificationTime;
 
     public TeamApply(int i, Date date, Date date1, String s1,  String s) {

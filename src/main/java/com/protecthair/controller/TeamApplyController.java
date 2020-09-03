@@ -8,6 +8,7 @@ import com.protecthair.result.Result;
 import com.protecthair.services.TeamServices;
 import com.protecthair.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,9 +33,12 @@ public class TeamApplyController {
 
     //学生团队申请
     @RequestMapping(value = "/apply")
-    public Result teamApply(@Validated TeamApplyVO teamApplyVO,
-                            @RequestParam("file") MultipartFile picture,
+    public Result teamApply(@RequestParam("file") MultipartFile picture,
+                            @Validated TeamApplyVO teamApplyVO, BindingResult res,
                             HttpServletRequest request) throws IOException {
+        if (res.hasErrors()){
+            return Result.CodeMsg(CodeMsg.NULL_DATA);
+        }
         //获取团队号,查看目前登录的人是否创建了团队
         SessionUser sessionUser = SessionUtil.getSessionUserFromCookie(request);
         String stuId = sessionUser.getUser().getUniversityCode();
@@ -47,7 +51,7 @@ public class TeamApplyController {
         String path = "";
         //获得文件类型（可以判断如果不是pdf，禁止上传）
         String contentType = picture.getContentType();
-        if (contentType == "pdf" && !picture.isEmpty()) {
+        if (contentType.equals("application/pdf") && !picture.isEmpty()) {
             //生成uuid作为文件名称
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             //获得文件后缀名称

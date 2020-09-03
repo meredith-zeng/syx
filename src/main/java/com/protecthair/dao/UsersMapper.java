@@ -1,7 +1,6 @@
 package com.protecthair.dao;
 
 import com.protecthair.domain.User;
-import com.protecthair.domain.Users;
 
 public interface UsersMapper {
 

@@ -1,5 +1,6 @@
 package com.protecthair.services.impl;
 
+import com.protecthair.domain.Team;
 import com.protecthair.vo.TeamApplyVO;
 import com.protecthair.vo.TeamReviewVO;
 import com.protecthair.dao.TeamMapper;
@@ -31,15 +32,16 @@ public class TeamServicesImpl implements TeamServices {
     @Override
     public CodeMsg applyTeam(String stuId, TeamApplyVO teamApplyVO) {
         //根据统一验证码查看团队是否存在
-        Integer teamID = mapper.selectTeamIDByStuId(stuId);
-        if (teamID == null) {
+        Team teamIDByStuId = mapper.selectTeamIDByStuId(stuId);
+        if (teamIDByStuId == null) {
             //该学号没有注册团队
             return CodeMsg.NO_EXIST_TEAM;
         }
 
-        TeamApply teamApply = new TeamApply(teamID);
+        TeamApply teamApply = new TeamApply(teamIDByStuId.getTeamId());
         teamApply.setIsPass("未审核");
         teamApply.setCreatedTime(new Date());
+        teamApplyVO.setTeamName(teamIDByStuId.getTeamName());
         //teamApply.setCertificationFileUrl(path);
         //TODO 需要判断下是否正确
         BeanUtils.copyProperties(teamApplyVO, teamApply);
@@ -80,6 +82,9 @@ public class TeamServicesImpl implements TeamServices {
         teamApply.setCertificationTime(new Date());
         //转换VO对象
         BeanUtils.copyProperties(teamReviewVO, teamApply);
+        if (teamApply.getIsPass().equals("审核不通过")){
+            teamApply.setTeamLevel("无");
+        }
         if (Constant.DATE_CHANGE_SUCCESS.equals(mapper.reviewTeam(teamApply))) {
             return CodeMsg.TEAM_REVIEWS_SUCCESS;
         } else {

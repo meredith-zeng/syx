@@ -19,7 +19,7 @@ public interface TeamMapper {
     int updateByPrimaryKey(Team record);
 
     //自己写的sql
-    Integer selectTeamIDByStuId(String stuId);
+    Team selectTeamIDByStuId(String stuId);
 
     Integer addTeamApply(TeamApply teamApply);
 

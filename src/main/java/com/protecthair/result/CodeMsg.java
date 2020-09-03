@@ -41,14 +41,14 @@ public class CodeMsg {
 
     //团队申请模块
     public static final CodeMsg NO_EXIST_TEAM = new CodeMsg(3001,"团队不存在");
-    public static final CodeMsg APPLY_TEAM_SUCCESS =  new CodeMsg(3002,"团队申请成功");
-    public static final CodeMsg APPLY_TEAM_FAIL =  new CodeMsg(3003,"团队申请失败");
-    public static final CodeMsg SHOW_ALLAPPLY_SUCCESS = new CodeMsg(3004,"展示团队成功");
-    public static final CodeMsg SHOW_ALLAPPLY_ERROR = new CodeMsg(3005,"展示团队失败");
-    public static final CodeMsg TEAM_REVIEWS_SUCCESS = new CodeMsg(3006,"团队审核成功");
-    public static final CodeMsg TEAM_REVIEWS_ERROR = new CodeMsg(3007,"团队审核失败");
+    public static final CodeMsg APPLY_TEAM_SUCCESS =  new CodeMsg(3002,"团队活动申请成功");
+    public static final CodeMsg APPLY_TEAM_FAIL =  new CodeMsg(3003,"团队活动申请失败");
+    public static final CodeMsg SHOW_ALLAPPLY_SUCCESS = new CodeMsg(3004,"展示团队活动成功");
+    public static final CodeMsg SHOW_ALLAPPLY_ERROR = new CodeMsg(3005,"展示活动失败");
+    public static final CodeMsg TEAM_REVIEWS_SUCCESS = new CodeMsg(3006,"团队活动审核成功");
+    public static final CodeMsg TEAM_REVIEWS_ERROR = new CodeMsg(3007,"团队活动审核失败");
     public static final CodeMsg SUBMIT_APPROVAL_ERROR = new CodeMsg(3008,"团队申请书为空");
-    public static final CodeMsg SUBMIT_FILE_ERROR =  new CodeMsg(3009, "团队申请书格式错误");
+    public static final CodeMsg SUBMIT_FILE_ERROR =  new CodeMsg(3009, "团队申请书格式错误，请传pdf格式");
 
 
     //用户管理模块
