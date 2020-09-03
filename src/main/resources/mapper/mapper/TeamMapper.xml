@@ -22,6 +22,12 @@
     from team
     where team_id = #{teamId,jdbcType=INTEGER}
   </select>
+  <select id="search" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where team_id like concat('%',#{teamName,jdbcType=VARCHAR},'%')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from team
     where team_id = #{teamId,jdbcType=INTEGER}

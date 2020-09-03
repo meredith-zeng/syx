@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.protecthair.domain.TeamMember">
     <constructor>
       <idArg column="team_member_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="team_name" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="team_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="team_member_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="student_id" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="team_member_major" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -21,6 +21,12 @@
     <include refid="Base_Column_List" />
     from team_member
     where team_member_id = #{teamMemberId,jdbcType=INTEGER}
+  </select>
+  <select id="find" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from team_member
+    where team_name = #{teamName,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from team_member

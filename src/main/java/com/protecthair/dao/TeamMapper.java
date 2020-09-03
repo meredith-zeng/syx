@@ -1,9 +1,8 @@
 package com.protecthair.dao;
 
 import com.protecthair.domain.Team;
-import com.protecthair.domain.TeamApply;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface TeamMapper {
     int deleteByPrimaryKey(Integer teamId);
@@ -12,20 +11,12 @@ public interface TeamMapper {
 
     int insertSelective(Team record);
 
-    Team selectByPrimaryKey(Integer teamId);
+    ArrayList<Team> selectByPrimaryKey(Integer teamId);
 
     int updateByPrimaryKeySelective(Team record);
 
     int updateByPrimaryKey(Team record);
 
-    //自己写的sql
-    Integer selectTeamIDByStuId(String stuId);
+    ArrayList<Team> search(String teamName);
 
-    Integer addTeamApply(TeamApply teamApply);
-
-    List<TeamApply> showApplyByStatus(String status);
-
-    List<TeamApply> showMyApply(String stuId);
-
-    Integer reviewTeam(TeamApply teamApply);
 }
