@@ -18,4 +18,6 @@ public interface TeamMemberMapper {
     int updateByPrimaryKey(TeamMember record);
 
     ArrayList<TeamMember> find(String name);
+
+    TeamMember check(String sid);
 }

@@ -15,14 +15,22 @@ import java.util.ArrayList;
 public class TeamMemberServiceImpl implements TeamMemberService {
     @Autowired
     TeamMemberMapper teamMemberMapper;
+
     public Result add(TeamMember member) {
+
         TeamMember teamMember=new TeamMember();
         BeanUtils.copyProperties(member,teamMember);
-        if (1 == teamMemberMapper.insert(teamMember)) {
-            return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
-        } else {
-            return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
+        String sid= teamMember.getStudentId();
+        if (teamMemberMapper.check(sid)==null){
+            if (1 == teamMemberMapper.insert(teamMember)) {
+                return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
+            } else {
+                return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
+            }
+        }else {
+           return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
         }
+
     }
 
     public Result modify(TeamMember member) {

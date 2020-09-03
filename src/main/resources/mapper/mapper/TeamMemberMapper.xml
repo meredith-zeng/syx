@@ -22,6 +22,12 @@
     from team_member
     where team_member_id = #{teamMemberId,jdbcType=INTEGER}
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from team_member
+    where student_id= #{studentId,jdbcType=VARCHAR}
+  </select>
   <select id="find" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
