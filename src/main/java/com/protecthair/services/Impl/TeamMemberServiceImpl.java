@@ -1,11 +1,11 @@
-package com.protecthair.service.Impl;
+package com.protecthair.services.Impl;
 
 
 import com.protecthair.dao.TeamMemberMapper;
 import com.protecthair.domain.TeamMember;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
-import com.protecthair.service.TeamMemberService;
+import com.protecthair.services.TeamMemberService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

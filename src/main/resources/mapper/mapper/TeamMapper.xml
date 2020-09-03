@@ -26,10 +26,10 @@
     select
     <include refid="Base_Column_List" />
     from team
-    where team_id like concat('%',#{teamName,jdbcType=VARCHAR},'%')
+    where team_name like concat('%',#{teamName,jdbcType=VARCHAR},'%')
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from team
+    delete team,team_member from team left join team_mber on team.team_name=team_member.team_name
     where team_id = #{teamId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.protecthair.domain.Team">

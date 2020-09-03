@@ -1,4 +1,4 @@
-package com.protecthair.service;
+package com.protecthair.services;
 
 import com.protecthair.domain.Team;
 import com.protecthair.result.Result;
