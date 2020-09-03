@@ -35,7 +35,7 @@
     where team_name like concat('%',#{teamName,jdbcType=VARCHAR},'%')
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete team,team_member from team left join team_mber on team.team_name=team_member.team_name
+    delete team,team_member from team left join team_member on team.team_name=team_member.team_name
     where team_id = #{teamId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.protecthair.domain.Team">

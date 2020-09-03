@@ -41,7 +41,7 @@
                 var teamNameVal = result[1];
                 if(teamNameVal){
                     $.post("/api/findTeamMember",{teamName:teamNameVal},function (data) {
-                        if(data.code==505){
+                        if(data.code==304){
                             var $tbody = $("#table_01>tbody").empty();
                             $.each(data.data,function(i, result){
                                 $(`<tr style='border: 3px;text-align: center'>
@@ -52,7 +52,7 @@
                                   <td>${result.teamMemberCollege}</td>
                                  <td>${result.teamMemberMajor}</td>
                                  <td>${result.isLeader}</td>
-                                  <td><a href="/pages/organization/update_organization.html?id=${result.teamMemberId}">修改</a> </td>
+                                  <td><a href="/pages/Myteam/update_myteamMember.html?id=${result.teamMemberId}">修改</a> </td>
                                  <td><a class="btnDelete" data-code="${result.teamMemberId}">删除</a> </td>
                                  </tr>`).appendTo($tbody);
                             });
@@ -68,7 +68,7 @@
                 var confirmMsg=confirm("确认删除？");
                 if(confirmMsg){
                     (function(t){
-                        $.post("/api/removeTeam",{teamId: t.attr("data-code")},function(data){
+                        $.post("/api/removeTeamMember",{teamId: t.attr("data-code")},function(data){
                             t.parents("tr").remove();
                         },"json");
                     })(trObj);
@@ -228,6 +228,8 @@
                                             <th class="text-center">学院</th>
                                             <th class="text-center">专业</th>
                                             <th class="text-center">队长</th>
+                                            <th class="text-center">修改操作</th>
+                                            <th class="text-center">删除操作</th>
                                             </thead>
                                             <tbody id="queryResult">
 
