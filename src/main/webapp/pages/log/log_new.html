@@ -115,13 +115,13 @@
                                                 <div ><span id="num">0</span>/500</div>
                                             </div>
                                         </div>
-                                        <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="TeamId">团队id<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="TeamId" name="TeamId" required="required" class="form-control "/>
-                                            </div>
-                                        </div>
+<!--                                        <div class="item form-group">-->
+<!--                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="TeamId">团队id<span class="required">*</span>-->
+<!--                                            </label>-->
+<!--                                            <div class="col-md-6 col-sm-6 ">-->
+<!--                                                <input type="text" id="TeamId" name="TeamId" required="required" class="form-control "/>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3 label-align">日志时间 <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
@@ -231,10 +231,10 @@
 <script>
     function wordStatic(input) {
         // 获取要显示已经输入字数文本框对象
-        var content = document.getElementById('num');
+        const content = document.getElementById('num');
         if (content && input) {
             // 获取输入框输入内容长度并更新到界面
-            var value = input.value;
+            let value = input.value;
             // 将换行符不计算为单词数
             value = value.replace(/\n|\r/gi,"");
             // 更新计数

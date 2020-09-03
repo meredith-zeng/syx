@@ -3,6 +3,7 @@ package com.protecthair.controller;
 import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
+import com.protecthair.services.LogServices;
 import com.protecthair.services.RouteRightService;
 import com.protecthair.util.SessionUtil;
 import com.protecthair.vo.RouteRightVO;
@@ -25,8 +26,12 @@ import java.util.Collection;
 @Controller
 @RequestMapping("/api/route")
 public class RouteRightController {
+    private RouteRightService routeRightService;
     @Autowired
-    RouteRightService routeRightService;
+    public void setRouteRightServiceController(RouteRightService routeRightService){
+        this.routeRightService=routeRightService;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     public Result routeRight(HttpServletRequest request)  {

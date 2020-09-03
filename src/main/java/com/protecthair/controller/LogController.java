@@ -41,8 +41,7 @@ public class LogController {
     @RequestMapping(value = "/insertLog",method = RequestMethod.POST)
     public Result insertLog(@RequestBody LogVO logVO,HttpServletRequest request) throws ParseException {
         SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
-        int TeamId = session.getTeamId();
-        logVO.setTeamId(TeamId);
+        logVO.setTeamId(session.getTeamId());
         if (logServices.insertLog(logVO)==1){
             return Result.success(true,CodeMsg.LOG_INSERT_SUCCESS);
         }else{
@@ -55,8 +54,7 @@ public class LogController {
     @RequestMapping(value = "/updateLog",method = RequestMethod.POST)
     public Result updateLog(@RequestBody LogVO logVO,HttpServletRequest request) throws ParseException {
         SessionUser session  = SessionUtil.getSessionUserFromCookie(request);
-        int TeamId = session.getTeamId();
-        logVO.setTeamId(TeamId);
+        logVO.setTeamId(session.getTeamId());
         if (logServices.updateLog(logVO)==1){
             return Result.success(true,CodeMsg.LOG_UPDATE_SUCCESS);
         }else{
