@@ -20,13 +20,13 @@ import java.util.Date;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-mvc.xml",
         "classpath:spring-mybatis.xml"})
-public class TeamServicesImplTest {
+public class TeamApplyServicesImplTest {
 
     @Autowired
     TeamMapper mapper;
 
     @Autowired
-    TeamServicesImpl teamServices;
+    TeamApplyApplyServicesImpl teamServices;
 
     @Test
     public void applyTeam() {

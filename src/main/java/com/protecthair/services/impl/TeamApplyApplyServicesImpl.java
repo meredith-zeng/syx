@@ -8,7 +8,7 @@ import com.protecthair.domain.TeamApply;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.Result;
-import com.protecthair.services.TeamServices;
+import com.protecthair.services.TeamApplyServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.List;
  * @Date 2020/8/29 16:27
  */
 @Service
-public class TeamServicesImpl implements TeamServices {
+public class TeamApplyApplyServicesImpl implements TeamApplyServices {
 
     @Autowired
     TeamMapper mapper;

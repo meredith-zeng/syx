@@ -11,7 +11,7 @@ import com.protecthair.result.Result;
  * @Description TODO
  * @Date 2020/8/29 16:27
  */
-public interface TeamServices {
+public interface TeamApplyServices {
     CodeMsg applyTeam(String stuId, TeamApplyVO teamApplyVO);
 
     Result getTeamApplyByStatus(String status);
