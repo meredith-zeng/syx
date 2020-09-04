@@ -1,6 +1,7 @@
 package com.protecthair.controller;
 
 import com.protecthair.domain.Expense;
+import com.protecthair.domain.Invoice;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.FinancialService;
@@ -141,11 +142,13 @@ public class FinancialManagerController {
      Result result =    financialService.expenseReview(certificationCertificatedCondition,id);
        return result;
     }
-    /**
-     * 管理员     * @param id     报销的业务id，即主键
-     * @param certificationCertificatedCondition   报销状态（通过，未通过）
-     * @return
-     */
+    @ResponseBody
+    @RequestMapping(value = "/invoiceShow", method = RequestMethod.POST)
+    public Result invoiceShow(@RequestParam(value = "expenseOrganization") String name) {
+        List<Invoice> invoiceList =    financialService.invoiceShow(name);
+        Result res =   Result.success(invoiceList,CodeMsg.QUERY_EXPENSE_SUCCESS);
+        return res;
+    }
 
     /**------------------------------------------管理员模块end------------------------------**/
 

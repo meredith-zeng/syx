@@ -8,4 +8,9 @@
         insert into invoice
         (team_name,code,number,date,price,verify)values(#{teamName},#{code},#{number},#{date},#{price},#{verify})
     </insert>
+    <select id="save" parameterType="String" parameterMap="Invoice">
+        select *
+        from invoice
+        where team_name=#{name}
+    </select>
 </mapper>

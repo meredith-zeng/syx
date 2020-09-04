@@ -113,6 +113,11 @@ public class FinancialServiceImpl implements FinancialService {
         return financialMapper.getExpenseApplyByIdAndStatus(status,memberid);
     }
 
+    public List<Invoice> invoiceShow(String name) {
+
+        return invoiceMapper.show(name);
+    }
+
 //    /**
 //     * 工资计算
 //     * @param id

@@ -2,6 +2,7 @@ package com.protecthair.services;
 
 import com.protecthair.domain.Expense;
 //import com.protecthair.domain.Salary;
+import com.protecthair.domain.Invoice;
 import com.protecthair.result.Result;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +38,8 @@ public interface FinancialService {
     List<Expense> getExpenseApplyById(Integer memberid);
     //圆滚滚通过
     List<Expense>  getExpenseApplyByIdAndStatus(String status, Integer memberid);
+
+    List<Invoice> invoiceShow(String name);
 
 
 //    Result caculateSalary(Integer id);
