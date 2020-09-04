@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.protecthair.domain.TeamMember">
     <constructor>
       <idArg column="team_member_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="team_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="team_name" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="team_member_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="student_id" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="team_member_major" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -22,18 +22,6 @@
     from team_member
     where team_member_id = #{teamMemberId,jdbcType=INTEGER}
   </select>
-  <select id="check" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from team_member
-    where student_id= #{studentId,jdbcType=VARCHAR}
-  </select>
-  <select id="find" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from team_member
-    where team_name = #{teamName,jdbcType=VARCHAR}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from team_member
     where team_member_id = #{teamMemberId,jdbcType=INTEGER}
@@ -42,7 +30,7 @@
     insert into team_member (team_member_id, team_name, team_member_name, 
       student_id, team_member_major, team_member_college, 
       is_leader)
-    values (#{teamMemberId,jdbcType=INTEGER}, #{teamName,jdbcType=VARCHAR}, #{teamMemberName,jdbcType=VARCHAR},
+    values (#{teamMemberId,jdbcType=INTEGER}, #{teamName,jdbcType=INTEGER}, #{teamMemberName,jdbcType=VARCHAR}, 
       #{studentId,jdbcType=VARCHAR}, #{teamMemberMajor,jdbcType=VARCHAR}, #{teamMemberCollege,jdbcType=VARCHAR}, 
       #{isLeader,jdbcType=VARCHAR})
   </insert>
@@ -76,7 +64,7 @@
         #{teamMemberId,jdbcType=INTEGER},
       </if>
       <if test="teamName != null">
-        #{teamName,jdbcType=VARCHAR},
+        #{teamName,jdbcType=INTEGER},
       </if>
       <if test="teamMemberName != null">
         #{teamMemberName,jdbcType=VARCHAR},
@@ -99,7 +87,7 @@
     update team_member
     <set>
       <if test="teamName != null">
-        team_name = #{teamName,jdbcType=VARCHAR},
+        team_name = #{teamName,jdbcType=INTEGER},
       </if>
       <if test="teamMemberName != null">
         team_member_name = #{teamMemberName,jdbcType=VARCHAR},
@@ -121,7 +109,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.protecthair.domain.TeamMember">
     update team_member
-    set team_name = #{teamName,jdbcType=VARCHAR},
+    set team_name = #{teamName,jdbcType=INTEGER},
       team_member_name = #{teamMemberName,jdbcType=VARCHAR},
       student_id = #{studentId,jdbcType=VARCHAR},
       team_member_major = #{teamMemberMajor,jdbcType=VARCHAR},

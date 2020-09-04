@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.protecthair.dao.UserRightMapper">
+  <resultMap id="BaseResultMap" type="com.protecthair.domain.UserRight">
+    <constructor>
+      <arg column="right_level" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+
+  <insert id="insertSelective" parameterType="com.protecthair.domain.UserRight">
+    insert into user_right
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rightLevel != null">
+        right_level,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rightLevel != null">
+        #{rightLevel,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="queryUserRight" resultType="com.protecthair.domain.UserRight">
+            SELECT
+    user_right.right_level,
+    user_right.user_id
+    FROM
+    user_right
+    </select>
+
+  <select id="selectUserRight" resultType="com.protecthair.domain.UserRight">
+        SELECT
+          user_right.right_level,
+          user_right.user_id
+        FROM
+          user_right
+          where user_id = #{userId}
+    </select>
+
+  <insert id="insertUserRightWithUsers">
+    INSERT ignore into user_right
+    VALUES (
+      (SELECT LEFT(university_code,1) from users where  user_id = #{userId}),
+      #{userId},
+      now()
+    )
+
+
+  </insert>
+</mapper>

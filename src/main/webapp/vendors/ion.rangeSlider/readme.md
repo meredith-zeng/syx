@@ -483,7 +483,7 @@ All plugins options are covered in demos.
 
 #### Support Ion-series plugins development:
 
-* Donate through Pledgie com.protecthair.service: [![](https://pledgie.com/campaigns/25694.png?skin_name=chrome)](https://pledgie.com/campaigns/25694)
+* Donate through Pledgie service: [![](https://pledgie.com/campaigns/25694.png?skin_name=chrome)](https://pledgie.com/campaigns/25694)
 
 * Donate direct to my Paypal account: https://www.paypal.me/IonDen
 

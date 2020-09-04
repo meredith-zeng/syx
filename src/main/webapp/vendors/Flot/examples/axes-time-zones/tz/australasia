@@ -853,9 +853,9 @@ Zone	Pacific/Wallis	12:15:20 -	LMT	1901
 # Broadcasting Commission), use the phrases `Eastern Standard Time'
 # or `Eastern Summer Time'.  (Note, though, that as I say in the
 # current australasia file, there is really no such thing.)  Announcers
-# on its overseas com.protecthair.service, Radio Australia, use the same phrases
+# on its overseas service, Radio Australia, use the same phrases
 # prefixed by the word `Australian' when referring to local times;
-# time announcements on that com.protecthair.service, naturally enough, are made in UTC.
+# time announcements on that service, naturally enough, are made in UTC.
 
 # From Arthur David Olson (1992-03-08):
 # Given the above, what's chosen for year-round use is:
