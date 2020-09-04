@@ -39,18 +39,23 @@ public class TeamApplyApplyServicesImpl implements TeamApplyServices {
         }
 
         TeamApply teamApply = new TeamApply(teamIDByStuId.getTeamId());
-        teamApply.setIsPass("未审核");
+        teamApply.setIsPass("待审核");
+        teamApply.setTeamLevel("暂无");
         teamApply.setCreatedTime(new Date());
-        teamApplyVO.setTeamName(teamIDByStuId.getTeamName());
-        //teamApply.setCertificationFileUrl(path);
+        teamApply.setTeamName(teamIDByStuId.getTeamName());
         //TODO 需要判断下是否正确
         BeanUtils.copyProperties(teamApplyVO, teamApply);
         //插入团队申请
-        if (Constant.DATE_CHANGE_SUCCESS.equals(mapper.addTeamApply(teamApply))) {
-            return CodeMsg.APPLY_TEAM_SUCCESS;
-        } else {
+        try {
+            if (Constant.DATE_CHANGE_SUCCESS.equals(mapper.addTeamApply(teamApply))) {
+                return CodeMsg.APPLY_TEAM_SUCCESS;
+            } else {
+                return CodeMsg.APPLY_TEAM_FAIL;
+            }
+        }catch (Exception e){
             return CodeMsg.APPLY_TEAM_FAIL;
         }
+
     }
 
     //根据状态获取团队申请列表
@@ -67,7 +72,7 @@ public class TeamApplyApplyServicesImpl implements TeamApplyServices {
     @Override
     public Result getMyTeamApply(String stuId) {
         List<TeamApply> list = mapper.showMyApply(stuId);
-        if (list != null) {
+        if (list != null && list.size() != 0) {
             return Result.success(list, CodeMsg.SHOW_ALLAPPLY_SUCCESS);
         } else {
             return Result.error(CodeMsg.SHOW_ALLAPPLY_ERROR);
@@ -82,7 +87,7 @@ public class TeamApplyApplyServicesImpl implements TeamApplyServices {
         teamApply.setCertificationTime(new Date());
         //转换VO对象
         BeanUtils.copyProperties(teamReviewVO, teamApply);
-        if (teamApply.getIsPass().equals("审核不通过")){
+        if (teamApply.getIsPass().equals("审核不通过")) {
             teamApply.setTeamLevel("无");
         }
         if (Constant.DATE_CHANGE_SUCCESS.equals(mapper.reviewTeam(teamApply))) {

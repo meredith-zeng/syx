@@ -41,10 +41,10 @@
   <insert id="insert" parameterType="com.protecthair.domain.Team">
     insert into team (team_id, team_name, team_college, 
       team_leader_student_name, team_leader_student_id, 
-      team_level, created_time)
+      team_level)
     values (#{teamId,jdbcType=INTEGER}, #{teamName,jdbcType=VARCHAR}, #{teamCollege,jdbcType=VARCHAR}, 
       #{teamLeaderStudentName,jdbcType=VARCHAR}, #{teamLeaderStudentId,jdbcType=INTEGER}, 
-      #{teamLevel,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP})
+      #{teamLevel,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.protecthair.domain.Team">
     insert into team

@@ -21,8 +21,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class TeamApplyVO {
 
-    private Integer teamId;
-    private String teamName;
 
     @NotNull
     @Future(message = "需要一个将来日期") // 只能是将来的日期

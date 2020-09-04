@@ -133,15 +133,15 @@
     </select>
 
   <select id="showMyApply" resultType="com.protecthair.domain.TeamApply" parameterType="String">
-        select certification_id,team_id,activity_begin_time,
+        select certification_id,team_id,team_name,team_level,activity_begin_time,
         activity_end_time,team_level,is_pass,created_time,certification_file_url,certification_time
         from certification
         where team_id = (select team_id from team where team_leader_student_id=#{stuId})
     </select>
 
   <insert id="addTeamApply" parameterType="com.protecthair.domain.TeamApply" >
-    insert into certification (team_id, activity_begin_time, activity_end_time,is_pass,created_time,certification_file_url)
-    values (#{teamId}, #{activityBeginTime}, #{activityEndTime},#{isPass},#{createdTime},#{certificationFileUrl})
+    insert into certification (team_id,team_name,team_level, activity_begin_time, activity_end_time,is_pass,created_time,certification_file_url)
+    values (#{teamId},#{teamName},#{teamLevel}, #{activityBeginTime}, #{activityEndTime},#{isPass},#{createdTime},#{certificationFileUrl})
   </insert>
 
   <update id="reviewTeam"  parameterType="com.protecthair.domain.TeamApply">

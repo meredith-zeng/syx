@@ -146,11 +146,11 @@
 
                             <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="#">修改账号密码</a>
+                                <a class="dropdown-item" href="/pages/user/update_password.html">修改账号密码</a>
 
-                                <a class="dropdown-item" href="#">修改注册信息</a>
+                                <a class="dropdown-item" href="/pages/user/update_userMessage.html">修改注册信息</a>
 
-                                <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i> 退出登录</a>
+                                <a class="dropdown-item" href="/pages/user/login.html"><i class="fa fa-sign-out pull-right"></i> 退出登录</a>
 
                             </div>
 
@@ -230,7 +230,6 @@
                                             <th class="text-center">是否通过</th>
                                             <th class="text-center">申请书</th>
                                             <th class="text-center">活动申请时间</th>
-                                            <th class="text-center">活动审核时间</th>
 
                                             </thead>
                                             <tbody id="queryResult">
@@ -402,8 +401,9 @@
             e.preventDefault();
             $.post("/api/team/applyByMyself", function (data) {
                 var $tbody = $("#table_01>tbody").empty();
-                $.each(data.data, function (i, o) {
-                    $(`<tr style='border: 3px;text-align: center'>
+                if(data.code==3004) {
+                    $.each(data.data, function (i, o) {
+                        $(`<tr style='border: 3px;text-align: center'>
 
                                 <td>${o.activityBeginTime}</td>
                                 <td>${o.activityEndTime}</td>
@@ -411,9 +411,15 @@
                                 <td>${o.isPass}</td>
                              <td><a href="${o.certificationFileUrl}">活动申请书预览</a></td>
                                 <td>${o.createdTime}</td>
-                                <td>${o.certificationTime}</td>
+
                                  </tr>`).appendTo($tbody);
-                });
+                    });
+                }else {
+                    $("#errorMsg").text(data.msg);
+                }
+
+
+
             })
         })
     });

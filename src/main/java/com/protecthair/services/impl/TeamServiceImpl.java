@@ -15,6 +15,7 @@ public class TeamServiceImpl implements TeamService{
     TeamMapper teamMapper;
 
 
+    @Override
     public Result modifyTeam(Team team) {
         Team team1=new Team();
         BeanUtils.copyProperties(team,team1);
@@ -25,21 +26,28 @@ public class TeamServiceImpl implements TeamService{
         }
     }
 
+    @Override
     public Result addTeam(Team team) {
         Team team1=new Team();
         BeanUtils.copyProperties(team,team1);
         String name=team1.getTeamName();
         if (teamMapper.check(name)==null) {
-            if (1 == teamMapper.insert(team1)) {
-                return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
-            } else {
-                return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
+            try {
+                if (1 == teamMapper.insert(team1)) {
+                    return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
+                } else {
+                    return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED1);
+                }
+            }catch (Exception e){
+                return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED1);
             }
+
         }else {
             return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
         }
     }
 
+    @Override
     public Result removeTeam(Team team) {
         Integer teamId=team.getTeamId();
         if (1 == teamMapper.deleteByPrimaryKey(teamId)) {
@@ -49,6 +57,7 @@ public class TeamServiceImpl implements TeamService{
         }
     }
 
+    @Override
     public Result queryTeam(Team team) {
         Integer teamId=team.getTeamId();
         ArrayList list =teamMapper.selectByPrimaryKey(teamId);
@@ -59,6 +68,7 @@ public class TeamServiceImpl implements TeamService{
         }
     }
 
+    @Override
     public Result searchTeam(Team team) {
         String teamName=team.getTeamName();
         ArrayList list =teamMapper.search(teamName);
@@ -69,6 +79,7 @@ public class TeamServiceImpl implements TeamService{
         }
     }
 
+    @Override
     public Result showTeam() {
         return null;
     }

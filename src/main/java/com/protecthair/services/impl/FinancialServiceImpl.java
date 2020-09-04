@@ -3,14 +3,18 @@ package com.protecthair.services.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.protecthair.dao.FinancialMapper;
 import com.protecthair.dao.InvoiceMapper;
+import com.protecthair.dao.TeamApplyMapper;
+import com.protecthair.dao.TeamMapper;
 import com.protecthair.domain.Expense;
 import com.protecthair.domain.Invoice;
+import com.protecthair.domain.Team;
+import com.protecthair.domain.TeamApply;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.InvoiceResult;
 import com.protecthair.result.Result;
 import com.protecthair.services.FinancialService;
-import com.protecthair.utils.ClientUploadUtils;
+import com.protecthair.util.ClientUploadUtils;
 import okhttp3.ResponseBody;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,9 @@ public class FinancialServiceImpl implements FinancialService {
     @Autowired
     InvoiceMapper invoiceMapper;
 
+    @Autowired
+    TeamApplyMapper mapper;
+
     /**
      * 保存报销申请
      *
@@ -47,9 +54,11 @@ public class FinancialServiceImpl implements FinancialService {
      * @param req
      * @return
      */
-
-    public Result saveExpense(MultipartFile picture, Expense expense, HttpServletRequest req) throws Exception {
+    @Override
+    public Result saveExpense(MultipartFile picture, Expense expense, String integer, HttpServletRequest req) throws Exception {
         // 判断文件是否为空
+        Team team = mapper.selectTeamIDByStuId(integer);
+        String expenseOrganization = team.getTeamName();
         if (picture.isEmpty()) {
             Result.error(CodeMsg.SUBMIT_APPROVAL_ERROR);
         }
@@ -67,13 +76,13 @@ public class FinancialServiceImpl implements FinancialService {
             path = "/file/" + uuid + "." + imageName;
 
             //voice Recognize
-            ResponseBody responseBody= ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr",picture.getBytes(),imageName);
+            ResponseBody responseBody = ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr", picture.getBytes(), imageName);
             String json = responseBody.string();
             ObjectMapper objectMapper = new ObjectMapper();
             InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
-            Invoice invoice=invoiceResult.getData();
+            Invoice invoice = invoiceResult.getData();
             System.out.println(invoice);
-            String teamName=expense.getExpenseOrganization();
+            String teamName = expense.getExpenseOrganization();
             invoice.setTeamName(teamName);
             invoiceMapper.save(invoice);
             picture.transferTo(new File(pathRoot + path));
@@ -82,13 +91,15 @@ public class FinancialServiceImpl implements FinancialService {
         expense.setExpensePic(path);
         expense.setExpenseCertifictedCondition("待审核");
 
-        Expense expense1=new Expense();
-        BeanUtils.copyProperties(expense,expense1);
+        Expense expense1 = new Expense();
+        BeanUtils.copyProperties(expense, expense1);
+        expense1.setExpenseOrganization(expenseOrganization);
         //保存实体
         try {
-            financialMapper.saveExpense(expense);
+            financialMapper.saveExpense(expense1);
             return Result.CodeMsg(CodeMsg.SUBMIT_APPROVAL_SUCCESS);
         } catch (Exception e) {
+            e.printStackTrace();
             return Result.CodeMsg(CodeMsg.SUBMIT_NULL_ERROR);
         }
 
@@ -109,11 +120,13 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
 
-    /**----------------------员工查询------------------------------*/
+    /**
+     * ----------------------员工查询------------------------------
+     */
 
     @Override
-    public List<Expense>  getExpenseApplyByIdAndStatus(String status, Integer memberid) {
-        return financialMapper.getExpenseApplyByIdAndStatus(status,memberid);
+    public List<Expense> getExpenseApplyByIdAndStatus(String status, Integer memberid) {
+        return financialMapper.getExpenseApplyByIdAndStatus(status, memberid);
     }
 
     @Override
@@ -183,7 +196,7 @@ public class FinancialServiceImpl implements FinancialService {
     public Result expenseReview(String expense_certifictedCondition, String id) {
         //更新报销状态
         if (Constant.DATE_CHANGE_SUCCESS.equals
-                (financialMapper.updateExpenseReview(expense_certifictedCondition,id))) {
+                (financialMapper.updateExpenseReview(expense_certifictedCondition, id))) {
             return Result.success(null, CodeMsg.EXPENSE_REVIEW_SUCCESS);
         } else {
             return Result.error(CodeMsg.EXPENSE_REVIEW_ERROR);

@@ -16,13 +16,14 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     @Autowired
     TeamMemberMapper teamMemberMapper;
 
+    @Override
     public Result add(TeamMember member) {
 
         TeamMember teamMember=new TeamMember();
         BeanUtils.copyProperties(member,teamMember);
         String sid= teamMember.getStudentId();
         if (teamMemberMapper.check(sid)==null){
-            if (1 == teamMemberMapper.insert(teamMember)) {
+             if (1 == teamMemberMapper.insert(teamMember)) {
                 return Result.CodeMsg(CodeMsg.ADD_TEAM_SUCCESS);
             } else {
                 return Result.CodeMsg(CodeMsg.ADD_TEAM_FAILED);
@@ -33,6 +34,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
 
     }
 
+    @Override
     public Result modify(TeamMember member) {
         TeamMember teamMember=new TeamMember();
         BeanUtils.copyProperties(member,teamMember);
@@ -43,6 +45,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         }
     }
 
+    @Override
     public Result remove(TeamMember member) {
         Integer teamMemberId= member.getTeamMemberId();
         if (1 == teamMemberMapper.deleteByPrimaryKey(teamMemberId)) {
@@ -52,6 +55,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         }
     }
 
+    @Override
     public Result queryTeam(TeamMember member) {
         Integer teamMemberId= member.getTeamMemberId();
         ArrayList list =teamMemberMapper.selectByPrimaryKey(teamMemberId);
@@ -62,6 +66,7 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         }
     }
 
+    @Override
     public Result findMember(TeamMember member) {
         String name=member.getTeamName();
         ArrayList list =teamMemberMapper.find(name);

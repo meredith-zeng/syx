@@ -372,7 +372,7 @@
                 $.post("/api/user/modifyMsg",$("#form_01").serialize(),function (data) {
                     if(data.code==3105){
                         $("#errorMsg").text(data.msg)
-                        window.location.href="/pages/user/user_center.html";
+                        window.location.href="/pages/teamApply/QueryMyApply.html"
                     }else{
                         //修改失败，返回修改失败信息；
                         $("#errorMsg").text(data.msg)
