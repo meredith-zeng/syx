@@ -22,33 +22,33 @@ import java.util.Date;
 public class Expense {
 
     //审批单据业务编号
-    @NotBlank
+    //@NotBlank
     private Integer expenseCode;
     //组织的名称
     @NotBlank
-    private String TeamName;
+    private String teamName;
     //报销人工号
-    @NotBlank
+
     private Integer memberId;
 
     //报销金额
-    @NotNull
+
     private Double expenseMoney;
     //报销原由
-    @NotBlank
+
     private String expenseEvent;
     //经办人
-    @NotBlank
+
     private String expenseAgent;
     //报销单据
-    @NotBlank
+    //@NotBlank
     private String expensePic;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date expenseTime;
 
     //报销审核的信息
-    @NotBlank
+    //@NotBlank
     private String expenseCertifictedCondition;
 
 

@@ -18,8 +18,7 @@ public interface FinancialMapper {
 
     String TABLE_NAME = " expense ";
 
-    String INSERT_FIELDS = " member_id, expense_organization, expense_money," +
-            "expense_event,expense_agent,expense_pic,expense_certifictedCondition ";
+    String INSERT_FIELDS = "expense_organization, expense_money,expense_pic,expense_certifictedCondition ";
     String SELECT_FIELDS = " expense_code , " + INSERT_FIELDS + ", expense_time";
 
     //绩效
@@ -36,8 +35,7 @@ public interface FinancialMapper {
 
     //插入审批
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-            ") values ( #{memberId}, #{expenseOrganization},#{expenseMoney},#{expenseEvent}," +
-                    "#{expenseAgent},#{expensePic},#{expenseCertifictedCondition})"})
+            ") values (  #{expenseOrganization},#{expenseMoney},#{expensePic},#{expenseCertifictedCondition})"})
     Integer saveExpense(Expense expense);
 
     //管理员获取所有审批

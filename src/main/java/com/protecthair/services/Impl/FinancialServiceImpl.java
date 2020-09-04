@@ -63,12 +63,12 @@ public class FinancialServiceImpl implements FinancialService {
             path = "/file/" + uuid + "." + imageName;
             picture.transferTo(new File(pathRoot + path));
             //voice Recognize
-            ResponseBody responseBody= ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr",path,imageName);
-            String json = responseBody.byteString().toString();
-            ObjectMapper objectMapper = new ObjectMapper();
-            InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
-            Invoice invoice=invoiceResult.getData();
-            System.out.println(invoice);
+//            ResponseBody responseBody= ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr",path,imageName);
+//            String json = responseBody.byteString().toString();
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
+//            Invoice invoice=invoiceResult.getData();
+//            System.out.println(invoice);
 //            String teamName=expense.getTeamName();
 //            invoice.setTeamName(teamName);
 //            invoiceMapper.save(invoice);
@@ -77,14 +77,7 @@ public class FinancialServiceImpl implements FinancialService {
         expense.setExpensePic(path);
         expense.setExpenseCertifictedCondition("待审核");
 
-
-
-        Integer memberID = -1;
-
-
-        //设置工号
-        expense.setMemberId(memberID);
-
+        Expense expense1=new Expense();
 
         //保存实体
         try {
