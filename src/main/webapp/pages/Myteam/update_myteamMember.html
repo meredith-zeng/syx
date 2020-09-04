@@ -14,7 +14,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>修改密码 </title>
+
+
+    <title>修改成员信息</title>
 
     <!-- Bootstrap -->
 
@@ -55,6 +57,8 @@
     <!-- Custom Theme Style -->
 
     <link href="../../build/css/custom.min.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -183,7 +187,7 @@
 
                                 <div class="x_title">
 
-                                    <h2>修改密码 <small></small></h2>
+                                    <h2>修改成员信息<small></small></h2>
 
 
 
@@ -193,64 +197,65 @@
 
                                 <div class="x_content">
 
-                                    <br />
+                                    <br/>
 
                                     <form id="form_01" class="form-horizontal" action="#" method="post">
-                                        <!--存放错误信息-->
-                                        <div style="height: 15px;margin-bottom: 13px;text-align: center">
-                                            <span id="errorMsg" style="color: red;text-align: center"></span>
+                                        <div class="form-group row">
+                                            <div>
+                                                <input type="text" style="height: 30px;font-size: 15px;display: none" class="form-control" id="teamMemberId" name="teamMemberId" value="${teamMemberIdVal}">
+                                            </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label for="teamName" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right;display: none">团队名称:</label>
+                                            <div class="col-sm-2">
+                                                <input type="text" style="height: 30px;font-size: 15px;display: none" class="form-control" id="teamName" name="teamName" placeholder="成员姓名"required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="teamMemberName" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">姓名:</label>
+                                            <div class="col-sm-2">
+                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="teamMemberName" name="teamMemberName" placeholder="姓名"required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="studentId" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right;display: none">学号:</label>
+                                            <div class="col-sm-2">
+                                                <input type="text" style="height: 30px;font-size: 15px;display:none" class="form-control" id="studentId" name="studentId" placeholder="学号"required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="teamMemberCollege" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">学院:</label>
+                                            <div class="col-sm-2">
+                                                <select id="teamMemberCollege" name="teamMemberCollege" style="height: 30px;font-size:14px"class="form-control" >
 
-                                        <div class="form-group row">
-                                            <label for="msgCode" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">验证码:</label>
-                                            <div class="col-sm-2">
-                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="msgCode" name="msgCode" placeholder="验证码">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="button" style="height: 30px" id="btnvcode" value="获取"/>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="userPassword" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">旧密码:</label>
+                                            <label for="teamMemberMajor" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">专业:</label>
                                             <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="userPassword" name="userPassword" placeholder="旧密码" oninput="checkUserPassword()"  required>
-                                            </div>
-                                            <!--存放错误信息-->
-                                            <div class="col-sm-3">
-                                                <span id="errorMsg01" style="color: red;text-align: center"></span>
+                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="teamMemberMajor" name="teamMemberMajor" placeholder="专业"required>
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
-                                            <label for="newpassword" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">新密码:</label>
+                                            <label for="isLeader" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">队长:</label>
                                             <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="newpassword" name="newPasswprd" placeholder="新密码" oninput="checkNewPassword()" onfocus="checkNewPassword()" required>
-                                            </div>
-                                            <!--存放错误信息-->
-                                            <div class="col-sm-3">
-                                                <span id="errorMsg02" style="color: red;text-align: center"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="confirmpassword" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">确认密码:</label>
-                                            <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="确认密码" oninput="confirmPassword()" required>
-                                            </div>
-                                            <!--存放错误信息-->
-                                            <div class="col-sm-3">
-                                                <span id="errorMsg03" style="color: red;text-align: center"></span>
+                                                <select id="isLeader" name="isLeader" style="height: 30px;font-size:14px"class="form-control" >
+                                                    <option value="是">是</option>
+                                                    <option value="否">否</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label  class="col-sm-5 control-label"></label>
                                             <div class="col-sm-2">
                                                 <span>
-                                                    <button  id="btn_01" class="btn btn-info btn-sm btn-block"  >确认修改</button>
+                                                    <button id="btn_01" class="btn btn-info btn-sm btn-block" >确认修改</button>
                                                 </span>
                                             </div>
                                         </div>
                                     </form>
+
                                 </div>
 
                             </div>
@@ -352,7 +357,6 @@
 <!-- Custom Theme Scripts -->
 
 <script src="../../build/js/custom.min.js"></script>
-
 <!-- FastClick -->
 
 <script src="../../vendors/fastclick/lib/fastclick.js"></script>
@@ -363,97 +367,42 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#btn_01").click(function (e) {
-            e.preventDefault();
-            if(checkUserPassword()&&checkNewPassword()&&confirmPassword()){
-                var confirMsg=confirm("确定修改？")
-                if (confirMsg){
-                    $.post("/api/user/modifyPassword",$("#form_01").serialize(),function (data) {
-                        if(data.code==3107){
-                            $("#errorMsg").text(data.msg)
-                            //修改成功跳转
-                            window.location.href="../user/login.html";
-                        }else {
-                            $("#errorMsg").text(data.msg)
-                            //注册失败，返回注册失败信息；
-                        }
-
-                    },"json");
+        var result = location.search.match(new RegExp("[\?\&]id=([^\&]+)","i"));
+        if(result){
+            $("#teamMemberId").val(result[1]);
+            $.post("/api/queryTeamMember",{teamMemberId:result[1]},function (data) {
+                if(data.code==304){
+                    $("#teamName").val(data.data[0].teamName);
+                    $("#teamMemberName").val(data.data[0].teamMemberName);
+                    $("#studentId").val(data.data[0].studentId);
+                    $("#teamMemberCollege").val(data.data[0].teamMemberCollege);
+                    $("#teamMemberMajor").val(data.data[0].teamMemberMajor);
+                    $("#isLeader").val(data.data[0].isLeader);
                 }
-            }
-
-        })
-    })
-    function checkUserPassword() {
-        var oldpasswordtext = $("#userPassword").val();
-        var oldpasswordpatt= /^\w{6,12}$/;
-        if(!oldpasswordpatt.test(oldpasswordtext)){
-            $("#errorMsg01").text("旧密码不合法！")
-            return false;
-        }else {
-            $("#errorMsg01").text("");
-            return true;
-        }
-
-    }
-    function checkNewPassword() {
-        var newPasswordText=$("#newpassword").val();
-        var oldPasswordText=$("#userPassword").val();
-        var newPasswordPatt=/^\w{6,12}$/;
-        if(newPasswordText==oldPasswordText){
-            $("#errorMsg02").text("新密码不能和原密码相同！")
-            return false;
-        }else {
-            if(!newPasswordPatt.test(newPasswordText)){
-                $("#errorMsg02").text("密码由6-12位字母、数字和下划线组成！")
-                return false;
-            }else {
-                $("#errorMsg02").text("");
-                return true;
-            }
-        }
-
-    }
-    function confirmPassword() {
-        var newPasswordText=$("#newpassword").val();
-        var confirmPasswordText=$("#confirmpassword").val();
-        if(confirmPasswordText!=newPasswordText){
-            $("#errorMsg03").text("确认密码和新密码不一致！")
-            return false;
-        }else {
-            $("#errorMsg03").text("");
-            return true;
-        }
-
-    }
-</script>
-
-<script type="application/javascript">
-    $(function () {
-        $("#btnvcode").one("click",f);
-
-        function f(e) {
-            e.preventDefault();
-            $.post("/api/user/messageSend", function (data) {
-                (function (e1) {
-                    var aaaa = e1.$target;
-                    let $this = $(e1.currentTarget).attr("disabled","disabled");
-                    let time = 60;
-                    let set = setInterval(function () {
-                        $this.val("获取验证码(" + time-- +")" );
-                        if( time <= 0 ){
-                            clearInterval(set);
-                            $this.val("获取验证码" ).removeAttr("disabled").one("click",f);
-                        }
-                    },1000);
-                })(e);
             },"json");
         }
+        var department = ["软件工程学院","计算机学院","通信学院","经济管理学院","法学院","理学院","外国语学院","传媒学院","自动化学院"];
+        var $option01 = $("#teamMemberCollege").empty();
+        $.each(department, function (i, item) {
+            $("<option/>").val(item).text(item).appendTo($option01);
+        })
+
+        $("#btn_01").click(function (e) {
+            e.preventDefault();
+            var teamNameVal=$("#teamName").val();
+            $.post("/api/modifyTeamMemeber",$("#form_01").serialize(),function (data) {
+                if(data.code==302){
+                    window.location.href="/pages/Myteam/query_myteamMember.html?id="+teamNameVal;
+                }else {
+                    $("#errorMsg").text(data.msg)
+                }
+
+            },"json");
+
+        })
+
     })
-
 </script>
-
-
 </body>
 
 </html>
