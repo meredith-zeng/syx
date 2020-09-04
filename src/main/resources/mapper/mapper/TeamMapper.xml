@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.protecthair.dao.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.protecthair.domain.Team">
+    <constructor>
+      <idArg column="team_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="team_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="team_college" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="team_leader_student_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="team_leader_student_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="team_level" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="created_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    team_id, team_name, team_college, team_leader_student_name, team_leader_student_id, 
+    team_level, created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from team
+    where team_id = #{teamId,jdbcType=INTEGER}
+  </select>
+  <select id="check" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where team_name = #{teamName,jdbcType=VARCHAR}
+  </select>
+  <select id="search" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where team_name like concat('%',#{teamName,jdbcType=VARCHAR},'%')
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete team,team_member from team left join team_member on team.team_name=team_member.team_name
+    where team_id = #{teamId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.protecthair.domain.Team">
+    insert into team (team_id, team_name, team_college, 
+      team_leader_student_name, team_leader_student_id, 
+      team_level, created_time)
+    values (#{teamId,jdbcType=INTEGER}, #{teamName,jdbcType=VARCHAR}, #{teamCollege,jdbcType=VARCHAR}, 
+      #{teamLeaderStudentName,jdbcType=VARCHAR}, #{teamLeaderStudentId,jdbcType=INTEGER}, 
+      #{teamLevel,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.protecthair.domain.Team">
+    insert into team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teamId != null">
+        team_id,
+      </if>
+      <if test="teamName != null">
+        team_name,
+      </if>
+      <if test="teamCollege != null">
+        team_college,
+      </if>
+      <if test="teamLeaderStudentName != null">
+        team_leader_student_name,
+      </if>
+      <if test="teamLeaderStudentId != null">
+        team_leader_student_id,
+      </if>
+      <if test="teamLevel != null">
+        team_level,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="teamName != null">
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamCollege != null">
+        #{teamCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="teamLeaderStudentName != null">
+        #{teamLeaderStudentName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamLeaderStudentId != null">
+        #{teamLeaderStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="teamLevel != null">
+        #{teamLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.protecthair.domain.Team">
+    update team
+    <set>
+      <if test="teamName != null">
+        team_name = #{teamName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamCollege != null">
+        team_college = #{teamCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="teamLeaderStudentName != null">
+        team_leader_student_name = #{teamLeaderStudentName,jdbcType=VARCHAR},
+      </if>
+      <if test="teamLeaderStudentId != null">
+        team_leader_student_id = #{teamLeaderStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="teamLevel != null">
+        team_level = #{teamLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where team_id = #{teamId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.protecthair.domain.Team">
+    update team
+    set team_name = #{teamName,jdbcType=VARCHAR},
+      team_college = #{teamCollege,jdbcType=VARCHAR},
+      team_leader_student_name = #{teamLeaderStudentName,jdbcType=VARCHAR},
+      team_leader_student_id = #{teamLeaderStudentId,jdbcType=INTEGER},
+      team_level = #{teamLevel,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where team_id = #{teamId,jdbcType=INTEGER}
+  </update>
+
+  <!--自己写的sql语句-->
+  <select id="selectTeamIDByStuId" resultType="Integer"  parameterType="String">
+        select team_id
+        from team
+        where team_leader_student_id = #{stuId}
+    </select>
+
+  <select id="showApplyByStatus" resultType="com.protecthair.domain.TeamApply" parameterType="String">
+        select certification_id,team_id,activity_begin_time,
+        activity_end_time,team_level,is_pass,created_time,certification_file_url,certification_time
+        from certification
+        where is_pass = #{isPass}
+    </select>
+
+  <select id="showMyApply" resultType="com.protecthair.domain.TeamApply" parameterType="String">
+        select certification_id,team_id,activity_begin_time,
+        activity_end_time,team_level,is_pass,created_time,certification_file_url,certification_time
+        from certification
+        where team_id = (select team_id from team where team_leader_student_id=#{stuId})
+    </select>
+
+  <insert id="addTeamApply" parameterType="com.protecthair.domain.TeamApply" >
+    insert into certification (team_id, activity_begin_time, activity_end_time,is_pass,created_time,certification_file_url)
+    values (#{teamId}, #{activityBeginTime}, #{activityEndTime},#{isPass},#{createdTime},#{certificationFileUrl})
+  </insert>
+
+  <update id="reviewTeam"  parameterType="com.protecthair.domain.TeamApply">
+    update certification
+    set team_level = #{teamLevel},is_pass = #{isPass},certification_time=#{certificationTime}
+    where certification_id = #{certificationId}
+  </update>
+
+
+
+</mapper>

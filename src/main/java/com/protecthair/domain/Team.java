@@ -8,18 +8,19 @@ import java.util.Date;
 
 @Data
 public class Team {
+    //团队id*
     private Integer teamId;
-
+    //团队名
     private String teamName;
-
+    //团队学院
     private String teamCollege;
-
+    //队长姓名
     private String teamLeaderStudentName;
-
+    //队长id
     private Integer teamLeaderStudentId;
-
+    //团队等级
     private String teamLevel;
-
+    //创建时间*
     private Date createdTime;
 
     public Team(Integer teamId, String teamName, String teamCollege, String teamLeaderStudentName, Integer teamLeaderStudentId, String teamLevel, Date createdTime) {
