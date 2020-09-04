@@ -401,9 +401,10 @@
                                           <option value="审核通过">审核通过</option>
                                     </select>
                           <input type="button" class="btn btn-success" data-id=${o.expenseCode} value="提交">
+                                   <a href="/pages/finance/show.html?id=${o.expenseOrganization}">查看单据详细信息</a>
                                 </td>
                            </tr>`).appendTo($tbody);
-               });
+                });
             })
         });
 
