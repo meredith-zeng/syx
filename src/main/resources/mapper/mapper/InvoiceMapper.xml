@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.protecthair.dao.InvoiceMapper">
+    <resultMap id="BaseResultMap" type="com.protecthair.domain.Invoice">
+        <constructor>
+            <idArg column="team_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="code" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="price" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="verify" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <insert id="save" parameterType="Invoice" >
+        insert into invoice
+        (team_name,code,number,date,price,verify)values(#{teamName},#{code},#{number},#{date},#{price},#{verify})
+    </insert>
+    <select id="show" parameterType="String" resultMap="BaseResultMap">
+        select *
+        from invoice
+        where team_name=#{name}
+    </select>
+</mapper>

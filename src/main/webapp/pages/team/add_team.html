@@ -356,6 +356,40 @@
 
 <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
 
+<script type="text/template" id="listTemplate">
+    {{#each this}}
+    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>
+        <ul class="side-menu">
+            {{#each childPartList}}
+            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>
+            {{/each}}
+        </ul>
+    </li>
+    {{/each}}
+</script>
+<script>
+
+    function flushPage() {
+        $.ajax({
+            url: "/api/route/query",
+            type: "POST",
+            dateType: 'JSON',
+            cache: false,
+            success: function (data) {
+                console.log(data.data);
+                const ParentTpl = $("#listTemplate").html();
+                const ParentTemplate = Handlebars.compile(ParentTpl);
+                const html = ParentTemplate(data.data);
+                $("#sidebar-menu").html(html);
+            },
+            error: function (error) {
+                console.log(error);
+                $("#errorMsg").text("没有可以浏览的内容");
+            },
+        });
+    }
+    window.onload = function(){flushPage();}
+</script>
 <script type="text/javascript">
     $(function () {
         var department = ["软件工程学院","计算机学院","通信学院","经济管理学院","法学院","理学院","外国语学院","传媒学院","自动化学院"];

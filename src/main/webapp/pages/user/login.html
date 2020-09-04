@@ -44,7 +44,7 @@
                     $.post("/api/user/login",$("#form_login").serialize(),function (data) {
                         if(data.code==3103){
                             $("#errorMsg").text(data.msg)
-                            window.location.href="/pages/user/user_center.html";
+                            window.location.href="/pages/team/add_team.html";
                         }else{
                             $("#errorMsg").text(data.msg)
                         }
