@@ -14,7 +14,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>查询团队</title>
+
+
+    <title>修改用户信息</title>
 
     <!-- Bootstrap -->
 
@@ -185,9 +187,7 @@
 
                                 <div class="x_title">
 
-                                    <h2>查询团队<small></small></h2>
-
-
+                                    <h2>修改电话号码<small></small></h2>
 
                                     <div class="clearfix"></div>
 
@@ -195,26 +195,29 @@
 
                                 <div class="x_content">
 
-                                    <br/>
+                                    <br />
 
                                     <form id="form_01" class="form-horizontal" action="#" method="post">
-                                        <div class="item form-group">
-                                            <input type="text" class="form-control" id="teamName"name="teamName" style="width: 160px;height: 30px;font-size: 14px" placeholder="请输入团队名称">
-                                            <button id="btn_01" class="btn btn-info btn-sm" style="margin-left: 10px">查询团队</button>
+                                        <!--存放错误信息-->
+                                        <div style="height: 15px;margin-bottom: 13px;text-align: center">
+                                            <span id="errorMsg" style="color: red;text-align: center"></span>
                                         </div>
-                                        <table id="table_01" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                            <th class="text-center" >团队名称</th>
-                                            <th class="text-center">团队等级</th>
-                                            <th class="text-center">学院</th>
-                                            <th class="text-center">团队队长</th>
-                                            <th class="text-center">学号</th>
-                                            <th class="text-center">团队成员</th>
-                                            </thead>
-                                            <tbody id="queryResult">
-
-                                            </tbody>
-                                        </table>
+                                        <div class="form-group row">
+                                            <label for="userPhoneNumber" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">电话号码:</label>
+                                            <div class="col-sm-2">
+                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="userPhoneNumber" name="userPhoneNumber" placeholder="电话号码" oninput="checkPhoneNumber()" required>
+                                            </div>
+                                            <!--存放错误信息-->
+                                            <div class="col-sm-3">
+                                                <span id="errorMsg01" style="color: red;text-align: center"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-5 control-label"></label>
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-info btn-block btn-sm" id="button_is">确认修改 </button>
+                                            </div>
+                                        </div>
                                     </form>
 
 
@@ -315,10 +318,10 @@
 <!-- starrr -->
 
 <script src="../../vendors/starrr/dist/starrr.js"></script>
-
 <!-- Custom Theme Scripts -->
 
 <script src="../../build/js/custom.min.js"></script>
+
 <!-- FastClick -->
 
 <script src="../../vendors/fastclick/lib/fastclick.js"></script>
@@ -329,34 +332,36 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#btn_01").click(function (e) {
+        $("#button_is").click(function (e) {
             e.preventDefault();
-            $.post("/api/searchTeam",$("#form_01").serialize(),function (data) {
-                if(data.code==304){
-                    //查询成功
-                    var $tbody = $("#table_01>tbody").empty();
-                    $.each(data.data,function(i, result){
-                        $(`<tr style='border: 3px;text-align: center'>
-                                 <td>${result.teamName}</td>
-                                 <td>${result.teamLevel}</td>
-                                 <td>${result.teamCollege}</td>
-                                 <td>${result.teamLeaderStudentName}</td>
-                                 <td>${result.teamLeaderStudentId}</td>
-                                 <td><a href="/pages/team/query_teamMember.html?id=${result.teamName}">查看</a> </td>
-                                 </tr>`).appendTo($tbody);
-                    });
-                }else if(data.code==506){
-                    $("#errorMsg").text(data.msg)
-                    //查询失败，返回查询失败信息；
-                }
-
-            },"json");
+            if(checkPhoneNumber()){
+                $.post("/api/user/modifyMsg",$("#form_01").serialize(),function (data) {
+                    if(data.code==3105){
+                        $("#errorMsg").text(data.msg)
+                        window.location.href="/pages/user/user_center.html";
+                    }else{
+                        //修改失败，返回修改失败信息；
+                        $("#errorMsg").text(data.msg)
+                    }
+                },"json");
+            }
         })
-
-    })
+    });
+    function checkPhoneNumber() {
+        //获取用户名输入框的内容；
+        var iponenumbertext = $("#userPhoneNumber").val();
+        //创建正则表达式；
+        var iponenumberpatt=/^1(3|4|5|6|7|8|9)\d{9}$/;
+        //验证
+        if(!iponenumberpatt.test(iponenumbertext)){
+            $("#errorMsg01").text("手机号不合法！")
+            return false;
+        }else {
+            $("#errorMsg01").text("");
+            return true;
+        }
+    }
 </script>
-
-
 </body>
 
 </html>

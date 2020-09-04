@@ -14,7 +14,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>查询团队</title>
+
+
+    <title>查看团队成员</title>
 
     <!-- Bootstrap -->
 
@@ -185,7 +187,7 @@
 
                                 <div class="x_title">
 
-                                    <h2>查询团队<small></small></h2>
+                                    <h2>团队信息<small></small></h2>
 
 
 
@@ -195,28 +197,25 @@
 
                                 <div class="x_content">
 
-                                    <br/>
+                                    <br />
 
                                     <form id="form_01" class="form-horizontal" action="#" method="post">
-                                        <div class="item form-group">
-                                            <input type="text" class="form-control" id="teamName"name="teamName" style="width: 160px;height: 30px;font-size: 14px" placeholder="请输入团队名称">
-                                            <button id="btn_01" class="btn btn-info btn-sm" style="margin-left: 10px">查询团队</button>
-                                        </div>
+
                                         <table id="table_01" class="table table-striped table-bordered table-hover">
                                             <thead>
+                                            <th class="text-center" >团队编号</th>
                                             <th class="text-center" >团队名称</th>
-                                            <th class="text-center">团队等级</th>
+                                            <th class="text-center">成员姓名</th>
+                                            <th class="text-center">成员学号</th>
                                             <th class="text-center">学院</th>
-                                            <th class="text-center">团队队长</th>
-                                            <th class="text-center">学号</th>
-                                            <th class="text-center">团队成员</th>
+                                            <th class="text-center">专业</th>
+                                            <th class="text-center">队长</th>
                                             </thead>
                                             <tbody id="queryResult">
 
                                             </tbody>
                                         </table>
                                     </form>
-
 
                                 </div>
 
@@ -326,32 +325,32 @@
 <script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
 
 <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
-
 <script type="text/javascript">
     $(function () {
-        $("#btn_01").click(function (e) {
-            e.preventDefault();
-            $.post("/api/searchTeam",$("#form_01").serialize(),function (data) {
-                if(data.code==304){
-                    //查询成功
-                    var $tbody = $("#table_01>tbody").empty();
-                    $.each(data.data,function(i, result){
-                        $(`<tr style='border: 3px;text-align: center'>
+        var result = location.search.match(new RegExp("[\?\&]id=([^\&]+)","i"));
+        if(result){
+            var teamNameVal = result[1];
+            if(teamNameVal){
+                $.post("/api/findTeamMember",{teamName:teamNameVal},function (data) {
+                    if(data.code==304){
+                        var $tbody = $("#table_01>tbody").empty();
+                        $.each(data.data,function(i, result){
+                            $(`<tr style='border: 3px;text-align: center'>
+                                 <td>${result.teamMemberId}</td>
                                  <td>${result.teamName}</td>
-                                 <td>${result.teamLevel}</td>
-                                 <td>${result.teamCollege}</td>
-                                 <td>${result.teamLeaderStudentName}</td>
-                                 <td>${result.teamLeaderStudentId}</td>
-                                 <td><a href="/pages/team/query_teamMember.html?id=${result.teamName}">查看</a> </td>
+                                 <td>${result.teamMemberName}</td>
+                                 <td>${result.studentId}</td>
+                                  <td>${result.teamMemberCollege}</td>
+                                 <td>${result.teamMemberMajor}</td>
+                                  <td>${result.isLeader}</td>
                                  </tr>`).appendTo($tbody);
-                    });
-                }else if(data.code==506){
-                    $("#errorMsg").text(data.msg)
-                    //查询失败，返回查询失败信息；
-                }
-
-            },"json");
-        })
+                        });
+                    }else{
+                        $("#errorMsg").text("");
+                    }
+                })
+            }
+        }
 
     })
 </script>
