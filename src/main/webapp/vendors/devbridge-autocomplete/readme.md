@@ -201,7 +201,7 @@ supply just a string array for suggestions:
 
 ## Non standard query/results
 
-If your ajax service expects the query in a different format, and returns data in a different format than the standard response,
+If your ajax com.protecthair.service expects the query in a different format, and returns data in a different format than the standard response,
 you can supply the "paramName" and "transformResult" options:
 
 ```javascript
