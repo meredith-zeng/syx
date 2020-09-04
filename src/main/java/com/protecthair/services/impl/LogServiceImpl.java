@@ -1,7 +1,7 @@
 package com.protecthair.services.impl;
 
 import com.protecthair.dao.LogMapper;
-import com.protecthair.dao.TeamMapper;
+import com.protecthair.dao.TeamApplyMapper;
 import com.protecthair.domain.Log;
 import com.protecthair.domain.Team;
 import com.protecthair.services.LogServices;
@@ -9,7 +9,6 @@ import com.protecthair.vo.LogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.ejb.DuplicateKeyException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class LogServiceImpl implements LogServices {
     @Autowired
     LogMapper logMapper;
     @Autowired
-    TeamMapper teamMapper;
+    TeamApplyMapper teamMapper;
 
     @Override
     public int insertLog(LogVO logVO) throws ParseException {

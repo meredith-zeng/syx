@@ -3,7 +3,7 @@ package com.protecthair.services.impl;
 import com.protecthair.domain.Team;
 import com.protecthair.vo.TeamApplyVO;
 import com.protecthair.vo.TeamReviewVO;
-import com.protecthair.dao.TeamMapper;
+import com.protecthair.dao.TeamApplyMapper;
 import com.protecthair.domain.TeamApply;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
@@ -26,7 +26,7 @@ import java.util.List;
 public class TeamApplyApplyServicesImpl implements TeamApplyServices {
 
     @Autowired
-    TeamMapper mapper;
+    TeamApplyMapper mapper;
 
     //团队申请
     @Override

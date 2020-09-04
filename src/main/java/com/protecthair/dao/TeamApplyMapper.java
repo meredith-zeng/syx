@@ -5,7 +5,7 @@ import com.protecthair.domain.TeamApply;
 
 import java.util.List;
 
-public interface TeamMapper {
+public interface TeamApplyMapper {
     int deleteByPrimaryKey(Integer teamId);
 
     int insert(Team record);

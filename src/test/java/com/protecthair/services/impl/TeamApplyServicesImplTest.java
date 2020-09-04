@@ -2,7 +2,7 @@ package com.protecthair.services.impl;
 
 import com.protecthair.vo.TeamApplyVO;
 import com.protecthair.vo.TeamReviewVO;
-import com.protecthair.dao.TeamMapper;
+import com.protecthair.dao.TeamApplyMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.Date;
 public class TeamApplyServicesImplTest {
 
     @Autowired
-    TeamMapper mapper;
+    TeamApplyMapper mapper;
 
     @Autowired
     TeamApplyApplyServicesImpl teamServices;
