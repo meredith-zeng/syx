@@ -175,7 +175,7 @@ example:
 Please see the ajax contents demo and following files on the source code to know how ajax content loading is implemented.
 
 1. *smartwizard2-ajax.htm*
-2. *services/service.php*
+2. *services/com.protecthair.service.php*
 
 ### Input validation
 
