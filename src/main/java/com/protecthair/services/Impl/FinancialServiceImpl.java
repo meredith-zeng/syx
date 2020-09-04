@@ -12,6 +12,7 @@ import com.protecthair.result.Result;
 //import com.protecthair.util.WageUitl;
 import com.protecthair.utils.ClientUploadUtils;
 import okhttp3.ResponseBody;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.protecthair.services.FinancialService;
@@ -34,6 +35,8 @@ public class FinancialServiceImpl implements FinancialService {
 
     @Autowired
     FinancialMapper financialMapper;
+
+    @Autowired
     InvoiceMapper invoiceMapper;
 
     /**
@@ -50,6 +53,7 @@ public class FinancialServiceImpl implements FinancialService {
         if (picture.isEmpty()) {
             Result.error(CodeMsg.SUBMIT_APPROVAL_ERROR);
         }
+        //picture.
         //获得物理路径webapp所在路径
         String pathRoot = req.getSession().getServletContext().getRealPath("");
         String path = "";
@@ -61,24 +65,25 @@ public class FinancialServiceImpl implements FinancialService {
             //获得文件后缀名称
             String imageName = contentType.substring(contentType.indexOf("/") + 1);
             path = "/file/" + uuid + "." + imageName;
-            picture.transferTo(new File(pathRoot + path));
+
             //voice Recognize
-//            ResponseBody responseBody= ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr",path,imageName);
-//            String json = responseBody.byteString().toString();
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
-//            Invoice invoice=invoiceResult.getData();
-//            System.out.println(invoice);
-//            String teamName=expense.getTeamName();
-//            invoice.setTeamName(teamName);
-//            invoiceMapper.save(invoice);
+            ResponseBody responseBody= ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr",picture.getBytes(),imageName);
+            String json = responseBody.string();
+            ObjectMapper objectMapper = new ObjectMapper();
+            InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
+            Invoice invoice=invoiceResult.getData();
+            System.out.println(invoice);
+            String teamName=expense.getExpenseOrganization();
+            invoice.setTeamName(teamName);
+            invoiceMapper.save(invoice);
+            picture.transferTo(new File(pathRoot + path));
         }
         //图片路径
         expense.setExpensePic(path);
         expense.setExpenseCertifictedCondition("待审核");
 
         Expense expense1=new Expense();
-
+        BeanUtils.copyProperties(expense,expense1);
         //保存实体
         try {
             financialMapper.saveExpense(expense);

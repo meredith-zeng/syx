@@ -219,10 +219,10 @@
                                     <form id="form_01" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left" method="post">
 
                                         <div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="TeamName">团队名<span class="required">*</span>
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="expenseOrganization">团队名<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input type="text" id="TeamName" name="TeamName"onfocus="check1()" required="required" class="form-control "/>
+                                                <input type="text" id="expenseOrganization" name="expenseOrganization"onfocus="check1()" required="required" class="form-control "/>
                                             </div>
                                         </div>
 
@@ -426,8 +426,8 @@
         })
     })
     function check1() {
-        if($("#TeamName").val()==""){
-            $("#TeamName").attr("placeholder","此字段必填！");
+        if($("#expenseOrganization").val()==""){
+            $("#expenseOrganization").attr("placeholder","此字段必填！");
             return false;
         }else {
             return true;

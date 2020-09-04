@@ -32,7 +32,7 @@
         <!--扫描bean包 使用别名-->
         <property name="typeAliasesPackage" value="com.protecthair.domain"/>
         <!--扫描sql配置文件：mapper需要的xml文件-->
-<!--        <property name="mapperLocations" value="classpath:mapper/mapper/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 
 

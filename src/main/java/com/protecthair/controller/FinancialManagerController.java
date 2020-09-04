@@ -141,7 +141,11 @@ public class FinancialManagerController {
      Result result =    financialService.expenseReview(certificationCertificatedCondition,id);
        return result;
     }
-
+    /**
+     * 管理员     * @param id     报销的业务id，即主键
+     * @param certificationCertificatedCondition   报销状态（通过，未通过）
+     * @return
+     */
 
     /**------------------------------------------管理员模块end------------------------------**/
 

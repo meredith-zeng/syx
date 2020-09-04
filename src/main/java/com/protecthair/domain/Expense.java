@@ -26,20 +26,13 @@ public class Expense {
     private Integer expenseCode;
     //组织的名称
     @NotBlank
-    private String teamName;
-    //报销人工号
+    private String expenseOrganization;
 
-    private Integer memberId;
 
     //报销金额
 
     private Double expenseMoney;
-    //报销原由
 
-    private String expenseEvent;
-    //经办人
-
-    private String expenseAgent;
     //报销单据
     //@NotBlank
     private String expensePic;

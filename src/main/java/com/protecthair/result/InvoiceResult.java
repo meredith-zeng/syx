@@ -9,7 +9,7 @@ import lombok.Data;
 public class InvoiceResult<T> {
     private String FileName;
 
-    private int code;
+    private String code;
 
     private Invoice data;
 

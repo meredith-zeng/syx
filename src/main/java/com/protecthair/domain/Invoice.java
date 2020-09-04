@@ -1,8 +1,11 @@
 package com.protecthair.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -11,13 +14,16 @@ public class Invoice {
 
     private String teamName;
 
-    private int code;
+    private String code;
 
-    private String date;
+    @JsonFormat(pattern = "yyyyMMdd")
+    private Date date;
 
     private String number;
 
     private String price;
+
+    private String verify;
 
 
 }

@@ -6,6 +6,6 @@
 <mapper namespace="com.protecthair.dao.InvoiceMapper">
     <insert id="save" parameterType="Invoice" >
         insert into invoice
-        (code,number,ate,price)values(#{code},#{number},#{date},#{price})
+        (team_name,code,number,date,price,verify)values(#{teamName},#{code},#{number},#{date},#{price},#{verify})
     </insert>
 </mapper>
