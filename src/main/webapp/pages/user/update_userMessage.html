@@ -14,7 +14,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>修改密码 </title>
+
+
+    <title>修改用户信息</title>
 
     <!-- Bootstrap -->
 
@@ -55,6 +57,8 @@
     <!-- Custom Theme Style -->
 
     <link href="../../build/css/custom.min.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -183,9 +187,7 @@
 
                                 <div class="x_title">
 
-                                    <h2>修改密码 <small></small></h2>
-
-
+                                    <h2>修改电话号码<small></small></h2>
 
                                     <div class="clearfix"></div>
 
@@ -200,57 +202,25 @@
                                         <div style="height: 15px;margin-bottom: 13px;text-align: center">
                                             <span id="errorMsg" style="color: red;text-align: center"></span>
                                         </div>
-
                                         <div class="form-group row">
-                                            <label for="msgCode" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">验证码:</label>
+                                            <label for="userPhoneNumber" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">电话号码:</label>
                                             <div class="col-sm-2">
-                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="msgCode" name="msgCode" placeholder="验证码">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="button" style="height: 30px" id="btnvcode" value="获取"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="userPassword" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">旧密码:</label>
-                                            <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="userPassword" name="userPassword" placeholder="旧密码" oninput="checkUserPassword()"  required>
+                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="userPhoneNumber" name="userPhoneNumber" placeholder="电话号码" oninput="checkPhoneNumber()" required>
                                             </div>
                                             <!--存放错误信息-->
                                             <div class="col-sm-3">
                                                 <span id="errorMsg01" style="color: red;text-align: center"></span>
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
-                                            <label for="newpassword" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">新密码:</label>
-                                            <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="newpassword" name="newPasswprd" placeholder="新密码" oninput="checkNewPassword()" onfocus="checkNewPassword()" required>
-                                            </div>
-                                            <!--存放错误信息-->
-                                            <div class="col-sm-3">
-                                                <span id="errorMsg02" style="color: red;text-align: center"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="confirmpassword" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">确认密码:</label>
-                                            <div class="col-sm-2">
-                                                <input type="password" style="height: 30px;font-size: 15px" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="确认密码" oninput="confirmPassword()" required>
-                                            </div>
-                                            <!--存放错误信息-->
-                                            <div class="col-sm-3">
-                                                <span id="errorMsg03" style="color: red;text-align: center"></span>
-                                            </div>
-                                        </div>
                                         <div class="form-group">
-                                            <label  class="col-sm-5 control-label"></label>
+                                            <label class="col-sm-5 control-label"></label>
                                             <div class="col-sm-2">
-                                                <span>
-                                                    <button  id="btn_01" class="btn btn-info btn-sm btn-block"  >确认修改</button>
-                                                </span>
+                                                <button class="btn btn-info btn-block btn-sm" id="button_is">确认修改 </button>
                                             </div>
                                         </div>
                                     </form>
+
+
                                 </div>
 
                             </div>
@@ -348,7 +318,6 @@
 <!-- starrr -->
 
 <script src="../../vendors/starrr/dist/starrr.js"></script>
-
 <!-- Custom Theme Scripts -->
 
 <script src="../../build/js/custom.min.js"></script>
@@ -363,97 +332,36 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#btn_01").click(function (e) {
+        $("#button_is").click(function (e) {
             e.preventDefault();
-            if(checkUserPassword()&&checkNewPassword()&&confirmPassword()){
-                var confirMsg=confirm("确定修改？")
-                if (confirMsg){
-                    $.post("/api/user/modifyPassword",$("#form_01").serialize(),function (data) {
-                        if(data.code==3107){
-                            $("#errorMsg").text(data.msg)
-                            //修改成功跳转
-                            window.location.href="../user/login.html";
-                        }else {
-                            $("#errorMsg").text(data.msg)
-                            //注册失败，返回注册失败信息；
-                        }
-
-                    },"json");
-                }
+            if(checkPhoneNumber()){
+                $.post("/api/user/modifyMsg",$("#form_01").serialize(),function (data) {
+                    if(data.code==3105){
+                        $("#errorMsg").text(data.msg)
+                        window.location.href="/pages/user/user_center.html";
+                    }else{
+                        //修改失败，返回修改失败信息；
+                        $("#errorMsg").text(data.msg)
+                    }
+                },"json");
             }
-
         })
-    })
-    function checkUserPassword() {
-        var oldpasswordtext = $("#userPassword").val();
-        var oldpasswordpatt= /^\w{6,12}$/;
-        if(!oldpasswordpatt.test(oldpasswordtext)){
-            $("#errorMsg01").text("旧密码不合法！")
+    });
+    function checkPhoneNumber() {
+        //获取用户名输入框的内容；
+        var iponenumbertext = $("#userPhoneNumber").val();
+        //创建正则表达式；
+        var iponenumberpatt=/^1(3|4|5|6|7|8|9)\d{9}$/;
+        //验证
+        if(!iponenumberpatt.test(iponenumbertext)){
+            $("#errorMsg01").text("手机号不合法！")
             return false;
         }else {
             $("#errorMsg01").text("");
             return true;
         }
-
-    }
-    function checkNewPassword() {
-        var newPasswordText=$("#newpassword").val();
-        var oldPasswordText=$("#userPassword").val();
-        var newPasswordPatt=/^\w{6,12}$/;
-        if(newPasswordText==oldPasswordText){
-            $("#errorMsg02").text("新密码不能和原密码相同！")
-            return false;
-        }else {
-            if(!newPasswordPatt.test(newPasswordText)){
-                $("#errorMsg02").text("密码由6-12位字母、数字和下划线组成！")
-                return false;
-            }else {
-                $("#errorMsg02").text("");
-                return true;
-            }
-        }
-
-    }
-    function confirmPassword() {
-        var newPasswordText=$("#newpassword").val();
-        var confirmPasswordText=$("#confirmpassword").val();
-        if(confirmPasswordText!=newPasswordText){
-            $("#errorMsg03").text("确认密码和新密码不一致！")
-            return false;
-        }else {
-            $("#errorMsg03").text("");
-            return true;
-        }
-
     }
 </script>
-
-<script type="application/javascript">
-    $(function () {
-        $("#btnvcode").one("click",f);
-
-        function f(e) {
-            e.preventDefault();
-            $.post("/api/user/messageSend", function (data) {
-                (function (e1) {
-                    var aaaa = e1.$target;
-                    let $this = $(e1.currentTarget).attr("disabled","disabled");
-                    let time = 60;
-                    let set = setInterval(function () {
-                        $this.val("获取验证码(" + time-- +")" );
-                        if( time <= 0 ){
-                            clearInterval(set);
-                            $this.val("获取验证码" ).removeAttr("disabled").one("click",f);
-                        }
-                    },1000);
-                })(e);
-            },"json");
-        }
-    })
-
-</script>
-
-
 </body>
 
 </html>
