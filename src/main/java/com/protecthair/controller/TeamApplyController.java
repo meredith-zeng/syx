@@ -5,7 +5,7 @@ import com.protecthair.vo.TeamReviewVO;
 import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
-import com.protecthair.services.TeamServices;
+import com.protecthair.services.TeamApplyServices;
 import com.protecthair.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -29,7 +29,7 @@ import java.util.UUID;
 public class TeamApplyController {
 
     @Autowired
-    TeamServices teamServices;
+    TeamApplyServices teamApplyServices;
 
     //学生团队申请
     @RequestMapping(value = "/apply")
@@ -62,7 +62,7 @@ public class TeamApplyController {
             return Result.CodeMsg(CodeMsg.SUBMIT_FILE_ERROR);
         }
         teamApplyVO.setCertificationFileUrl(path);
-        CodeMsg codeMsg = teamServices.applyTeam(stuId, teamApplyVO);
+        CodeMsg codeMsg = teamApplyServices.applyTeam(stuId, teamApplyVO);
         return Result.CodeMsg(codeMsg);
     }
 
@@ -71,21 +71,21 @@ public class TeamApplyController {
     public Result getMyTeamApply(HttpServletRequest request) {
         SessionUser sessionUser = SessionUtil.getSessionUserFromCookie(request);
         String stuId = sessionUser.getUser().getUniversityCode();
-        Result result = teamServices.getMyTeamApply(stuId);
+        Result result = teamApplyServices.getMyTeamApply(stuId);
         return result;
     }
 
     //管理员根据状态获取
     @RequestMapping(value = "/applyByStatus", method = RequestMethod.POST)
     public Result getTeamApplyByStatus(@Validated @RequestParam("applyStatus") String status) {
-        Result result = teamServices.getTeamApplyByStatus(status);
+        Result result = teamApplyServices.getTeamApplyByStatus(status);
         return result;
     }
 
     //管理员进行审核
     @RequestMapping(value = "/review")
     public Result teamReview(@Validated TeamReviewVO teamApplyVO) {
-        CodeMsg codeMsg = teamServices.reviewTeam(teamApplyVO);
+        CodeMsg codeMsg = teamApplyServices.reviewTeam(teamApplyVO);
         return Result.CodeMsg(codeMsg);
     }
 }

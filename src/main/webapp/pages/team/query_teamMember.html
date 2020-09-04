@@ -325,6 +325,41 @@
 <script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
 
 <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
+
+<script type="text/template" id="listTemplate">
+    {{#each this}}
+    <li><a><i class="fa fa-home"></i> {{listParentName}}<span class="fa fa-chevron-down"></span> </a>
+        <ul class="side-menu">
+            {{#each childPartList}}
+            <li><a href="{{routeUrl}}"><p style="color: white">{{routeName}}</p></a></li>
+            {{/each}}
+        </ul>
+    </li>
+    {{/each}}
+</script>
+<script>
+
+    function flushPage() {
+        $.ajax({
+            url: "/api/route/query",
+            type: "POST",
+            dateType: 'JSON',
+            cache: false,
+            success: function (data) {
+                console.log(data.data);
+                const ParentTpl = $("#listTemplate").html();
+                const ParentTemplate = Handlebars.compile(ParentTpl);
+                const html = ParentTemplate(data.data);
+                $("#sidebar-menu").html(html);
+            },
+            error: function (error) {
+                console.log(error);
+                $("#errorMsg").text("没有可以浏览的内容");
+            },
+        });
+    }
+    window.onload = function(){flushPage();}
+</script>
 <script type="text/javascript">
     $(function () {
         var result = location.search.match(new RegExp("[\?\&]id=([^\&]+)","i"));

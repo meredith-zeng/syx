@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>审核身份认证</title>
+</head>
+<script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
+<script src="../../static/js/jquery-3.3.1.min.js"></script>
+
+<body>
+<div>
+    <form id="changeCondition" action="#" method="post">
+        <table>
+            <thead>
+                <td>1111111111111申请认证编号</td>
+                <td>用户id</td>
+                <td>申请类型编号</td>
+                <td>认证状态</td>
+                <td>申请地</td>
+                <td>审核</td>
+            </thead>
+            <tbody id="queryResult">
+
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<script type="text/template" id="template">
+{{#each this}}
+            <tr>
+                <td>{{certificationCode}}</td>
+                <td>{{userId}}</td>
+                <td>{{certificationTypeCode}}</td>
+                <td>{{certificationCertificatedCondition}}</td>
+                <td>{{certificationAddress}}</td>
+                  <td>
+                      <select name="certificationCertificatedCondition">
+                        <option value="审核不通过">审核不通过</option>
+                        <option value="审核通过">审核通过</option>
+                    </select>
+                    <input type="button" name="submitNow" id="{{userId}}" onclick="submitForm(this)" value="提交">
+                  </td>
+            </tr>
+    {{/each}}
+</script>
+<script>
+    $.ajax({
+        url:"/identity/Authentication/query",
+        type:"POST",
+        dateType:'JSON',
+        cache:false,
+        contentType: "application/json",
+        success:function(data){
+            console.log(data);
+            var tpl = $("#template").html();
+            var template = Handlebars.compile(tpl);
+            var html = template(data);
+            $("#queryResult").html(html);
+        },
+        error:function(error){
+            console.log(error);
+        },
+    });
+</script>
+<script>
+
+    function submitForm(node){
+        const tr = node.parentNode.parentNode;
+        const arr = [];
+        let userId = tr.cells[1].innerHTML;
+        let certificationTypeCode = tr.cells[2].innerHTML;
+        let certificationCertificatedCondition = tr.cells[5].children[0].value;
+            arr.push({
+                userId: userId,
+                certificationTypeCode:certificationTypeCode,
+                "certificationCertificatedCondition":certificationCertificatedCondition
+            });
+        console.log(JSON.stringify(arr[0]));
+
+        doAjax(JSON.stringify(arr[0]));
+
+    }
+
+    function doAjax(arr){
+        $.ajax({
+            type:'POST',
+            url:"/identity/Authentication/audit",
+            data: arr,
+            dateType:'JSON',
+            cache:false,
+            contentType: "application/json",
+            success : function (result) {
+                if (result==true)
+                    console.log(result);
+            },
+            error : function (err) {
+                console.log(err);
+            }
+        })
+    }
+
+
+
+
+</script>
+</body>
+</html>

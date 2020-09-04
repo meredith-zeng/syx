@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申请身份认证</title>
+    <script type="text/javascript" src="http://www.imooc.com/data/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="http://www.imooc.com/data/jquery.form.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
+</head>
+<body>
+
+<div id="applyCertificateContainer">
+    <form id="applyAuthentication"
+          action="#" method="post">
+        用户id:<input type="text" name="userId" id="userId">
+        认证类型：<select name="certificationTypeCode" id="certificationTypeCode">
+            <option value="1">部门用户</option>
+            <option value="2">供应商</option>
+            <option value="3">社会公众</option>
+        </select>
+<!--        <select name="certificationCertificatedCondition" id="certificationCertificatedCondition">-->
+<!--            <option value="提交审核">提交审核</option>-->
+<!--        </select>-->
+        认证地址：<input type="text" name="certificationAddress"/>
+        <input type="submit" id="submit" name="submit"/>
+    </form>
+</div>
+
+<div id="applyResult">
+
+</div>
+
+<script>
+    $(function () {
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            const serializeStr = JSON.stringify($('#applyAuthentication').serializeJSON());
+            $.ajax({
+                type:'POST',
+                url:"/identity/Authentication/apply",
+                data: serializeStr,
+                dateType:'JSON',
+                cache:false,
+                contentType: "application/json",
+                success : function (result) {
+                    if (result==true)
+                    console.log(result);
+                },
+                error : function (err) {
+                    console.log(err);
+                }
+            })
+        });
+    })
+</script>
+</body>
+</html>

@@ -2,6 +2,8 @@ package com.protecthair.services.impl;
 
 import com.protecthair.dao.RouteRightMapper;
 import com.protecthair.domain.RouteRight;
+import com.protecthair.services.RouteRightService;
+import com.protecthair.vo.RouteRightVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

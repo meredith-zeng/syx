@@ -3,12 +3,12 @@ package com.protecthair.services.impl;
 import com.protecthair.domain.Team;
 import com.protecthair.vo.TeamApplyVO;
 import com.protecthair.vo.TeamReviewVO;
-import com.protecthair.dao.TeamMapper;
+import com.protecthair.dao.TeamApplyMapper;
 import com.protecthair.domain.TeamApply;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Constant;
 import com.protecthair.result.Result;
-import com.protecthair.services.TeamServices;
+import com.protecthair.services.TeamApplyServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +23,10 @@ import java.util.List;
  * @Date 2020/8/29 16:27
  */
 @Service
-public class TeamServicesImpl implements TeamServices {
+public class TeamApplyApplyServicesImpl implements TeamApplyServices {
 
     @Autowired
-    TeamMapper mapper;
+    TeamApplyMapper mapper;
 
     //团队申请
     @Override

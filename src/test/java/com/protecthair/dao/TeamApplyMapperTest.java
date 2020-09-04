@@ -19,10 +19,10 @@ import java.util.Date;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
-public class TeamMapperTest extends TestCase {
+public class TeamApplyMapperTest extends TestCase {
 
     @Autowired
-    TeamMapper teamDao;
+    TeamApplyMapper teamDao;
 
     @Test
     public void testSelectTeamIDByStuId() {
