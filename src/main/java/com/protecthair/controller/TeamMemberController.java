@@ -1,13 +1,17 @@
 package com.protecthair.controller;
 
+import com.protecthair.domain.SessionUser;
 import com.protecthair.domain.TeamMember;
 import com.protecthair.result.Result;
 import com.protecthair.services.TeamMemberService;
+import com.protecthair.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -20,8 +24,10 @@ public class TeamMemberController {
     //New Team
     @ResponseBody
     @RequestMapping(value = "/newTeamMember", method = RequestMethod.POST)
-    public Result add(TeamMember member) {
-        Result res = teamMemberService.add(member);
+    public Result add(TeamMember member, HttpServletRequest req) {
+        SessionUser session  = SessionUtil.getSessionUserFromCookie(req);
+        String stuId = session.getUser().getUniversityCode();
+        Result res = teamMemberService.add(member,stuId);
         return res;
     }
 

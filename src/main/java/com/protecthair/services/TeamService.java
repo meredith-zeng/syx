@@ -12,7 +12,7 @@ public interface TeamService {
 
     Result queryTeam(Team team);
 
-    Result searchTeam(Team team);
+    Result searchTeam(String team);
 
     Result showTeam();
 }

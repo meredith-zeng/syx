@@ -21,8 +21,13 @@
         <mvc:interceptor>
             <!-- 拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面 -->
             <mvc:mapping path="/pages/**" />
+            <mvc:mapping path="/api/**" />
             <!-- 但是排除下面这些，也就是不拦截请求 -->
             <mvc:exclude-mapping path="/pages/user/**" />
+            <mvc:exclude-mapping path="/pages/css/**" />
+            <mvc:exclude-mapping path="/pages/js/**" />
+            <mvc:exclude-mapping path="/pages/img/**" />
+            <mvc:exclude-mapping path="/api/user/**" />
             <bean class="com.protecthair.Interceptor.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

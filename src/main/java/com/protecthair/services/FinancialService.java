@@ -39,7 +39,7 @@ public interface FinancialService {
     //圆滚滚通过
     List<Expense>  getExpenseApplyByIdAndStatus(String status, Integer memberid);
 
-    List<Invoice> invoiceShow(String name);
+    List<Invoice> invoiceShow(String name,String a);
 
 
 //    Result caculateSalary(Integer id);

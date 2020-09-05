@@ -1,6 +1,8 @@
 package com.protecthair.services.impl;
+import com.protecthair.dao.TeamApplyMapper;
 import com.protecthair.dao.TeamMapper;
 import com.protecthair.domain.Team;
+import com.protecthair.domain.TeamApply;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.TeamService;
@@ -11,9 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 @Service
 public class TeamServiceImpl implements TeamService{
+    
     @Autowired
     TeamMapper teamMapper;
 
+    @Autowired
+    TeamApplyMapper mapper;
 
     @Override
     public Result modifyTeam(Team team) {
@@ -69,7 +74,8 @@ public class TeamServiceImpl implements TeamService{
     }
 
     @Override
-    public Result searchTeam(Team team) {
+    public Result searchTeam(String teamid) {
+        Team team = mapper.selectTeamIDByStuId(teamid);
         String teamName=team.getTeamName();
         ArrayList list =teamMapper.search(teamName);
         if (list!=null ) {

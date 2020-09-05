@@ -56,8 +56,9 @@ public class TeamController {
     //Search Team
     @ResponseBody
     @RequestMapping(value = "/searchTeam", method = RequestMethod.POST)
-    public Result searchTeam(Team team) {
-        Result res=teamService.searchTeam(team);
+    public Result searchTeam(HttpServletRequest request) {
+        String teamid = SessionUtil.getSessionUserFromCookie(request).getUser().getUniversityCode();
+        Result res=teamService.searchTeam(teamid);
         return res;
     }
 //    //Show Team

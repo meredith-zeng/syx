@@ -147,8 +147,10 @@ public class FinancialManagerController {
     }
     @ResponseBody
     @RequestMapping(value = "/invoiceShow", method = RequestMethod.POST)
-    public Result invoiceShow(@RequestParam(value = "expenseOrganization") String name) {
-        List<Invoice> invoiceList =    financialService.invoiceShow(name);
+    public Result invoiceShow(@RequestParam(value = "expenseOrganization") String name,HttpServletRequest request) {
+        SessionUser user = SessionUtil.getSessionUserFromCookie(request);
+        String teamId = user.getUser().getUniversityCode();
+        List<Invoice> invoiceList =    financialService.invoiceShow(name,teamId);
         Result res =   Result.success(invoiceList, CodeMsg.QUERY_EXPENSE_SUCCESS);
         return res;
     }

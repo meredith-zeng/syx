@@ -96,14 +96,14 @@ public class UserController {
     }
 
     //登出功能
-    @RequestMapping("/logout")
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         //获取token
         String token = SessionUtil.getStringFromCookie(request);
         request.getSession().removeAttribute(token);
         request.getSession().invalidate();
         //重定向到首页
-        return "redirect:/pages/user/index.html";
+        return "redirect:/pages/user/login.html";
     }
 
 

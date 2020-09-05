@@ -149,8 +149,7 @@
 
                                 <a class="dropdown-item" href="/pages/user/update_userMessage.html">修改注册信息</a>
 
-                                <a class="dropdown-item" href="/pages/user/login.html"><i class="fa fa-sign-out pull-right"></i> 退出登录</a>
-
+                                <a class="dropdown-item" href="/api/user/logout"><i class="fa fa-sign-out pull-right"></i> 退出登录</a>
                             </div>
 
                         </li>
@@ -229,7 +228,7 @@
                                             <label for="isLeader" class="col-sm-1 col-form-label" style="font-size: 18px;text-align: right">队长:</label>
                                             <div class="col-sm-2">
                                                 <select id="isLeader" name="isLeader" style="height: 30px;font-size:14px"class="form-control" >
-                                                    <option value="是">是</option>
+
                                                     <option value="否">否</option>
                                                 </select>
                                             </div>
@@ -401,7 +400,7 @@
             if(result){
                 $.post("/api/newTeamMember",$("#form_01").serialize(),function (data) {
                     if(data.code==300){
-                        window.location.href="/pages/Myteam/query_myteamMember.html?id="+teamNameVal;
+                        window.location.href="/pages/Myteam/query_myteamMember.html";
                     }
                 },"json");
 

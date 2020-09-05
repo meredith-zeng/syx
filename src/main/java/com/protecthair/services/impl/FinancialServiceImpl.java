@@ -46,6 +46,8 @@ public class FinancialServiceImpl implements FinancialService {
     @Autowired
     TeamApplyMapper mapper;
 
+
+
     /**
      * 保存报销申请
      *
@@ -76,14 +78,14 @@ public class FinancialServiceImpl implements FinancialService {
             path = "/file/" + uuid + "." + imageName;
 
             //voice Recognize
-            ResponseBody responseBody = ClientUploadUtils.upload("http://192.168.110.135:11111/invoice-ocr", picture.getBytes(), imageName);
+            ResponseBody responseBody = ClientUploadUtils.upload("http://192.168.110.132:11111/invoice-ocr", picture.getBytes(), imageName);
             String json = responseBody.string();
             ObjectMapper objectMapper = new ObjectMapper();
             InvoiceResult invoiceResult = objectMapper.readValue(json, InvoiceResult.class);
             Invoice invoice = invoiceResult.getData();
             System.out.println(invoice);
-            String teamName = expense.getExpenseOrganization();
-            invoice.setTeamName(teamName);
+            //String teamName = expense.getExpenseOrganization();
+            invoice.setTeamName(expenseOrganization);
             invoiceMapper.save(invoice);
             picture.transferTo(new File(pathRoot + path));
         }
@@ -130,8 +132,9 @@ public class FinancialServiceImpl implements FinancialService {
     }
 
     @Override
-    public List<Invoice> invoiceShow(String name) {
-
+    public List<Invoice> invoiceShow(String name,String stuId) {
+//        Team team = mapper.selectTeamIDByStuId(stuId);
+//        String teamName = team.getTeamName();
         return invoiceMapper.show(name);
     }
 
