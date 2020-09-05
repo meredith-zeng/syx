@@ -368,6 +368,8 @@
             e.preventDefault();
             $.post("/api/searchTeam",$("#form_01").serialize(),function (data) {
                 if(data.code==304){
+
+
                     //查询成功
                     var $tbody = $("#table_01>tbody").empty();
                     $.each(data.data,function(i, result){

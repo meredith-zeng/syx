@@ -2,9 +2,11 @@ package com.protecthair.controller;
 
 import com.protecthair.domain.Expense;
 import com.protecthair.domain.Invoice;
+import com.protecthair.domain.SessionUser;
 import com.protecthair.result.CodeMsg;
 import com.protecthair.result.Result;
 import com.protecthair.services.FinancialService;
+import com.protecthair.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -49,8 +51,9 @@ public class FinancialManagerController {
         if (result.hasErrors()){
             return Result.CodeMsg(CodeMsg.SUBMIT_NULL_ERROR);
         }
-
-       return financialService.saveExpense(picture,expense,req);
+        SessionUser user = SessionUtil.getSessionUserFromCookie(req);
+        String teamId = user.getUser().getUniversityCode();
+       return financialService.saveExpense(picture,expense,teamId,req);
     }
 
     /**

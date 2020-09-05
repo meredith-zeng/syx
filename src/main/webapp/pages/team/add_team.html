@@ -210,27 +210,27 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="teamCollege" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">学院:</label>
+                                            <label for="teamCollege" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">本人所属学院:</label>
                                             <div class="col-sm-3">
                                                 <select id="teamCollege" name="teamCollege" style="height: 30px;font-size:14px"class="form-control" >
 
                                                 </select>
                                             </div>
                                         </div>
+<!--                                        <div class="form-group row">-->
+<!--                                            <label for="teamLeaderStudentName" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">队长姓名:</label>-->
+<!--                                            <div class="col-sm-3">-->
+<!--                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="teamLeaderStudentName" name="teamLeaderStudentName" placeholder="队长姓名"required>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group row">-->
+<!--                                            <label for="teamLeaderStudentId" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">队长学号:</label>-->
+<!--                                            <div class="col-sm-3">-->
+<!--                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="teamLeaderStudentId" name="teamLeaderStudentId" placeholder="队长学号"required>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="form-group row">
-                                            <label for="teamLeaderStudentName" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">队长姓名:</label>
-                                            <div class="col-sm-3">
-                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="teamLeaderStudentName" name="teamLeaderStudentName" placeholder="队长姓名"required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="teamLeaderStudentId" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">队长学号:</label>
-                                            <div class="col-sm-3">
-                                                <input type="text" style="height: 30px;font-size: 15px" class="form-control" id="teamLeaderStudentId" name="teamLeaderStudentId" placeholder="队长学号"required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="teamLevel" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">申请等级:</label>
+                                            <label for="teamLevel" class="col-sm-5 col-form-label" style="font-size: 18px;text-align: right">申请团队等级:</label>
                                             <div class="col-sm-3">
                                                 <select id="teamLevel" name="teamLevel" style="height: 30px;font-size:14px"class="form-control" >
 
@@ -398,7 +398,7 @@
             $("<option/>").val(item).text(item).appendTo($option01);
         })
 
-        var applyLevel = ["A","B","C","D"];
+        var applyLevel = ["院级团队","校级团队"];
         var $option02 = $("#teamLevel").empty();
         $.each(applyLevel, function (i, item) {
             $("<option/>").val(item).text(item).appendTo($option02);

@@ -20,9 +20,7 @@ public class TeamMemberController {
     //New Team
     @ResponseBody
     @RequestMapping(value = "/newTeamMember", method = RequestMethod.POST)
-    public Result add(TeamMember member)
-
-    {
+    public Result add(TeamMember member) {
         Result res = teamMemberService.add(member);
         return res;
     }

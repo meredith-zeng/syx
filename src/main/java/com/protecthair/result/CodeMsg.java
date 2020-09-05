@@ -40,11 +40,11 @@ public class CodeMsg {
     public static  final CodeMsg RIGHT_ROUTE_ERROR = new CodeMsg(915,"刷新动态侧边栏失败");
 
     //团队申请模块
-    public static final CodeMsg NO_EXIST_TEAM = new CodeMsg(3001,"团队不存在");
+    public static final CodeMsg NO_EXIST_TEAM = new CodeMsg(3001,"团队不存在，请先创建团队");
     public static final CodeMsg APPLY_TEAM_SUCCESS =  new CodeMsg(3002,"团队活动申请成功");
-    public static final CodeMsg APPLY_TEAM_FAIL =  new CodeMsg(3003,"团队活动申请失败");
+    public static final CodeMsg APPLY_TEAM_FAIL =  new CodeMsg(3003,"活动申请已存在");
     public static final CodeMsg SHOW_ALLAPPLY_SUCCESS = new CodeMsg(3004,"展示团队活动成功");
-    public static final CodeMsg SHOW_ALLAPPLY_ERROR = new CodeMsg(3005,"展示活动失败");
+    public static final CodeMsg SHOW_ALLAPPLY_ERROR = new CodeMsg(3005,"查询活动申请失败，请先创建团队或者团队活动申请");
     public static final CodeMsg TEAM_REVIEWS_SUCCESS = new CodeMsg(3006,"团队活动审核成功");
     public static final CodeMsg TEAM_REVIEWS_ERROR = new CodeMsg(3007,"团队活动审核失败");
     public static final CodeMsg SUBMIT_APPROVAL_ERROR = new CodeMsg(3008,"团队申请书为空");
@@ -69,7 +69,8 @@ public class CodeMsg {
 
     //Team Manage
     public static final CodeMsg ADD_TEAM_SUCCESS=new CodeMsg(300,"Add Team Success");
-    public static final CodeMsg ADD_TEAM_FAILED=new CodeMsg(301,"Add Team Failed");
+    public static final CodeMsg ADD_TEAM_FAILED=new CodeMsg(301,"团队名称已存在");
+    public static final CodeMsg ADD_TEAM_FAILED1=new CodeMsg(301,"该学生已经创建了团队");
     public static final CodeMsg EDIT_TEAM_SUCCESS=new CodeMsg(302,"Edit Team Success");
     public static final CodeMsg EDIT_TEAM_FAILED=new CodeMsg(303,"Edit Team Failed");
     public static final CodeMsg FIND_TEAM_SUCCESS=new CodeMsg(304,"Find Team Success");

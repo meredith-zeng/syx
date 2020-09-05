@@ -32,7 +32,6 @@ public class TeamApplyServicesImplTest {
     public void applyTeam() {
         String stuId = "20190003";
         TeamApplyVO teamApplyVO = new TeamApplyVO();
-        teamApplyVO.setTeamId(1);
         teamApplyVO.setActivityBeginTime(new Date());
         teamApplyVO.setActivityEndTime(new Date());
         String path = "file/wq/qws/.dlf";

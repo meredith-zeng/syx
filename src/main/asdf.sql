@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 03/09/2020 20:42:09
+ Date: 04/09/2020 23:28:29
 */
 
 SET NAMES utf8mb4;
@@ -30,21 +30,16 @@ CREATE TABLE `certification`  (
   `team_level` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '团队等级',
   `is_pass` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否通过',
   `created_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建申请时间',
-  `certification_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '审核时间',
+  `certification_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '审核时间',
   `certification_file_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审核书存储路径',
   PRIMARY KEY (`certification_id`) USING BTREE,
   UNIQUE INDEX `团队唯一申请`(`team_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of certification
 -- ----------------------------
-INSERT INTO `certification` VALUES (5, 1, '123', '2020-09-03 17:29:22', '2020-09-03 17:29:26', '校级团队', '审核通过', '2020-08-19 11:11:53', '2020-09-03 20:01:01', '12321');
-INSERT INTO `certification` VALUES (6, 2, '十七万四千五', '2020-09-03 17:29:16', '2020-09-03 17:29:19', '无', '审核不通过', '2020-08-25 14:37:35', '2020-09-03 19:36:41', '1431');
-INSERT INTO `certification` VALUES (7, 3, '321', '2020-09-03 17:29:11', '2020-09-03 17:29:13', '无', '审核不通过', '2020-08-25 14:37:53', '2020-09-03 19:36:39', '/file/c9a0932952b54968ba8cd7211b20f7c6.pdf');
-INSERT INTO `certification` VALUES (8, 4, '322威威', '2020-09-03 17:27:47', '2020-09-03 17:27:49', '', '待审核', '2020-08-25 14:38:12', '2020-09-03 19:37:10', '213312312');
-INSERT INTO `certification` VALUES (9, 5, '432423', '2020-09-26 00:00:00', '2020-09-24 00:00:00', '无', '审核不通过', '2020-09-03 18:13:18', '2020-09-03 19:36:37', '');
-INSERT INTO `certification` VALUES (10, NULL, NULL, '2020-09-12 00:00:00', '2020-09-24 00:00:00', NULL, '未审核', '2020-09-03 19:59:03', '2020-09-03 19:59:03', '/file/cc462d7650af4d70b454629e294b9479.pdf');
+INSERT INTO `certification` VALUES (27, 30, '兔子和老鹰', '2020-09-11 00:00:00', '2020-09-10 00:00:00', '校级团队', '审核通过', '2020-09-04 22:17:48', '2020-09-04 22:48:51', '/file/a7da3be89a104661bdbc4466654f4143.pdf');
 
 -- ----------------------------
 -- Table structure for expense
@@ -52,16 +47,37 @@ INSERT INTO `certification` VALUES (10, NULL, NULL, '2020-09-12 00:00:00', '2020
 DROP TABLE IF EXISTS `expense`;
 CREATE TABLE `expense`  (
   `expense_code` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `expense_team_id` int(0) NULL DEFAULT NULL COMMENT '报销团队的团队id',
-  `expense_time` date NULL DEFAULT NULL COMMENT '报销的时间',
-  `expense_money` double NULL DEFAULT NULL COMMENT '报销金额',
-  `expense_event` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '报销原由',
-  `expense_agent` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '报销经办人',
-  `expense_pic` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '报销单据图片存储地址',
-  `expense_certifictedCondition` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '报销审核状态',
-  `created_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '插入时间',
+  `expense_organization` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '报销的组织',
+  `expense_money` double NOT NULL COMMENT '报销金额',
+  `expense_pic` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '报销单据图片存储地址',
+  `expense_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '插入时间',
+  `expense_certifictedCondition` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '报销审核状态',
   PRIMARY KEY (`expense_code`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of expense
+-- ----------------------------
+INSERT INTO `expense` VALUES (30, '兔子和老鹰', 343, '/file/2585fb757bcf4dd79300f3b52536efaa.png', '2020-09-04 23:24:39', '待审核');
+
+-- ----------------------------
+-- Table structure for invoice
+-- ----------------------------
+DROP TABLE IF EXISTS `invoice`;
+CREATE TABLE `invoice`  (
+  `team_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `date` date NULL DEFAULT NULL,
+  `price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `verify` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`team_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of invoice
+-- ----------------------------
+INSERT INTO `invoice` VALUES ('34123', '012001800311', '33207675', '2019-05-08', '46.62', '76939056883466677916');
 
 -- ----------------------------
 -- Table structure for log
@@ -75,7 +91,7 @@ CREATE TABLE `log`  (
   `log_time` date NULL DEFAULT NULL COMMENT '日志时间',
   PRIMARY KEY (`log_code`) USING BTREE,
   UNIQUE INDEX `test`(`log_team_id`, `log_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of log
@@ -83,6 +99,8 @@ CREATE TABLE `log`  (
 INSERT INTO `log` VALUES (5, 2, '尽诛宵小天策义', '2020-08-29 10:10:46', '2020-08-31');
 INSERT INTO `log` VALUES (7, 4, '是的呢', '2020-08-29 14:19:55', '2020-08-31');
 INSERT INTO `log` VALUES (31, 1, '你猜', '2020-08-31 11:57:31', '2020-08-31');
+INSERT INTO `log` VALUES (66, 30, '312312', '2020-09-04 22:27:22', '2020-09-10');
+INSERT INTO `log` VALUES (67, 30, 'dqwdq', '2020-09-04 22:27:41', '2020-09-15');
 
 -- ----------------------------
 -- Table structure for route
@@ -96,7 +114,7 @@ CREATE TABLE `route`  (
   `parent_route_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `parent_route_code` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`route_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of route
@@ -107,8 +125,17 @@ INSERT INTO `route` VALUES (3, '查询所有日志', '2', '/pages/log/log_queryA
 INSERT INTO `route` VALUES (4, '团队日志模块', '1', '/pages/log', '团队日志', -1);
 INSERT INTO `route` VALUES (5, '团队活动模块', '1', '/pages/teamApply', '团队活动', -1);
 INSERT INTO `route` VALUES (6, '团队活动申请', '2', '/pages/teamApply/Teamapply.html', '团队活动', 5);
-INSERT INTO `route` VALUES (7, '团队活动个人查询', '2', '/pages/teamApply/QueryMyApply.html', '团队活动', 5);
+INSERT INTO `route` VALUES (7, '本团队活动申请查询', '2', '/pages/teamApply/QueryMyApply.html', '团队活动', 5);
 INSERT INTO `route` VALUES (8, '团队活动全部查询', '2', '/pages/teamApply/QueryAllApply.html', '团队活动', 5);
+INSERT INTO `route` VALUES (9, '团队管理模块', '1', '/pages/team', '团队管理', -1);
+INSERT INTO `route` VALUES (10, '添加团队', '2', '/pages/team/add_team.html', '团队管理', 9);
+INSERT INTO `route` VALUES (11, '查询团队', '2', '/pages/team/query_team.html', '团队管理', 9);
+INSERT INTO `route` VALUES (13, '查询团队成员', '2', '/pages/team/query_member.html', '团队管理', 9);
+INSERT INTO `route` VALUES (14, '我的团队管理模块', '1', '/pages/Myteam', '我的团队管理', -1);
+INSERT INTO `route` VALUES (16, '查询我的团队', '2', '/pages/Myteam/query_myteam.html', '我的团队管理', 14);
+INSERT INTO `route` VALUES (19, '财务报销模块', '1', '/pages/finance', '财务报销', NULL);
+INSERT INTO `route` VALUES (20, '报销申请', '2', '/pages/finance/Expenseapply.html', '财务报销', NULL);
+INSERT INTO `route` VALUES (21, '查询审核报销申请', '2', '/pages/finance/QueryExpense.html', '财务报销', NULL);
 
 -- ----------------------------
 -- Table structure for route_right
@@ -135,6 +162,18 @@ INSERT INTO `route_right` VALUES ('8', '5', '100');
 INSERT INTO `route_right` VALUES ('6', '5', '2');
 INSERT INTO `route_right` VALUES ('7', '5', '2');
 INSERT INTO `route_right` VALUES ('8', '5', '0');
+INSERT INTO `route_right` VALUES ('20', '19', '100');
+INSERT INTO `route_right` VALUES ('21', '19', '100');
+INSERT INTO `route_right` VALUES ('20', '19', '2');
+INSERT INTO `route_right` VALUES ('21', '19', '0');
+INSERT INTO `route_right` VALUES ('10', '9', '100');
+INSERT INTO `route_right` VALUES ('11', '9', '100');
+INSERT INTO `route_right` VALUES ('13', '9', '100');
+INSERT INTO `route_right` VALUES ('10', '9', '2');
+INSERT INTO `route_right` VALUES ('11', '9', '0');
+INSERT INTO `route_right` VALUES ('13', '9', '0');
+INSERT INTO `route_right` VALUES ('16', '14', '100');
+INSERT INTO `route_right` VALUES ('16', '14', '2');
 
 -- ----------------------------
 -- Table structure for team
@@ -147,18 +186,15 @@ CREATE TABLE `team`  (
   `team_leader_student_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '团队队长姓名',
   `team_leader_student_id` int(0) NULL DEFAULT NULL COMMENT '团队队长学号',
   `team_level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '团队等级',
-  `created_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `created_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`team_id`) USING BTREE,
-  UNIQUE INDEX `唯一标识`(`team_name`, `team_leader_student_id`) USING BTREE
+  UNIQUE INDEX `1q`(`team_leader_student_id`, `team_leader_student_name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of team
 -- ----------------------------
-INSERT INTO `team` VALUES (1, '阿西吧', '1', NULL, NULL, NULL, '2020-08-19 11:11:53');
-INSERT INTO `team` VALUES (2, '组织部门', '重庆市', NULL, NULL, NULL, '2020-08-25 14:37:35');
-INSERT INTO `team` VALUES (3, '党史局', '北京市', NULL, 10233, NULL, '2020-08-25 14:37:53');
-INSERT INTO `team` VALUES (4, '芜湖', 'dqwubui', NULL, NULL, NULL, '2020-08-25 14:38:12');
+INSERT INTO `team` VALUES (30, '兔子和老鹰', '软件工程学院', '白瑶怡', 2017214363, '校级团队', '2020-09-04 21:44:29');
 
 -- ----------------------------
 -- Table structure for team_member
@@ -166,7 +202,7 @@ INSERT INTO `team` VALUES (4, '芜湖', 'dqwubui', NULL, NULL, NULL, '2020-08-25
 DROP TABLE IF EXISTS `team_member`;
 CREATE TABLE `team_member`  (
   `team_member_id` int(0) NOT NULL AUTO_INCREMENT,
-  `team_name` int(0) NULL DEFAULT NULL COMMENT '团队名称',
+  `team_name` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '团队名称',
   `team_member_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '名字',
   `student_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '学号',
   `team_member_major` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '专业',
@@ -175,16 +211,6 @@ CREATE TABLE `team_member`  (
   PRIMARY KEY (`team_member_id`) USING BTREE,
   INDEX `FK_Relationship_4`(`team_name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of team_member
--- ----------------------------
-INSERT INTO `team_member` VALUES (1, 1, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `team_member` VALUES (2, NULL, '134234132', '2020-08-25 14:39:01', 'dab', '审核通过', NULL);
-INSERT INTO `team_member` VALUES (3, NULL, '2134234', '2020-08-25 16:03:24', 'xxx', '审核通过', NULL);
-INSERT INTO `team_member` VALUES (4, NULL, '2134', '2020-08-25 16:03:59', NULL, NULL, NULL);
-INSERT INTO `team_member` VALUES (5, NULL, '2134', '2020-08-25 16:04:00', NULL, NULL, NULL);
-INSERT INTO `team_member` VALUES (6, NULL, '2134', '2020-08-25 16:04:04', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_right
@@ -202,8 +228,8 @@ CREATE TABLE `user_right`  (
 -- Records of user_right
 -- ----------------------------
 INSERT INTO `user_right` VALUES (100, 41, '2020-08-21 09:53:50');
-INSERT INTO `user_right` VALUES (2, 39, '2020-09-02 15:54:45');
-INSERT INTO `user_right` VALUES (2, 38, '2020-09-02 16:04:06');
+INSERT INTO `user_right` VALUES (2, 38, '2020-09-04 20:44:24');
+INSERT INTO `user_right` VALUES (0, 39, '2020-09-04 22:23:56');
 
 -- ----------------------------
 -- Table structure for user_right_level
@@ -241,8 +267,9 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (38, '白瑶怡', '2017214363', 'b63789cdcc1063fec5bf369bc388f9df', '17782161746', '2&#c', '2020-08-24 12:47:50');
+INSERT INTO `users` VALUES (38, '白瑶怡', '2017214363', 'e579428e98a83cf01490d0c915b50211', '13062332215', 'gPv4', '2020-08-24 12:47:50');
 INSERT INTO `users` VALUES (39, '南宫婉', '010233', 'da587c6cd18fb4253d96173c2fedcef8', '13062332215', 'gPv4', '2020-08-24 12:51:28');
-INSERT INTO `users` VALUES (41, '南宫婉', '2017214366', '356b1bf04d2c888337fc5c22e2399dd1', '17782161748', 'RgSg', '2020-08-25 16:32:05');
+INSERT INTO `users` VALUES (41, '冰风', '2017214366', 'da587c6cd18fb4253d96173c2fedcef8', '17782161741', 'gPv4', '2020-08-25 16:32:05');
+INSERT INTO `users` VALUES (42, '风清扬', '2017214364', 'da587c6cd18fb4253d96173c2fedcef8', '17782161741', 'gPv4', '2020-09-04 20:42:45');
 
 SET FOREIGN_KEY_CHECKS = 1;

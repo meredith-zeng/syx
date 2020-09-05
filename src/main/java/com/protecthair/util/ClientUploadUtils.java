@@ -1,4 +1,4 @@
-package com.protecthair.utils;
+package com.protecthair.util;
 
 import okhttp3.*;
 
