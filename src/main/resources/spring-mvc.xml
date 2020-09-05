@@ -16,22 +16,16 @@
 
     <mvc:default-servlet-handler/>
 
-    <!-- 配置用于session验证的拦截器 -->
-    <!--
-        如果有多个拦截器满足拦截处理的要求，则依据配置的先后顺序来执行
-     -->
-<!--    <mvc:interceptors>-->
 
-<!--        <mvc:interceptor>-->
-<!--            &lt;!&ndash; 拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面 &ndash;&gt;-->
-<!--            <mvc:mapping path="/pages/**" />-->
-<!--            &lt;!&ndash; 但是排除下面这些，也就是不拦截请求 &ndash;&gt;-->
-<!--            <mvc:exclude-mapping path="/pages/user/index.html" />-->
-<!--            <mvc:exclude-mapping path="/user/login"/>-->
-<!--            <mvc:exclude-mapping path="/user/register"/>-->
-<!--            <bean class="com.protecthair.Interceptor.LoginInterceptor" />-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面 -->
+            <mvc:mapping path="/pages/**" />
+            <!-- 但是排除下面这些，也就是不拦截请求 -->
+            <mvc:exclude-mapping path="/pages/user/**" />
+            <bean class="com.protecthair.Interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 
